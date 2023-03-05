@@ -45,7 +45,7 @@ public class Move : MonoBehaviour
                 if (waitPointIndex != 0)
                 {
                     GetComponentInParent<Player>().MoveTheSame(pionek,
-                        waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y, false);
+                        waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y);
                     GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa);
                     Debug.Log("done");
 
@@ -81,12 +81,16 @@ public class Move : MonoBehaviour
         }
         else if ((waitPointIndex + GameRules.diceNumber) > waitPoints.Length - 1)
         {
+            Transform waitPoint = waitPoints[waitPointIndex];
             //jesli waitpoint index + wartosc na kostce jest wiecej niz ilosc waitpointow przypisanych to waitPointIndex zostaje zmieniony na ilosc elementow w tabeli - to co bylo ponad ilosc elementow
             waitPointIndex = (waitPoints.Length - 1) - ((waitPointIndex + GameRules.diceNumber) - (waitPoints.Length - 1));
+            GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
         }
         else if(waitPointIndex !=0 && waitPointIndex < waitPoints.Length-6)
         {
+            Transform waitPoint = waitPoints[waitPointIndex];
             waitPointIndex += GameRules.diceNumber;
+            GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
         }
 
 
@@ -122,4 +126,8 @@ public class Move : MonoBehaviour
         transform.position = new Vector2(x, y);
     }
 
+    public Transform GetWaitpoint()
+    {
+        return waitPoints[waitPointIndex];
+    }
 }

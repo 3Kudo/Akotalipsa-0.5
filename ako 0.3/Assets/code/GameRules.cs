@@ -582,7 +582,7 @@ public class GameRules : MonoBehaviour
                     turtle.GetComponent<Player>().active = turtle.GetComponent<Player>().EnambleMovement();//ustawienie obecnego playera na aktywny
                     Debug.Log("turtle");
                     turtleTurCounter += 1;//zwiekszenie ilosci tur o 1
-                    Debug.Log(turtleTurCounter);//wyswietlenie w konsoli ile tur minelo                }
+                    Debug.Log(turtleTurCounter);//wyswietlenie w konsoli ile tur minelo
                 }
                 break;
            case 4:

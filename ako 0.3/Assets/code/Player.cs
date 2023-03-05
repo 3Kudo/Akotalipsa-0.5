@@ -42,41 +42,48 @@ public class Player : MonoBehaviour
         return pionek[i].GetComponent<Move>().waitPoints[pionek[i].GetComponent<Move>().waitPointIndex];
     }
 
-    public void MoveTheSame(GameObject pio, float x, float y, bool leave)
+    public void MoveTheSame(GameObject pio, float x, float y)
     {
-        int move_x = 1;
-        int move_y = 1;
-        int liczba = 0;
+        List<GameObject> toMove = new List<GameObject>();
         for (int i = 0; i < 4; i++)
         {
-
-            if (pio != pionek[i])
-            {
-                if (pio.GetComponent<Move>().waitPointIndex == pionek[i].GetComponent<Move>().waitPointIndex)
-                {
-                    pionek[i].GetComponent<Move>().Set(x + (0.2F * move_x), y + (0.2F * move_y));
-                    liczba++;
-                    if (move_x == 1)
-                        move_x = -1;
-                    else if (move_y == 1)
-                        move_y = -1;
-                    else
-                        move_x = 1;
-                }
-            }
+            if (pio.GetComponent<Move>().waitPointIndex == pionek[i].GetComponent<Move>().waitPointIndex)
+                toMove.Add(pionek[i]);
         }
-        if (liczba != 0 && !leave)
+        if (toMove.Count == 1)
         {
-            x = x + (0.2F * move_x);
-            y = y + (0.2F * move_y);
-
             pio.GetComponent<Move>().Set(x, y);
-
-            return;
         }
-
-
-
+        else if (toMove.Count == 2)
+        {
+            toMove[0].GetComponent<Move>().Set(x - 0.2F, y);
+            toMove[1].GetComponent<Move>().Set(x + 0.2F, y);
+        }
+        else if(toMove.Count == 3)
+        {
+            toMove[0].GetComponent<Move>().Set(x - 0.2F, y + 0.2F);
+            toMove[1].GetComponent<Move>().Set(x + 0.2F, y + 0.2F);
+            toMove[2].GetComponent<Move>().Set(x, y - 0.2F);
+        }
+        else
+        {
+            toMove[0].GetComponent<Move>().Set(x - 0.2F, y + 0.2F);
+            toMove[1].GetComponent<Move>().Set(x + 0.2F, y + 0.2F);
+            toMove[2].GetComponent<Move>().Set(x - 0.2F, y - 0.2F);
+            toMove[3].GetComponent<Move>().Set(x + 0.2F, y - 0.2F);
+        }
     }
 
+    public void MoveOut(Transform waitPoint, GameObject pio)
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            if(waitPoint == pionek[i].GetComponent<Move>().GetWaitpoint() && pio != pionek[i])
+            {
+                MoveTheSame(pionek[i], waitPoint.transform.position.x,waitPoint.transform.position.y);
+            }
+        }
+    }
 }
+
+
