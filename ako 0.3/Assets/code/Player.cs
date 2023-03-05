@@ -13,28 +13,28 @@ public class Player : MonoBehaviour
     public bool active = false;
 
     public string nazwa;
-    private void Update()
-    {
-        //sprawdzam czy jakis pionek nie moze sie ruszyc jezeli tak to jest to tura gracza jesli nie to skipuje gracza
-        if (active)
-        {
-            if (!pionek[0].GetComponent<Move>().MoveEnabled(ref pionek[0].GetComponent<Move>().bDalejWGrze) && !pionek[1].GetComponent<Move>().MoveEnabled(ref pionek[1].GetComponent<Move>().bDalejWGrze)
-                && !pionek[2].GetComponent<Move>().MoveEnabled(ref pionek[2].GetComponent<Move>().bDalejWGrze) && !pionek[3].GetComponent<Move>().MoveEnabled(ref pionek[3].GetComponent<Move>().bDalejWGrze))
-            {
-                active = false;
-                if (GameRules.diceNumber != 6 || GameRules.diceNumber != 0)
-                {
-                    GameRules.whoseTurn++;
-                    if (GameRules.whoseTurn == 5)
-                    {
-                        GameRules.whoseTurn = 1;
 
-                    }
+
+    // sprawdza czy jest mo¿liwy ruch
+    public bool EnambleMovement()
+    {
+        if (!pionek[0].GetComponent<Move>().MoveEnabled(ref pionek[0].GetComponent<Move>().bDalejWGrze) && !pionek[1].GetComponent<Move>().MoveEnabled(ref pionek[1].GetComponent<Move>().bDalejWGrze)
+                && !pionek[2].GetComponent<Move>().MoveEnabled(ref pionek[2].GetComponent<Move>().bDalejWGrze) && !pionek[3].GetComponent<Move>().MoveEnabled(ref pionek[3].GetComponent<Move>().bDalejWGrze))
+        {
+            if (GameRules.diceNumber != 6 || GameRules.diceNumber != 0)
+            {
+                GameRules.whoseTurn++;
+                if (GameRules.whoseTurn == 5)
+                {
+                    GameRules.whoseTurn = 1;
+
                 }
-                GameRules.diceNumber = 0;
-                GameRules.Turn();
             }
+            GameRules.diceNumber = 0;
+            GameRules.Turn();
+            return false;
         }
+        return true;
     }
 
     public Transform WitchWaitpoint(int i)
