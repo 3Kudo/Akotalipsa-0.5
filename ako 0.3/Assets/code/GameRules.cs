@@ -104,421 +104,7 @@ public class GameRules : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //--------------------------------------------------------------------Pierwsza Kaczka-------------------------------------------------------------------------------------------------------------//
 
-        if (bDuckFinished)
-        {
-            firstName.text = "Duck";
-            firstTurn.text = duckTurCounter.ToString();
-
-            //-----#####-----Wyœwietlanie poprawnie-----#####-----//
-
-            //-----#####-----przypisanie kto jest drugi-----#####-----//
-
-
-            if (bSharkFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Shark";
-                }
-            }
-            else if (bTurtleFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Turtle";
-                }
-            }
-            else if (bMoleFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Mole";
-                }
-            }
-
-            //----------$-----Shark drugi-----$----------//
-
-            else if (bSharkFinished == true)
-            {
-                if (whichAnimalWasSecond == "Shark")
-                {
-                    secondName.text = "Shark";
-                    secondTurn.text = sharkTurCounter.ToString();
-                    if (bTurtleFinished)
-                    {
-                        thirdName.text = "Turtle";
-                        thirdTurn.text = turtleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bMoleFinished)
-                    {
-                        thirdName.text = "Mole";
-                        thirdTurn.text = moleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-
-            //----------$-----turtle drugi-----$----------//
-
-            else if (bTurtleFinished == true)
-            {
-                if (whichAnimalWasSecond == "Turtle")
-                {
-                    secondName.text = "Turtle";
-                    secondTurn.text = turtleTurCounter.ToString();
-                    if (bSharkFinished)
-                    {
-                        thirdName.text = "Shark";
-                        thirdTurn.text = sharkTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bMoleFinished)
-                    {
-                        thirdName.text = "Mole";
-                        thirdTurn.text = moleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-
-            //----------$-----mole drugi-----$----------//
-
-            else if (bMoleFinished == true)
-            {
-                if (whichAnimalWasSecond == "Mole")
-                {
-                    secondName.text = "Mole";
-                    secondTurn.text = moleTurCounter.ToString();
-                    if (bTurtleFinished)
-                    {
-                        thirdName.text = "Turtle";
-                        thirdTurn.text = turtleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bSharkFinished)
-                    {
-                        thirdName.text = "Shark";
-                        thirdTurn.text = sharkTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-        }
-
-        //--------------------------------------------------------------------Pierwszy Rekin-------------------------------------------------------------------------------------------------------------//
-
-        else if (bSharkFinished)
-        {
-            firstName.text = "Shark";
-            firstTurn.text = sharkTurCounter.ToString();
-
-            //-----#####-----Wyœwietlanie poprawnie-----#####-----//
-
-            //-----#####-----przypisanie kto jest drugi-----#####-----//
-
-
-            if (bDuckFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Duck";
-                }
-            }
-            else if (bTurtleFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Turtle";
-                }
-            }
-            else if (bMoleFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Mole";
-                }
-            }
-
-            //----------$-----Duck drugi-----$----------//
-
-            else if (bDuckFinished == true)
-            {
-                if (whichAnimalWasSecond == "Duck")
-                {
-                    secondName.text = "Duck";
-                    secondTurn.text = duckTurCounter.ToString();
-                    if (bTurtleFinished)
-                    {
-                        thirdName.text = "Turtle";
-                        thirdTurn.text = turtleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bMoleFinished)
-                    {
-                        thirdName.text = "Mole";
-                        thirdTurn.text = moleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-
-
-            //----------$-----turtle drugi-----$----------//
-
-            else if (bTurtleFinished == true)
-            {
-                if (whichAnimalWasSecond == "Turtle")
-                {
-                    secondName.text = "Turtle";
-                    secondTurn.text = turtleTurCounter.ToString();
-                    if (bDuckFinished)
-                    {
-                        thirdName.text = "Duck";
-                        thirdTurn.text = duckTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bMoleFinished)
-                    {
-                        thirdName.text = "Mole";
-                        thirdTurn.text = moleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-            //----------$-----mole drugi-----$----------//
-
-            else if (bMoleFinished == true)
-            {
-                if (whichAnimalWasSecond == "Mole")
-                {
-                    secondName.text = "Mole";
-                    secondTurn.text = moleTurCounter.ToString();
-                    if (bTurtleFinished)
-                    {
-                        thirdName.text = "Turtle";
-                        thirdTurn.text = turtleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bDuckFinished)
-                    {
-                        thirdName.text = "Duck";
-                        thirdTurn.text = duckTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-        }
-
-        //--------------------------------------------------------------------Pierwsza Zaba-------------------------------------------------------------------------------------------------------------//
-
-        if (bTurtleFinished)
-        {
-            firstName.text = "Turtle";
-            firstTurn.text = turtleTurCounter.ToString();
-
-            //-----#####-----Wyœwietlanie poprawnie-----#####-----//
-
-            //-----#####-----przypisanie kto jest drugi-----#####-----//
-
-
-            if (bSharkFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Shark";
-                }
-            }
-            else if (bDuckFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Duck";
-                }
-            }
-            else if (bMoleFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Mole";
-                }
-            }
-
-            //----------$-----Shark drugi-----$----------//
-
-            else if (bSharkFinished == true)
-            {
-                if (whichAnimalWasSecond == "Shark")
-                {
-                    secondName.text = "Shark";
-                    secondTurn.text = sharkTurCounter.ToString();
-                    if (bDuckFinished)
-                    {
-                        thirdName.text = "Duck";
-                        thirdTurn.text = duckTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bMoleFinished)
-                    {
-                        thirdName.text = "Mole";
-                        thirdTurn.text = moleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-
-            //----------$-----Duck drugi-----$----------//
-
-            else if (bDuckFinished == true)
-            {
-                if (whichAnimalWasSecond == "Duck")
-                {
-                    secondName.text = "Duck";
-                    secondTurn.text = duckTurCounter.ToString();
-                    if (bSharkFinished)
-                    {
-                        thirdName.text = "Shark";
-                        thirdTurn.text = sharkTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bMoleFinished)
-                    {
-                        thirdName.text = "Mole";
-                        thirdTurn.text = moleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-
-            //----------$-----mole drugi-----$----------//
-
-            else if (bMoleFinished == true)
-            {
-                if (whichAnimalWasSecond == "Mole")
-                {
-                    secondName.text = "Mole";
-                    secondTurn.text = moleTurCounter.ToString();
-                    if (bDuckFinished)
-                    {
-                        thirdName.text = "Duck";
-                        thirdTurn.text = duckTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bSharkFinished)
-                    {
-                        thirdName.text = "Shark";
-                        thirdTurn.text = sharkTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-        }
-
-        //--------------------------------------------------------------------Pierwszy Kret-------------------------------------------------------------------------------------------------------------//
-
-        else if (bMoleFinished)
-        {
-            firstName.text = "Mole";
-            firstTurn.text = moleTurCounter.ToString();
-
-            //-----#####-----Wyœwietlanie poprawnie-----#####-----//
-
-            //-----#####-----przypisanie kto jest drugi-----#####-----//
-
-
-            if (bDuckFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Duck";
-                }
-            }
-            else if (bTurtleFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Turtle";
-                }
-            }
-            else if (bSharkFinished == true)
-            {
-                if (whichAnimalWasSecond == "")
-                {
-                    whichAnimalWasSecond = "Shark";
-                }
-            }
-
-            //----------$-----Duck drugi-----$----------//
-
-            else if (bDuckFinished == true)
-            {
-                if (whichAnimalWasSecond == "Duck")
-                {
-                    secondName.text = "Duck";
-                    secondTurn.text = duckTurCounter.ToString();
-                    if (bTurtleFinished)
-                    {
-                        thirdName.text = "Turtle";
-                        thirdTurn.text = turtleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bSharkFinished)
-                    {
-                        thirdName.text = "Shark";
-                        thirdTurn.text = sharkTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-
-
-            //----------$-----turtle drugi-----$----------//
-
-            else if (bTurtleFinished == true)
-            {
-                if (whichAnimalWasSecond == "Turtle")
-                {
-                    secondName.text = "Turtle";
-                    secondTurn.text = turtleTurCounter.ToString();
-                    if (bDuckFinished)
-                    {
-                        thirdName.text = "Duck";
-                        thirdTurn.text = duckTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bSharkFinished)
-                    {
-                        thirdName.text = "Shark";
-                        thirdTurn.text = sharkTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-            //----------$-----Rekin drugi-----$----------//
-
-            else if (bSharkFinished == true)
-            {
-                if (whichAnimalWasSecond == "Shark")
-                {
-                    secondName.text = "Shark";
-                    secondTurn.text = sharkTurCounter.ToString();
-                    if (bTurtleFinished)
-                    {
-                        thirdName.text = "Turtle";
-                        thirdTurn.text = turtleTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                    else if (bDuckFinished)
-                    {
-                        thirdName.text = "Duck";
-                        thirdTurn.text = duckTurCounter.ToString();
-                        gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
-                    }
-                }
-            }
-        }
 
     }
 
@@ -546,6 +132,111 @@ public class GameRules : MonoBehaviour
                     duckTurCounter += 1;//zwiekszenie ilosci tur o 1
                     Debug.Log(duckTurCounter);//wyswietlenie w konsoli ile tur minelo
                 }
+
+                //--------------------------------------------------------------------Pierwsza Kaczka-------------------------------------------------------------------------------------------------------------//
+
+                if (bDuckFinished)
+                {
+                    firstName.text = "Duck";
+                    firstTurn.text = duckTurCounter.ToString();
+
+                    //-----#####-----Wyœwietlanie poprawnie-----#####-----//
+
+                    //-----#####-----przypisanie kto jest drugi-----#####-----//
+
+
+                    if (bSharkFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Shark";
+                        }
+                    }
+                    else if (bTurtleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Turtle";
+                        }
+                    }
+                    else if (bMoleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Mole";
+                        }
+                    }
+
+                    //----------$-----Shark drugi-----$----------//
+
+                    else if (bSharkFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Shark")
+                        {
+                            secondName.text = "Shark";
+                            secondTurn.text = sharkTurCounter.ToString();
+                            if (bTurtleFinished)
+                            {
+                                thirdName.text = "Turtle";
+                                thirdTurn.text = turtleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bMoleFinished)
+                            {
+                                thirdName.text = "Mole";
+                                thirdTurn.text = moleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+
+                    //----------$-----turtle drugi-----$----------//
+
+                    else if (bTurtleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Turtle")
+                        {
+                            secondName.text = "Turtle";
+                            secondTurn.text = turtleTurCounter.ToString();
+                            if (bSharkFinished)
+                            {
+                                thirdName.text = "Shark";
+                                thirdTurn.text = sharkTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bMoleFinished)
+                            {
+                                thirdName.text = "Mole";
+                                thirdTurn.text = moleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+
+                    //----------$-----mole drugi-----$----------//
+
+                    else if (bMoleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Mole")
+                        {
+                            secondName.text = "Mole";
+                            secondTurn.text = moleTurCounter.ToString();
+                            if (bTurtleFinished)
+                            {
+                                thirdName.text = "Turtle";
+                                thirdTurn.text = turtleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bSharkFinished)
+                            {
+                                thirdName.text = "Shark";
+                                thirdTurn.text = sharkTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+                }
+
                 break;
             case 2:
                 if (!shark.GetComponent<Player>().pionek[0].GetComponent<Move>().bDalejWGrze || !shark.GetComponent<Player>().pionek[1].GetComponent<Move>().bDalejWGrze ||
@@ -565,6 +256,111 @@ public class GameRules : MonoBehaviour
                     sharkTurCounter += 1;//zwiekszenie ilosci tur o 1
                     Debug.Log(sharkTurCounter);//wyswietlenie w konsoli ile tur minelo
                 }
+
+                //--------------------------------------------------------------------Pierwszy Rekin-------------------------------------------------------------------------------------------------------------//
+
+                if (bSharkFinished)
+                {
+                    firstName.text = "Shark";
+                    firstTurn.text = sharkTurCounter.ToString();
+
+                    //-----#####-----Wyœwietlanie poprawnie-----#####-----//
+
+                    //-----#####-----przypisanie kto jest drugi-----#####-----//
+
+
+                    if (bDuckFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Duck";
+                        }
+                    }
+                    else if (bTurtleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Turtle";
+                        }
+                    }
+                    else if (bMoleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Mole";
+                        }
+                    }
+
+                    //----------$-----Duck drugi-----$----------//
+
+                    else if (bDuckFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Duck")
+                        {
+                            secondName.text = "Duck";
+                            secondTurn.text = duckTurCounter.ToString();
+                            if (bTurtleFinished)
+                            {
+                                thirdName.text = "Turtle";
+                                thirdTurn.text = turtleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bMoleFinished)
+                            {
+                                thirdName.text = "Mole";
+                                thirdTurn.text = moleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+
+
+                    //----------$-----turtle drugi-----$----------//
+
+                    else if (bTurtleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Turtle")
+                        {
+                            secondName.text = "Turtle";
+                            secondTurn.text = turtleTurCounter.ToString();
+                            if (bDuckFinished)
+                            {
+                                thirdName.text = "Duck";
+                                thirdTurn.text = duckTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bMoleFinished)
+                            {
+                                thirdName.text = "Mole";
+                                thirdTurn.text = moleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+                    //----------$-----mole drugi-----$----------//
+
+                    else if (bMoleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Mole")
+                        {
+                            secondName.text = "Mole";
+                            secondTurn.text = moleTurCounter.ToString();
+                            if (bTurtleFinished)
+                            {
+                                thirdName.text = "Turtle";
+                                thirdTurn.text = turtleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bDuckFinished)
+                            {
+                                thirdName.text = "Duck";
+                                thirdTurn.text = duckTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+                }
+
                 break;
             case 3:
                 if (!turtle.GetComponent<Player>().pionek[0].GetComponent<Move>().bDalejWGrze || !turtle.GetComponent<Player>().pionek[1].GetComponent<Move>().bDalejWGrze ||
@@ -584,6 +380,111 @@ public class GameRules : MonoBehaviour
                     turtleTurCounter += 1;//zwiekszenie ilosci tur o 1
                     Debug.Log(turtleTurCounter);//wyswietlenie w konsoli ile tur minelo                }
                 }
+
+                //--------------------------------------------------------------------Pierwsza Zaba-------------------------------------------------------------------------------------------------------------//
+
+                if (bTurtleFinished)
+                {
+                    firstName.text = "Turtle";
+                    firstTurn.text = turtleTurCounter.ToString();
+
+                    //-----#####-----Wyœwietlanie poprawnie-----#####-----//
+
+                    //-----#####-----przypisanie kto jest drugi-----#####-----//
+
+
+                    if (bSharkFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Shark";
+                        }
+                    }
+                    else if (bDuckFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Duck";
+                        }
+                    }
+                    else if (bMoleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Mole";
+                        }
+                    }
+
+                    //----------$-----Shark drugi-----$----------//
+
+                    else if (bSharkFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Shark")
+                        {
+                            secondName.text = "Shark";
+                            secondTurn.text = sharkTurCounter.ToString();
+                            if (bDuckFinished)
+                            {
+                                thirdName.text = "Duck";
+                                thirdTurn.text = duckTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bMoleFinished)
+                            {
+                                thirdName.text = "Mole";
+                                thirdTurn.text = moleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+
+                    //----------$-----Duck drugi-----$----------//
+
+                    else if (bDuckFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Duck")
+                        {
+                            secondName.text = "Duck";
+                            secondTurn.text = duckTurCounter.ToString();
+                            if (bSharkFinished)
+                            {
+                                thirdName.text = "Shark";
+                                thirdTurn.text = sharkTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bMoleFinished)
+                            {
+                                thirdName.text = "Mole";
+                                thirdTurn.text = moleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+
+                    //----------$-----mole drugi-----$----------//
+
+                    else if (bMoleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Mole")
+                        {
+                            secondName.text = "Mole";
+                            secondTurn.text = moleTurCounter.ToString();
+                            if (bDuckFinished)
+                            {
+                                thirdName.text = "Duck";
+                                thirdTurn.text = duckTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bSharkFinished)
+                            {
+                                thirdName.text = "Shark";
+                                thirdTurn.text = sharkTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+                }
+
                 break;
            case 4:
                 if (!mole.GetComponent<Player>().pionek[0].GetComponent<Move>().bDalejWGrze || !mole.GetComponent<Player>().pionek[1].GetComponent<Move>().bDalejWGrze ||
@@ -603,6 +504,111 @@ public class GameRules : MonoBehaviour
                     moleTurCounter += 1;//zwiekszenie ilosci tur o 1
                     Debug.Log(moleTurCounter);//wyswietlenie w konsoli ile tur minelo
                 }
+
+                //--------------------------------------------------------------------Pierwszy Kret-------------------------------------------------------------------------------------------------------------//
+
+                if (bMoleFinished)
+                {
+                    firstName.text = "Mole";
+                    firstTurn.text = moleTurCounter.ToString();
+
+                    //-----#####-----Wyœwietlanie poprawnie-----#####-----//
+
+                    //-----#####-----przypisanie kto jest drugi-----#####-----//
+
+
+                    if (bDuckFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Duck";
+                        }
+                    }
+                    else if (bTurtleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Turtle";
+                        }
+                    }
+                    else if (bSharkFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "")
+                        {
+                            whichAnimalWasSecond = "Shark";
+                        }
+                    }
+
+                    //----------$-----Duck drugi-----$----------//
+
+                    else if (bDuckFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Duck")
+                        {
+                            secondName.text = "Duck";
+                            secondTurn.text = duckTurCounter.ToString();
+                            if (bTurtleFinished)
+                            {
+                                thirdName.text = "Turtle";
+                                thirdTurn.text = turtleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bSharkFinished)
+                            {
+                                thirdName.text = "Shark";
+                                thirdTurn.text = sharkTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+
+
+                    //----------$-----turtle drugi-----$----------//
+
+                    else if (bTurtleFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Turtle")
+                        {
+                            secondName.text = "Turtle";
+                            secondTurn.text = turtleTurCounter.ToString();
+                            if (bDuckFinished)
+                            {
+                                thirdName.text = "Duck";
+                                thirdTurn.text = duckTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bSharkFinished)
+                            {
+                                thirdName.text = "Shark";
+                                thirdTurn.text = sharkTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+                    //----------$-----Rekin drugi-----$----------//
+
+                    else if (bSharkFinished == true)
+                    {
+                        if (whichAnimalWasSecond == "Shark")
+                        {
+                            secondName.text = "Shark";
+                            secondTurn.text = sharkTurCounter.ToString();
+                            if (bTurtleFinished)
+                            {
+                                thirdName.text = "Turtle";
+                                thirdTurn.text = turtleTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                            else if (bDuckFinished)
+                            {
+                                thirdName.text = "Duck";
+                                thirdTurn.text = duckTurCounter.ToString();
+                                gameOverUI(firstName, firstTurn, secondName, secondTurn, thirdName, thirdTurn);
+                            }
+                        }
+                    }
+                }
+
                 break;
         }
     }
