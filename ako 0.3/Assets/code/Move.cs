@@ -77,6 +77,7 @@ public class Move : MonoBehaviour
         if (waitPointIndex == 0 && GameRules.diceNumber == 6)
         {
             waitPointIndex++;
+            GameRules.onBoard.Add(pionek);
         }
         else if ((waitPointIndex + GameRules.diceNumber) > waitPoints.Length - 1)
         {

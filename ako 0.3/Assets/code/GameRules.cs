@@ -104,39 +104,6 @@ public class GameRules : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            if (shark.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex > 0)
-            {
-                onBoard.Add(shark.GetComponent<Player>().pionek[i]);
-            }
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (turtle.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex > 0)
-            {
-                onBoard.Add(turtle.GetComponent<Player>().pionek[i]);
-            }
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (duck.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex > 0)
-            {
-                onBoard.Add(duck.GetComponent<Player>().pionek[i]);
-            }
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (mole.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex > 0)
-            {
-                onBoard.Add(mole.GetComponent<Player>().pionek[i]);
-            }
-        }
-
-
         //--------------------------------------------------------------------Pierwsza Kaczka-------------------------------------------------------------------------------------------------------------//
 
         if (bDuckFinished)
@@ -562,108 +529,76 @@ public class GameRules : MonoBehaviour
         {
             case 1:
                 //wydaje mi sie to lepsze do ogladnia niz wszystko w jednym ifie, ale mozna to zmienic
-                if (duck.GetComponent<Player>().pionek[0].GetComponent<Move>().bDalejWGrze == false)
+                if (!duck.GetComponent<Player>().pionek[0].GetComponent<Move>().bDalejWGrze || !duck.GetComponent<Player>().pionek[1].GetComponent<Move>().bDalejWGrze ||
+                    !duck.GetComponent<Player>().pionek[2].GetComponent<Move>().bDalejWGrze || !duck.GetComponent<Player>().pionek[3].GetComponent<Move>().bDalejWGrze)//sprawdzanie czy wszystkie pionki skonczyly
                 {
-                    if (duck.GetComponent<Player>().pionek[1].GetComponent<Move>().bDalejWGrze == false)
-                    {
-                        if (duck.GetComponent<Player>().pionek[2].GetComponent<Move>().bDalejWGrze == false)
-                        {
-                            if (duck.GetComponent<Player>().pionek[3].GetComponent<Move>().bDalejWGrze == false)//sprawdzanie czy wszystkie pionki skonczyly
-                            {
-                                bDuckFinished = true; //gracz zakonczyl juz granie, przestawienie boola na true
-                                Debug.Log(bDuckFinished);
-                                whoseTurn++;//zmiana czyja tura zeby moc pominac ture gracza, ktory skonczyl
-                                //wezwanie metody MovePlayer() by mogl sie ruszyc inny gracz
-                                MovePlayer(ref sharkTurCounter, ref duckTurCounter, ref turtleTurCounter, ref moleTurCounter, ref whoseTurn);
-                            }
-                        }
-                    }
+                    bDuckFinished = true; //gracz zakonczyl juz granie, przestawienie boola na true
+                    Debug.Log(bDuckFinished);
+                    whoseTurn++;//zmiana czyja tura zeby moc pominac ture gracza, ktory skonczyl
+                    //wezwanie metody MovePlayer() by mogl sie ruszyc inny gracz
+                    MovePlayer(ref sharkTurCounter, ref duckTurCounter, ref turtleTurCounter, ref moleTurCounter, ref whoseTurn);
                 }
                 else
                 {
                     Turn();
-                    duck.GetComponent<Player>().active = true;//ustawienie obecnego playera na aktywny
+                    duck.GetComponent<Player>().active = duck.GetComponent<Player>().EnambleMovement();//ustawienie obecnego playera na aktywny
                     Debug.Log("duck");
                     duckTurCounter += 1;//zwiekszenie ilosci tur o 1
                     Debug.Log(duckTurCounter);//wyswietlenie w konsoli ile tur minelo
                 }
                 break;
             case 2:
-                if (shark.GetComponent<Player>().pionek[0].GetComponent<Move>().bDalejWGrze == false)
+                if (!shark.GetComponent<Player>().pionek[0].GetComponent<Move>().bDalejWGrze || !shark.GetComponent<Player>().pionek[1].GetComponent<Move>().bDalejWGrze ||
+                    !shark.GetComponent<Player>().pionek[2].GetComponent<Move>().bDalejWGrze || !shark.GetComponent<Player>().pionek[3].GetComponent<Move>().bDalejWGrze)//sprawdzanie czy wszystkie pionki skonczyly
                 {
-                    if (shark.GetComponent<Player>().pionek[1].GetComponent<Move>().bDalejWGrze == false)
-                    {
-                        if (shark.GetComponent<Player>().pionek[2].GetComponent<Move>().bDalejWGrze == false)
-                        {
-                            if (shark.GetComponent<Player>().pionek[3].GetComponent<Move>().bDalejWGrze == false)//sprawdzanie czy wszystkie pionki skonczyly
-                            {
-                                bSharkFinished = true; //gracz zakonczyl juz granie, przestawienie boola na true
-                                Debug.Log(bSharkFinished);
-                                whoseTurn++;//zmiana czyja tura zeby moc pominac ture gracza, ktory skonczyl
-                                //wezwanie metody MovePlayer() by mogl sie ruszyc inny gracz
-                                MovePlayer(ref sharkTurCounter, ref duckTurCounter, ref turtleTurCounter, ref moleTurCounter, ref whoseTurn);
-                            }
-                        }
-                    }
+                    bSharkFinished = true; //gracz zakonczyl juz granie, przestawienie boola na true
+                    Debug.Log(bSharkFinished);
+                    whoseTurn++;//zmiana czyja tura zeby moc pominac ture gracza, ktory skonczyl
+                    //wezwanie metody MovePlayer() by mogl sie ruszyc inny gracz
+                    MovePlayer(ref sharkTurCounter, ref duckTurCounter, ref turtleTurCounter, ref moleTurCounter, ref whoseTurn);
                 }
                 else
                 {
                     Turn();
-                    shark.GetComponent<Player>().active = true;//ustawienie obecnego playera na aktywny
+                    shark.GetComponent<Player>().active = shark.GetComponent<Player>().EnambleMovement();//ustawienie obecnego playera na aktywny
                     Debug.Log("shark");
                     sharkTurCounter += 1;//zwiekszenie ilosci tur o 1
                     Debug.Log(sharkTurCounter);//wyswietlenie w konsoli ile tur minelo
                 }
                 break;
             case 3:
-                if (turtle.GetComponent<Player>().pionek[0].GetComponent<Move>().bDalejWGrze == false)
+                if (!turtle.GetComponent<Player>().pionek[0].GetComponent<Move>().bDalejWGrze || !turtle.GetComponent<Player>().pionek[1].GetComponent<Move>().bDalejWGrze ||
+                    !turtle.GetComponent<Player>().pionek[2].GetComponent<Move>().bDalejWGrze || !turtle.GetComponent<Player>().pionek[3].GetComponent<Move>().bDalejWGrze)//sprawdzanie czy wszystkie pionki skonczyly
                 {
-                    if (turtle.GetComponent<Player>().pionek[1].GetComponent<Move>().bDalejWGrze == false)
-                    {
-                        if (turtle.GetComponent<Player>().pionek[2].GetComponent<Move>().bDalejWGrze == false)
-                        {
-                            if (turtle.GetComponent<Player>().pionek[3].GetComponent<Move>().bDalejWGrze == false)//sprawdzanie czy wszystkie pionki skonczyly
-                            {
-                                bTurtleFinished = true; //gracz zakonczyl juz granie, przestawienie boola na true
-                                Debug.Log(bTurtleFinished);
-                                whoseTurn++;//zmiana czyja tura zeby moc pominac ture gracza, ktory skonczyl
-                                //wezwanie metody MovePlayer() by mogl sie ruszyc inny gracz
-                                MovePlayer(ref sharkTurCounter, ref duckTurCounter, ref turtleTurCounter, ref moleTurCounter, ref whoseTurn);
-                            }
-                        }
-                    }
+                    bTurtleFinished = true; //gracz zakonczyl juz granie, przestawienie boola na true
+                    Debug.Log(bTurtleFinished);
+                    whoseTurn++;//zmiana czyja tura zeby moc pominac ture gracza, ktory skonczyl
+                    //wezwanie metody MovePlayer() by mogl sie ruszyc inny gracz
+                    MovePlayer(ref sharkTurCounter, ref duckTurCounter, ref turtleTurCounter, ref moleTurCounter, ref whoseTurn);
                 }
                 else
                 {
                     Turn();
-                    turtle.GetComponent<Player>().active = true;//ustawienie obecnego playera na aktywny
+                    turtle.GetComponent<Player>().active = turtle.GetComponent<Player>().EnambleMovement();//ustawienie obecnego playera na aktywny
                     Debug.Log("turtle");
                     turtleTurCounter += 1;//zwiekszenie ilosci tur o 1
                     Debug.Log(turtleTurCounter);//wyswietlenie w konsoli ile tur minelo                }
                 }
                 break;
            case 4:
-                if (mole.GetComponent<Player>().pionek[0].GetComponent<Move>().bDalejWGrze == false)
+                if (!mole.GetComponent<Player>().pionek[0].GetComponent<Move>().bDalejWGrze || !mole.GetComponent<Player>().pionek[1].GetComponent<Move>().bDalejWGrze ||
+                    !mole.GetComponent<Player>().pionek[2].GetComponent<Move>().bDalejWGrze || !mole.GetComponent<Player>().pionek[3].GetComponent<Move>().bDalejWGrze)//sprawdzanie czy wszystkie pionki skonczyly
                 {
-                    if (mole.GetComponent<Player>().pionek[1].GetComponent<Move>().bDalejWGrze == false)
-                    {
-                        if (mole.GetComponent<Player>().pionek[2].GetComponent<Move>().bDalejWGrze == false)
-                        {
-                            if (mole.GetComponent<Player>().pionek[3].GetComponent<Move>().bDalejWGrze == false)//sprawdzanie czy wszystkie pionki skonczyly
-                            {
-                                bMoleFinished = true; //gracz zakonczyl juz granie, przestawienie boola na true
-                                Debug.Log(bMoleFinished);
-                                whoseTurn++;//zmiana czyja tura zeby moc pominac ture gracza, ktory skonczyl
-                                //wezwanie metody MovePlayer() by mogl sie ruszyc inny gracz
-                                MovePlayer(ref sharkTurCounter, ref duckTurCounter, ref turtleTurCounter, ref moleTurCounter, ref whoseTurn);
-                            }
-                        }
-                    }
+                    bMoleFinished = true; //gracz zakonczyl juz granie, przestawienie boola na true
+                    Debug.Log(bMoleFinished);
+                    whoseTurn++;//zmiana czyja tura zeby moc pominac ture gracza, ktory skonczyl
+                    //wezwanie metody MovePlayer() by mogl sie ruszyc inny gracz
+                    MovePlayer(ref sharkTurCounter, ref duckTurCounter, ref turtleTurCounter, ref moleTurCounter, ref whoseTurn);
                 }
                 else
                 {
                     Turn();
-                    mole.GetComponent<Player>().active = true;//ustawienie obecnego playera na aktywny
+                    mole.GetComponent<Player>().active = mole.GetComponent<Player>().EnambleMovement();//ustawienie obecnego playera na aktywny
                     Debug.Log("mole");
                     moleTurCounter += 1;//zwiekszenie ilosci tur o 1
                     Debug.Log(moleTurCounter);//wyswietlenie w konsoli ile tur minelo
@@ -698,7 +633,6 @@ public class GameRules : MonoBehaviour
         }
     }
 
-
     public static void Chceck(Transform waitPoints, string nazwa)
     {
         for (int i = 0; i < 2; i++)
@@ -715,6 +649,7 @@ public class GameRules : MonoBehaviour
             {
                 if (shark.GetComponent<Player>().WitchWaitpoint(i) == waitPoints)
                 {
+                    onBoard.Remove(shark.GetComponent<Player>().pionek[i]);
                     shark.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
                     shark.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
                 }
@@ -726,6 +661,7 @@ public class GameRules : MonoBehaviour
             {
                 if (turtle.GetComponent<Player>().WitchWaitpoint(i) == waitPoints)
                 {
+                    onBoard.Remove(turtle.GetComponent<Player>().pionek[i]);
                     turtle.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
                     turtle.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
                 }
@@ -737,6 +673,7 @@ public class GameRules : MonoBehaviour
             {
                 if (mole.GetComponent<Player>().WitchWaitpoint(i) == waitPoints)
                 {
+                    onBoard.Remove(mole.GetComponent<Player>().pionek[i]);
                     mole.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
                     mole.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
                 }
@@ -748,6 +685,7 @@ public class GameRules : MonoBehaviour
             {
                 if (duck.GetComponent<Player>().WitchWaitpoint(i) == waitPoints)
                 {
+                    onBoard.Remove(duck.GetComponent<Player>().pionek[i]);
                     duck.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
                     duck.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
                 }
