@@ -15,6 +15,9 @@ public class Move : MonoBehaviour
     [HideInInspector]
     public int waitPointIndex = 0;
 
+    public AudioClip[] soundTracks;
+    AudioSource AS;
+
     //ruch pionka
     public bool ruch = false;
 
@@ -29,6 +32,7 @@ public class Move : MonoBehaviour
 
         //ustwienie wartosci boola bDalejWGrze na starcie na true
         bDalejWGrze = true;
+        AS = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     private void Update()
@@ -39,9 +43,16 @@ public class Move : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position,
                 waitPoints[waitPointIndex].transform.position,
                 moveSpeed * Time.deltaTime);
+            if (AS.isPlaying == false)
+            {
+                AS.clip = soundTracks[0];
+
+                AS.Play();
+            }
             if (transform.position == waitPoints[waitPointIndex].transform.position)
             {
                 ruch = false;
+                AS.Stop();
                 if (waitPointIndex != 0)
                 {
                     GetComponentInParent<Player>().MoveTheSame(pionek,
