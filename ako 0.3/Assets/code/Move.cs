@@ -15,6 +15,9 @@ public class Move : MonoBehaviour
     [HideInInspector]
     public int waitPointIndex = 0;
 
+    public AudioClip[] soundTracks;
+    AudioSource AS;
+
     //ruch pionka
     public bool ruch = false;
 
@@ -27,18 +30,20 @@ public class Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //ustawienie pionków na miejscu startowym
+        //ustawienie pionkÃ³w na miejscu startowym
         transform.position = waitPoints[waitPointIndex].transform.position;
 
         //ustwienie wartosci boola bDalejWGrze na starcie na true
         bDalejWGrze = true;
+        AS = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     private void Update()
     {
-        //wykonanie ruchu, nie wiem czy to jest dobry pomys³ ¿e to tutaj wstawi³em po porstu lepiej tutaj wygl¹da ruch
+        //wykonanie ruchu, nie wiem czy to jest dobry pomysÂ³ Â¿e to tutaj wstawiÂ³em po porstu lepiej tutaj wyglÂ¹da ruch
         if (ruch)
         {
+
             transform.position = Vector3.MoveTowards(transform.position, waitPoints[StaraPozycja + 1].transform.position, moveSpeed * Time.deltaTime);
             if (transform.position == waitPoints[StaraPozycja + 1].transform.position && transform.position != waitPoints[waitPointIndex].transform.position)
                 {
@@ -50,6 +55,25 @@ public class Move : MonoBehaviour
                 if (waitPointIndex != 0)
                 {
                     GetComponentInParent<Player>().MoveTheSame(pionek, waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y, false);
+
+            transform.position = Vector3.MoveTowards(transform.position,
+                waitPoints[waitPointIndex].transform.position,
+                moveSpeed * Time.deltaTime);
+            if (AS.isPlaying == false)
+            {
+                AS.clip = soundTracks[0];
+
+                AS.Play();
+            }
+            if (transform.position == waitPoints[waitPointIndex].transform.position)
+            {
+                ruch = false;
+                AS.Stop();
+                if (waitPointIndex != 0)
+                {
+                    GetComponentInParent<Player>().MoveTheSame(pionek,
+                        waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y);
+
                     GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa);
                     Debug.Log("done");
                         if (GameRules.diceNumber != 6)
@@ -86,6 +110,7 @@ public class Move : MonoBehaviour
            
         }
         else if ((waitPointIndex + GameRules.diceNumber) > waitPoints.Length - 1)
+
             {
             StaraPozycja = waitPointIndex;
             //jesli waitpoint index + wartosc na kostce jest wiecej niz ilosc waitpointow przypisanych to waitPointIndex zostaje zmieniony na ilosc elementow w tabeli - to co bylo ponad ilosc elementow
@@ -97,6 +122,20 @@ public class Move : MonoBehaviour
             waitPointIndex += GameRules.diceNumber;
             }                 
         ruch = true;
+
+        {
+            Transform waitPoint = waitPoints[waitPointIndex];
+            //jesli waitpoint index + wartosc na kostce jest wiecej niz ilosc waitpointow przypisanych to waitPointIndex zostaje zmieniony na ilosc elementow w tabeli - to co bylo ponad ilosc elementow
+            waitPointIndex = (waitPoints.Length - 1) - ((waitPointIndex + GameRules.diceNumber) - (waitPoints.Length - 1));
+            GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
+        }
+        else if(waitPointIndex !=0 && waitPointIndex < waitPoints.Length-6)
+        {
+            Transform waitPoint = waitPoints[waitPointIndex];
+            waitPointIndex += GameRules.diceNumber;
+            GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
+        }
+
 
 
     }
@@ -130,4 +169,8 @@ public class Move : MonoBehaviour
         transform.position = new Vector2(x, y);
     }
 
+    public Transform GetWaitpoint()
+    {
+        return waitPoints[waitPointIndex];
+    }
 }
