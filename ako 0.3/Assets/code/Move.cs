@@ -18,6 +18,9 @@ public class Move : MonoBehaviour
     //ruch pionka
     public bool ruch = false;
 
+    public int StaraPozycja = 0;
+    public int i = 0;
+
     //bool, ktory okresla czy pionek zakonczyl juz gre (jesli false to skonczyl i nie bedzie aktywny, jesli true to jest dalej w grze)
     public bool bDalejWGrze;
 
@@ -36,31 +39,32 @@ public class Move : MonoBehaviour
         //wykonanie ruchu, nie wiem czy to jest dobry pomys³ ¿e to tutaj wstawi³em po porstu lepiej tutaj wygl¹da ruch
         if (ruch)
         {
-            transform.position = Vector3.MoveTowards(transform.position,
-                waitPoints[waitPointIndex].transform.position,
-                moveSpeed * Time.deltaTime);
-            if (transform.position == waitPoints[waitPointIndex].transform.position)
-            {
-                ruch = false;
+            transform.position = Vector3.MoveTowards(transform.position, waitPoints[StaraPozycja + 1].transform.position, moveSpeed * Time.deltaTime);
+            if (transform.position == waitPoints[StaraPozycja + 1].transform.position && transform.position != waitPoints[waitPointIndex].transform.position)
+                {
+                StaraPozycja++;
+                }
+                if (transform.position == waitPoints[waitPointIndex].transform.position)
+                {
+                    ruch = false;
                 if (waitPointIndex != 0)
                 {
-                    GetComponentInParent<Player>().MoveTheSame(pionek,
-                        waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y, false);
+                    GetComponentInParent<Player>().MoveTheSame(pionek, waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y, false);
                     GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa);
                     Debug.Log("done");
-
-                    if (GameRules.diceNumber != 6)
-                    {
-                        GameRules.whoseTurn++;
-                        if (GameRules.whoseTurn == 5)
+                        if (GameRules.diceNumber != 6)
                         {
-                            GameRules.whoseTurn = 1;
+                            GameRules.whoseTurn++;
+                            if (GameRules.whoseTurn == 5)
+                            {
+                                GameRules.whoseTurn = 1;
+                            }
                         }
-                    }
-                    GameRules.diceNumber = 0;
-                    GameRules.Turn();
+                        GameRules.diceNumber = 0;
+                        GameRules.Turn();
+                    
                 }
-            }
+               }        
         }
 
     }
@@ -76,21 +80,25 @@ public class Move : MonoBehaviour
         Debug.Log(GetComponentInParent<Player>().active);
         if (waitPointIndex == 0 && GameRules.diceNumber == 6)
         {
+            StaraPozycja = waitPointIndex;
             waitPointIndex++;
             GameRules.onBoard.Add(pionek);
+           
         }
         else if ((waitPointIndex + GameRules.diceNumber) > waitPoints.Length - 1)
-        {
+            {
+            StaraPozycja = waitPointIndex;
             //jesli waitpoint index + wartosc na kostce jest wiecej niz ilosc waitpointow przypisanych to waitPointIndex zostaje zmieniony na ilosc elementow w tabeli - to co bylo ponad ilosc elementow
             waitPointIndex = (waitPoints.Length - 1) - ((waitPointIndex + GameRules.diceNumber) - (waitPoints.Length - 1));
-        }
-        else if(waitPointIndex !=0 && waitPointIndex < waitPoints.Length-6)
-        {
+            }
+        else if (waitPointIndex != 0 && waitPointIndex < waitPoints.Length - 6)
+            {
+            StaraPozycja = waitPointIndex;
             waitPointIndex += GameRules.diceNumber;
-        }
-
-
+            }                 
         ruch = true;
+
+
     }
 
     //sprawdza czy gracz moze sie poruszac
