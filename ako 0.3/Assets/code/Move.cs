@@ -20,6 +20,8 @@ public class Move : MonoBehaviour
 
     //ruch pionka
     public bool ruch = false;
+    public int StaraPozycja = 0;
+    public int i = 0;
 
     //bool, ktory okresla czy pionek zakonczyl juz gre (jesli false to skonczyl i nie bedzie aktywny, jesli true to jest dalej w grze)
     public bool bDalejWGrze;
@@ -40,9 +42,11 @@ public class Move : MonoBehaviour
         //wykonanie ruchu, nie wiem czy to jest dobry pomysł że to tutaj wstawiłem po porstu lepiej tutaj wygląda ruch
         if (ruch)
         {
-            transform.position = Vector3.MoveTowards(transform.position,
-                waitPoints[waitPointIndex].transform.position,
-                moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, waitPoints[StaraPozycja + 1].transform.position, moveSpeed * Time.deltaTime);
+            if (transform.position == waitPoints[StaraPozycja + 1].transform.position && transform.position != waitPoints[waitPointIndex].transform.position)
+            {
+                StaraPozycja++;
+            }
             if (AS.isPlaying == false)
             {
                 AS.clip = soundTracks[0];
@@ -51,7 +55,7 @@ public class Move : MonoBehaviour
             }
             if (transform.position == waitPoints[waitPointIndex].transform.position)
             {
-                ruch = false;
+                ruch = false;                
                 AS.Stop();
                 if (waitPointIndex != 0)
                 {
@@ -87,11 +91,13 @@ public class Move : MonoBehaviour
         Debug.Log(GetComponentInParent<Player>().active);
         if (waitPointIndex == 0 && GameRules.diceNumber == 6)
         {
+            StaraPozycja = waitPointIndex;
             waitPointIndex++;
             GameRules.onBoard.Add(pionek);
         }
         else if ((waitPointIndex + GameRules.diceNumber) > waitPoints.Length - 1)
         {
+            StaraPozycja = waitPointIndex;
             Transform waitPoint = waitPoints[waitPointIndex];
             //jesli waitpoint index + wartosc na kostce jest wiecej niz ilosc waitpointow przypisanych to waitPointIndex zostaje zmieniony na ilosc elementow w tabeli - to co bylo ponad ilosc elementow
             waitPointIndex = (waitPoints.Length - 1) - ((waitPointIndex + GameRules.diceNumber) - (waitPoints.Length - 1));
@@ -99,6 +105,7 @@ public class Move : MonoBehaviour
         }
         else if(waitPointIndex !=0 && waitPointIndex < waitPoints.Length-6)
         {
+            StaraPozycja = waitPointIndex;
             Transform waitPoint = waitPoints[waitPointIndex];
             waitPointIndex += GameRules.diceNumber;
             GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
