@@ -633,7 +633,7 @@ public class GameRules : MonoBehaviour
         }
     }
 
-    public static void Chceck(Transform waitPoints, string nazwa)
+    public static void Chceck(Transform waitPoints, string nazwa, GameObject pionek)
     {
         for (int i = 0; i < 2; i++)
         {
@@ -649,9 +649,17 @@ public class GameRules : MonoBehaviour
             {
                 if (shark.GetComponent<Player>().WitchWaitpoint(i) == waitPoints)
                 {
-                    onBoard.Remove(shark.GetComponent<Player>().pionek[i]);
-                    shark.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
-                    shark.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
+                    if (shark.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex == 1)
+                    {
+                        pionek.GetComponent<Move>().waitPointIndex = 0;
+                        pionek.GetComponent<Move>().ruch = true;
+                    }
+                    else
+                    {
+                        onBoard.Remove(shark.GetComponent<Player>().pionek[i]);
+                        shark.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
+                        shark.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
+                    }
                 }
             }
 
@@ -661,9 +669,17 @@ public class GameRules : MonoBehaviour
             {
                 if (turtle.GetComponent<Player>().WitchWaitpoint(i) == waitPoints)
                 {
-                    onBoard.Remove(turtle.GetComponent<Player>().pionek[i]);
-                    turtle.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
-                    turtle.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
+                    if (turtle.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex == 1)
+                    {
+                        pionek.GetComponent<Move>().waitPointIndex = 0;
+                        pionek.GetComponent<Move>().ruch = true;
+                    }
+                    else
+                    {
+                        onBoard.Remove(turtle.GetComponent<Player>().pionek[i]);
+                        turtle.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
+                        turtle.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
+                    }
                 }
             }
 
@@ -673,9 +689,18 @@ public class GameRules : MonoBehaviour
             {
                 if (mole.GetComponent<Player>().WitchWaitpoint(i) == waitPoints)
                 {
-                    onBoard.Remove(mole.GetComponent<Player>().pionek[i]);
-                    mole.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
-                    mole.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
+                    if (mole.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex == 1)
+                    {
+                        pionek.GetComponent<Move>().waitPointIndex = 0;
+                        pionek.GetComponent<Move>().ruch = true;
+                    }
+                    else
+                    {
+                        onBoard.Remove(mole.GetComponent<Player>().pionek[i]);
+                        mole.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
+                        mole.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
+                    }
+
                 }
             }
 
@@ -685,9 +710,17 @@ public class GameRules : MonoBehaviour
             {
                 if (duck.GetComponent<Player>().WitchWaitpoint(i) == waitPoints)
                 {
-                    onBoard.Remove(duck.GetComponent<Player>().pionek[i]);
-                    duck.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
-                    duck.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
+                    if (duck.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex == 1)
+                    {
+                        pionek.GetComponent<Move>().waitPointIndex = 0;
+                        pionek.GetComponent<Move>().ruch = true;
+                    }
+                    else 
+                    { 
+                        onBoard.Remove(duck.GetComponent<Player>().pionek[i]);
+                        duck.GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
+                        duck.GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
+                    }
                 }
             }
     }

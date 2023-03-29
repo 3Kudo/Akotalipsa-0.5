@@ -9,7 +9,6 @@ public class Move : MonoBehaviour
 
     public Transform[] waitPoints;
 
-    [SerializeField]
     private float moveSpeed = 2f;
 
     [HideInInspector]
@@ -20,7 +19,7 @@ public class Move : MonoBehaviour
 
     //ruch pionka
     public bool ruch = false;
-    public int StaraPozycja = 0;
+    public int Pozycja = 0;
     public int i = 0;
 
     //bool, ktory okresla czy pionek zakonczyl juz gre (jesli false to skonczyl i nie bedzie aktywny, jesli true to jest dalej w grze)
@@ -42,11 +41,23 @@ public class Move : MonoBehaviour
         //wykonanie ruchu, nie wiem czy to jest dobry pomysł że to tutaj wstawiłem po porstu lepiej tutaj wygląda ruch
         if (ruch)
         {
-            transform.position = Vector3.MoveTowards(transform.position, waitPoints[StaraPozycja + 1].transform.position, moveSpeed * Time.deltaTime);
-            if (transform.position == waitPoints[StaraPozycja + 1].transform.position && transform.position != waitPoints[waitPointIndex].transform.position)
+            transform.position = Vector3.MoveTowards(transform.position, waitPoints[Pozycja].transform.position, moveSpeed * Time.deltaTime);
+
+
+            if (transform.position == waitPoints[Pozycja].transform.position && transform.position != waitPoints[waitPointIndex].transform.position)
             {
-                StaraPozycja++;
+                if (waitPointIndex > Pozycja)
+                {
+                    moveSpeed = 4f;
+                    Pozycja++;
+                }
+                else
+                {
+                    moveSpeed = 8f;
+                    Pozycja--;
+                }
             }
+
             if (AS.isPlaying == false)
             {
                 AS.clip = soundTracks[0];
@@ -61,7 +72,7 @@ public class Move : MonoBehaviour
                 {
                     GetComponentInParent<Player>().MoveTheSame(pionek,
                         waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y);
-                    GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa);
+                    GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
                     Debug.Log("done");
 
                     if (GameRules.diceNumber != 6)
@@ -87,17 +98,18 @@ public class Move : MonoBehaviour
 
     private void MoveOn()
     {
+        moveSpeed = 4f;
         GetComponentInParent<Player>().active = false;
         Debug.Log(GetComponentInParent<Player>().active);
         if (waitPointIndex == 0 && GameRules.diceNumber == 6)
         {
-            StaraPozycja = waitPointIndex;
+            Pozycja++;
             waitPointIndex++;
             GameRules.onBoard.Add(pionek);
         }
         else if ((waitPointIndex + GameRules.diceNumber) > waitPoints.Length - 1)
         {
-            StaraPozycja = waitPointIndex;
+            Pozycja++;
             Transform waitPoint = waitPoints[waitPointIndex];
             //jesli waitpoint index + wartosc na kostce jest wiecej niz ilosc waitpointow przypisanych to waitPointIndex zostaje zmieniony na ilosc elementow w tabeli - to co bylo ponad ilosc elementow
             waitPointIndex = (waitPoints.Length - 1) - ((waitPointIndex + GameRules.diceNumber) - (waitPoints.Length - 1));
@@ -105,7 +117,7 @@ public class Move : MonoBehaviour
         }
         else if(waitPointIndex !=0 && waitPointIndex < waitPoints.Length-6)
         {
-            StaraPozycja = waitPointIndex;
+            Pozycja++;
             Transform waitPoint = waitPoints[waitPointIndex];
             waitPointIndex += GameRules.diceNumber;
             GetComponentInParent<Player>().MoveOut(waitPoint, pionek);

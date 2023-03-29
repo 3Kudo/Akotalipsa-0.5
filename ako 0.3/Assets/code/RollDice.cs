@@ -44,7 +44,7 @@ public class RollDice : MonoBehaviour
         int randomDiceSide = 0;
         for (int i = 0; i <= 5; i++)
         {
-            randomDiceSide = Random.Range(5, 6);
+            randomDiceSide = Random.Range(0, 6);
             rend.sprite = dicesSides[randomDiceSide];
             yield return new WaitForSeconds(0.2f);
         }

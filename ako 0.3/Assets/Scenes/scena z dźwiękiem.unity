@@ -527,11 +527,13 @@ MonoBehaviour:
   - {fileID: 560379664}
   - {fileID: 1620133152}
   - {fileID: 1091194499}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &145181910
 PolygonCollider2D:
@@ -905,11 +907,13 @@ MonoBehaviour:
   - {fileID: 560379664}
   - {fileID: 1620133152}
   - {fileID: 1091194499}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &209223031
 PolygonCollider2D:
@@ -1718,11 +1722,13 @@ MonoBehaviour:
   - {fileID: 18783026}
   - {fileID: 1881778227}
   - {fileID: 1692644719}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &384831390
 PolygonCollider2D:
@@ -2642,11 +2648,13 @@ MonoBehaviour:
   - {fileID: 892506374}
   - {fileID: 1759401555}
   - {fileID: 2037938501}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!82 &565801316
 AudioSource:
@@ -2909,11 +2917,13 @@ MonoBehaviour:
   - {fileID: 18783026}
   - {fileID: 1881778227}
   - {fileID: 1692644719}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &604178501
 PolygonCollider2D:
@@ -3286,11 +3296,13 @@ MonoBehaviour:
   - {fileID: 892506374}
   - {fileID: 1759401555}
   - {fileID: 2037938501}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!82 &609282492
 AudioSource:
@@ -3576,11 +3588,13 @@ MonoBehaviour:
   - {fileID: 892506374}
   - {fileID: 1759401555}
   - {fileID: 2037938501}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!82 &610892564
 AudioSource:
@@ -3979,11 +3993,13 @@ MonoBehaviour:
   - {fileID: 464365209}
   - {fileID: 1005802502}
   - {fileID: 1321306624}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &688237531
 PolygonCollider2D:
@@ -5002,11 +5018,13 @@ MonoBehaviour:
   - {fileID: 464365209}
   - {fileID: 1005802502}
   - {fileID: 1321306624}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &901403423
 PolygonCollider2D:
@@ -5433,7 +5451,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018598621}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.37, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5636,11 +5654,13 @@ MonoBehaviour:
   - {fileID: 464365209}
   - {fileID: 1005802502}
   - {fileID: 1321306624}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &1063066517
 PolygonCollider2D:
@@ -6571,11 +6591,13 @@ MonoBehaviour:
   - {fileID: 464365209}
   - {fileID: 1005802502}
   - {fileID: 1321306624}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &1333517155
 PolygonCollider2D:
@@ -7747,11 +7769,13 @@ MonoBehaviour:
   - {fileID: 892506374}
   - {fileID: 1759401555}
   - {fileID: 2037938501}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!82 &1751368375
 AudioSource:
@@ -8014,11 +8038,13 @@ MonoBehaviour:
   - {fileID: 18783026}
   - {fileID: 1881778227}
   - {fileID: 1692644719}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &1809797742
 PolygonCollider2D:
@@ -8399,11 +8425,13 @@ MonoBehaviour:
   - {fileID: 560379664}
   - {fileID: 1620133152}
   - {fileID: 1091194499}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &1868742803
 PolygonCollider2D:
@@ -8691,11 +8719,13 @@ MonoBehaviour:
   - {fileID: 18783026}
   - {fileID: 1881778227}
   - {fileID: 1692644719}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &1869554857
 PolygonCollider2D:
@@ -9774,11 +9804,13 @@ MonoBehaviour:
   - {fileID: 560379664}
   - {fileID: 1620133152}
   - {fileID: 1091194499}
-  moveSpeed: 5
+  moveSpeed: 3
   waitPointIndex: 0
   soundTracks:
   - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
   ruch: 0
+  Pozycja: 0
+  i: 0
   bDalejWGrze: 0
 --- !u!60 &2119415012
 PolygonCollider2D:
