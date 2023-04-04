@@ -8,18 +8,21 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameObject[] pionek;
+    public GameObject gracz;
 
     //czy jest aktywna tura gracza
     public bool active = false;
 
     public string nazwa;
 
+    public bool finished;
+
 
     // sprawdza czy jest mo¿liwy ruch
     public bool EnambleMovement()
     {
-        if (!pionek[0].GetComponent<Move>().MoveEnabled(ref pionek[0].GetComponent<Move>().bDalejWGrze) && !pionek[1].GetComponent<Move>().MoveEnabled(ref pionek[1].GetComponent<Move>().bDalejWGrze)
-                && !pionek[2].GetComponent<Move>().MoveEnabled(ref pionek[2].GetComponent<Move>().bDalejWGrze) && !pionek[3].GetComponent<Move>().MoveEnabled(ref pionek[3].GetComponent<Move>().bDalejWGrze))
+        if (!pionek[0].GetComponent<Move>().MoveEnabled() && !pionek[1].GetComponent<Move>().MoveEnabled()
+                && !pionek[2].GetComponent<Move>().MoveEnabled() && !pionek[3].GetComponent<Move>().MoveEnabled())
         {
             if (GameRules.diceNumber != 6 || GameRules.diceNumber != 0)
             {
@@ -30,8 +33,8 @@ public class Player : MonoBehaviour
 
                 }
             }
-            GameRules.diceNumber = 0;
             GameRules.Turn();
+            GameRules.diceNumber = 0;
             return false;
         }
         return true;
@@ -82,6 +85,16 @@ public class Player : MonoBehaviour
             {
                 MoveTheSame(pionek[i], waitPoint.transform.position.x,waitPoint.transform.position.y);
             }
+        }
+    }
+
+    public void ChceckPlayerFinished(int dice)
+    {
+        if (pionek[0].GetComponent<Move>().GetFinish() && pionek[1].GetComponent<Move>().GetFinish()
+                && pionek[2].GetComponent<Move>().GetFinish() && pionek[3].GetComponent<Move>().GetFinish())
+        {
+            finished = true;
+            GameRules.PlayerFinishedGamed(gracz);
         }
     }
 }
