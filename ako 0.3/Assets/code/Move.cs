@@ -13,17 +13,14 @@ public class Move : MonoBehaviour
 
     [HideInInspector]
     public int waitPointIndex = 0;
-
+      
     public AudioClip[] soundTracks;
     AudioSource AS;
 
     //ruch pionka
     public bool ruch = false;
-    public int Pozycja = 0;
-    public int i = 0;
-
-    //bool, ktory okresla czy pionek zakonczyl juz gre (jesli false to skonczyl i nie bedzie aktywny, jesli true to jest dalej w grze)
-    public bool bDalejWGrze;
+    public int pozycja = 0;
+    private bool finished;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +29,8 @@ public class Move : MonoBehaviour
         transform.position = waitPoints[waitPointIndex].transform.position;
 
         //ustwienie wartosci boola bDalejWGrze na starcie na true
-        bDalejWGrze = true;
         AS = GetComponent<AudioSource>();
+        finished = false;
     }
     // Update is called once per frame
     private void Update()
@@ -41,20 +38,20 @@ public class Move : MonoBehaviour
         //wykonanie ruchu, nie wiem czy to jest dobry pomysł że to tutaj wstawiłem po porstu lepiej tutaj wygląda ruch
         if (ruch)
         {
-            transform.position = Vector3.MoveTowards(transform.position, waitPoints[Pozycja].transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, waitPoints[pozycja].transform.position, moveSpeed * Time.deltaTime);
 
 
-            if (transform.position == waitPoints[Pozycja].transform.position && transform.position != waitPoints[waitPointIndex].transform.position)
+            if (transform.position == waitPoints[pozycja].transform.position && transform.position != waitPoints[waitPointIndex].transform.position)
             {
-                if (waitPointIndex > Pozycja)
+                if (waitPointIndex > pozycja)
                 {
-                    moveSpeed = 4f;
-                    Pozycja++;
+                    moveSpeed = 20f;
+                    pozycja++;
                 }
                 else
                 {
-                    moveSpeed = 8f;
-                    Pozycja--;
+                    moveSpeed = 12f;
+                    pozycja--;
                 }
             }
 
@@ -83,8 +80,8 @@ public class Move : MonoBehaviour
                             GameRules.whoseTurn = 1;
                         }
                     }
-                    GameRules.diceNumber = 0;
                     GameRules.Turn();
+                    GameRules.diceNumber = 0;
                 }
             }
         }
@@ -92,63 +89,63 @@ public class Move : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (GetComponentInParent<Player>().active && MoveEnabled(ref bDalejWGrze))
+        if (GetComponentInParent<Player>().active && MoveEnabled())
             MoveOn();
     }
 
     private void MoveOn()
     {
-        moveSpeed = 4f;
+        moveSpeed = 20f;
         GetComponentInParent<Player>().active = false;
         Debug.Log(GetComponentInParent<Player>().active);
         if (waitPointIndex == 0 && GameRules.diceNumber == 6)
         {
-            Pozycja++;
+            pozycja++;
             waitPointIndex++;
             GameRules.onBoard.Add(pionek);
         }
-        else if ((waitPointIndex + GameRules.diceNumber) > waitPoints.Length - 1)
+        else if((waitPointIndex + GameRules.diceNumber) <= waitPoints.Length - 1)
         {
-            Pozycja++;
+            pozycja++;
             Transform waitPoint = waitPoints[waitPointIndex];
-            //jesli waitpoint index + wartosc na kostce jest wiecej niz ilosc waitpointow przypisanych to waitPointIndex zostaje zmieniony na ilosc elementow w tabeli - to co bylo ponad ilosc elementow
-            waitPointIndex = (waitPoints.Length - 1) - ((waitPointIndex + GameRules.diceNumber) - (waitPoints.Length - 1));
+            waitPointIndex = waitPointIndex + GameRules.diceNumber;
             GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
-        }
-        else if(waitPointIndex !=0 && waitPointIndex < waitPoints.Length-6)
-        {
-            Pozycja++;
-            Transform waitPoint = waitPoints[waitPointIndex];
-            waitPointIndex += GameRules.diceNumber;
-            GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
-        }
-
-
-        ruch = true;
-    }
-
-    //sprawdza czy gracz moze sie poruszac
-    public bool MoveEnabled(ref bool bDalejWGrze)
-    {
-        if (waitPointIndex == 0 && GameRules.diceNumber == 6)
-        {
-            bDalejWGrze = true;
-            return true;
-        }
-        else if ((waitPointIndex + GameRules.diceNumber) == waitPoints.Length - 1)
-        {
-            bDalejWGrze = false;
-            return false;
-        }
-        else if (waitPointIndex > 0 && waitPointIndex != (waitPoints.Length - 1))
-        {
-            bDalejWGrze = true;
-            return true;
         }
         else
         {
-            return false;
+            Transform waitPoint = waitPoints[waitPointIndex];
+            int countPosition = waitPointIndex;
+            countPosition = countPosition + GameRules.diceNumber;
+            countPosition = countPosition - (waitPoints.Length - 1);
+            countPosition = (waitPoints.Length-1) - countPosition;
+            if (countPosition < waitPointIndex)
+                pozycja--;
+            else if (countPosition > waitPointIndex)
+                pozycja++;
+            waitPointIndex = countPosition;
+            GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
         }
+        int dice=GameRules.diceNumber;
+        ruch = true;
+        if (waitPointIndex == waitPoints.Length - 1)
+        {
+            finished = true;
+            GameRules.onBoard.Remove(pionek);
+            GetComponentInParent<Player>().ChceckPlayerFinished(dice);
+        }
+        
+    }
+
+    //sprawdza czy gracz moze sie poruszac
+    public bool MoveEnabled()
+    {
+        if(finished)
+            return false;
+        if(waitPointIndex == 0 && GameRules.diceNumber == 6)
+            return true;
+        if (waitPointIndex > 0)
+            return true;
+        return false;
     }
 
     public void Set(float x, float y)
@@ -156,8 +153,15 @@ public class Move : MonoBehaviour
         transform.position = new Vector2(x, y);
     }
 
+
+
     public Transform GetWaitpoint()
     {
         return waitPoints[waitPointIndex];
+    }
+
+    public bool GetFinish()
+    {
+        return finished;
     }
 }

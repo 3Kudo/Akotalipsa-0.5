@@ -35,14 +35,14 @@ public class RollDice : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (diceThrowAllowed)
+        if (diceThrowAllowed && GameRules.miejsce!=3)
             StartCoroutine("RollTheDice");
     }
     private IEnumerator RollTheDice()
     {
         diceThrowAllowed = false;
         int randomDiceSide = 0;
-        for (int i = 0; i <= 5; i++)
+        for (int i = 0; i <= 3; i++)
         {
             randomDiceSide = Random.Range(0, 6);
             rend.sprite = dicesSides[randomDiceSide];
@@ -50,6 +50,11 @@ public class RollDice : MonoBehaviour
         }
 
         GameRules.diceNumber = randomDiceSide + 1;
-        GameRules.MovePlayer(ref GameRules.sharkTurCounter, ref GameRules.duckTurCounter, ref GameRules.turtleTurCounter, ref GameRules.moleTurCounter, ref GameRules.whoseTurn);
+        GameRules.MovePlayer();
+    }
+
+    private void RollDiceBlock()
+    {
+        diceThrowAllowed = false;
     }
 }
