@@ -15,15 +15,20 @@ public class GameRules : MonoBehaviour
 	public static Sprite[] sprites = new Sprite[4];
 	public static Image[] images= new Image[4];
 	public static int miejsce;
+	public static GameObject safePlacePrefabe;
 
 
 	public static Transform[] randomBack = new Transform[2];
 
+	public static Transform[] safePlaceWaitPoints = new Transform[44];
+
 
 	public static List<GameObject> onBoard = new List<GameObject>();
 
+	public static List<GameObject> safePlace = new List<GameObject>();
 
-	public static int whoseTurn = 0;
+
+    public static int whoseTurn = 0;
 	public static int diceNumber = 6;
 	// Start is called before the first frame update
 	void Start()
@@ -75,7 +80,9 @@ public class GameRules : MonoBehaviour
 		pawn[2].GetComponent<Player>().active = false;
 		pawn[0].GetComponent<Player>().active = false;
 		whoseTurn = Random.Range(1, 5);
-		Turn();
+		AddSafePlace();
+        AddSafePlace();
+        Turn();
 
 	}
 
@@ -139,6 +146,7 @@ public class GameRules : MonoBehaviour
 
 	public static void Chceck(Transform waitPoints, string nazwa, GameObject pionek)
 	{
+		
 		for (int i = 0; i < 2; i++)
 		{
 			if (randomBack[i] == waitPoints)
@@ -148,38 +156,104 @@ public class GameRules : MonoBehaviour
 			}
 		}
 
+		GameObject pio=null;
+		int ammount = 0;
+		
 		for(int j = 0; j < 4; j++)
 		{
-			if (nazwa != pawn[j].GetComponent<Player>().nazwa)
+            bool leave = false;
+            if (nazwa != pawn[j].GetComponent<Player>().nazwa)
 			{
 				for (int i = 0; i < 4; i++)
 				{
 					if (pawn[j].GetComponent<Player>().WitchWaitpoint(i) == waitPoints)
 					{
-						if (pawn[j].GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex == 1)
+						
+						if (pawn[j].GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex == 1 || 
+							pawn[j].GetComponent<Player>().pionek[i].GetComponent<Move>().defence)
 						{
 							pionek.GetComponent<Move>().waitPointIndex = 0;
 							pionek.GetComponent<Move>().ruch = true;
+							leave = true;
+							break;
 						}
 						else
 						{
-							onBoard.Remove(pawn[i].GetComponent<Player>().pionek[i]);
-							pawn[j].GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex = 0;
-							pawn[j].GetComponent<Player>().pionek[i].GetComponent<Move>().ruch = true;
+							pio = pawn[j].GetComponent<Player>().pionek[i];
+							ammount++;
 						}
 					}
 				}
 			}
+			if (leave)
+				break;
         }
-	}
+		if (ammount == 1)
+		{
+			onBoard.Remove(pio);
+            pio.GetComponent<Move>().waitPointIndex = 0;
+            pio.GetComponent<Move>().ruch = true;
+			return;
+        }
+		else if(ammount > 1)
+		{
+            onBoard.Remove(pionek);
+            pionek.GetComponent<Move>().waitPointIndex = 0;
+            pionek.GetComponent<Move>().ruch = true;
+			return;
+        }
+		for(int i = 0; i < safePlace.Count; i++)
+		{
+			if (safePlace[i].GetComponent<SafePlace>().waitPoint == waitPoints)
+			{
+				GameObject toDestroy = safePlace[i];
+				safePlace.RemoveAt(i);
+				Destroy(toDestroy);
+				OnSafePlace(pionek, waitPoints);
+			}
+		}
+    }
 
 	public static void losoweCofanie()
 	{
 		int los = Random.Range(0, onBoard.Count);
 		GameObject pionek = onBoard.ElementAt(los);
 		onBoard.Remove(pionek);
-		pionek.GetComponent<Move>().waitPointIndex = 0;
+		Transform position = pionek.GetComponent<Move>().GetWaitpoint();
+		pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
+        pionek.GetComponent<Move>().waitPointIndex = 0;
 		pionek.GetComponent<Move>().ruch = true;
+	}
 
+	public static void OnSafePlace(GameObject pionek, Transform waitPoint)
+	{
+		pionek.GetComponent<Move>().defence = true;
+        Transform newWaitPoint = GetRandomPosition();
+        List<Transform> safePlacePosition = new List<Transform>();
+		for(int i = 0; i < safePlace.Count; i++)
+			safePlacePosition.Add(safePlace[i].GetComponent<SafePlace>().waitPoint);
+		for (int i = 0; i < 2; i++)
+			safePlacePosition.Add(randomBack[i]);
+        while(safePlacePosition.Contains(newWaitPoint))
+            newWaitPoint = GetRandomPosition();
+        safePlace.Add(Instantiate(safePlacePrefabe) as GameObject);
+		safePlace[safePlace.Count-1].GetComponent<SafePlace>().setPlace(newWaitPoint);
+    }
+
+    public static void AddSafePlace()
+    {
+		Transform newWaitPoint = GetRandomPosition();
+        List<Transform> safePlacePosition = new List<Transform>();
+        for (int i = 0; i < safePlace.Count; i++)
+            safePlacePosition.Add(safePlace[i].GetComponent<SafePlace>().waitPoint);
+       while (safePlacePosition.Contains(newWaitPoint))
+            newWaitPoint = GetRandomPosition();
+        safePlace.Add(Instantiate(safePlacePrefabe) as GameObject);
+        safePlace[safePlace.Count - 1].GetComponent<SafePlace>().setPlace(newWaitPoint);
+    }
+
+	public static Transform GetRandomPosition()
+	{
+		return safePlaceWaitPoints[Random.Range(0, 44)];
 	}
 }

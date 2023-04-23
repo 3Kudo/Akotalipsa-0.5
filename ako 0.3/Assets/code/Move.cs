@@ -17,6 +17,8 @@ public class Move : MonoBehaviour
     public AudioClip[] soundTracks;
     AudioSource AS;
 
+    public bool defence;
+
     //ruch pionka
     public bool ruch = false;
     public int pozycja = 0;
@@ -31,6 +33,7 @@ public class Move : MonoBehaviour
         //ustwienie wartosci boola bDalejWGrze na starcie na true
         AS = GetComponent<AudioSource>();
         finished = false;
+        defence = false;
     }
     // Update is called once per frame
     private void Update()
@@ -139,6 +142,10 @@ public class Move : MonoBehaviour
     //sprawdza czy gracz moze sie poruszac
     public bool MoveEnabled()
     {
+        //wyłączenie oborny
+        defence = false;
+
+
         if(finished)
             return false;
         if(waitPointIndex == 0 && GameRules.diceNumber == 6)
