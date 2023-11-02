@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.WSA;
 
 public class RollDice : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class RollDice : MonoBehaviour
         rend = GetComponent<SpriteRenderer>();
         dicesSides = Resources.LoadAll<Sprite>("Dice/");
         rend.sprite = dicesSides[5];
+        Color color = rend.color;
+        color.r = (float)0.90;
+        color.g = (float)0.90;
+        color.b = (float)0.90;
+        rend.color = color;
 
     }
 
@@ -24,7 +30,36 @@ public class RollDice : MonoBehaviour
         if (GameRules.diceNumber == 0)
         {
             diceThrowAllowed = true;
+            Color color = rend.color;
+            color.r = (float)0.90;
+            color.g = (float)0.90;
+            color.b = (float)0.90;
+            rend.color = color;
             GameRules.diceNumber++;
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        if (diceThrowAllowed)
+        {
+            Color color = rend.color;
+            color.r = 1;
+            color.g = 1;
+            color.b = 1;
+            rend.color = color;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (diceThrowAllowed)
+        {
+            Color color = rend.color;
+            color.r = (float)0.90;
+            color.g = (float)0.90;
+            color.b = (float)0.90;
+            rend.color = color;
         }
     }
 
@@ -43,7 +78,11 @@ public class RollDice : MonoBehaviour
             rend.sprite = dicesSides[randomDiceSide];
             yield return new WaitForSeconds(0.2f);
         }
-
+        Color color = rend.color;
+        color.r = (float)0.60;
+        color.g = (float)0.60;
+        color.b = (float)0.60;
+        rend.color = color;
         GameRules.diceNumber = randomDiceSide + 1;
         GameRules.MovePlayer();
     }

@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using TMPro;
-using UnityEditor.UI;
 using UnityEngine.UI;
 
 public class GameRules : MonoBehaviour
