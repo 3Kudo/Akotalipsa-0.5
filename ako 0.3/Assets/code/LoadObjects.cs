@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class LoadObjects : MonoBehaviour
 {
     public Sprite[] sprites;
+    public Image[] images;
     public Transform[] randomBack;
     public GameObject safePlacePrefabe;
 
@@ -16,6 +17,7 @@ public class LoadObjects : MonoBehaviour
         for (int i = 0; i < sprites.Length; i++)
         {
             GameRules.sprites[i] = sprites[i];
+            GameRules.images[i] = images[i];
         }
 
         for(int i = 0; i < safePlace.Length; i++)
@@ -23,8 +25,8 @@ public class LoadObjects : MonoBehaviour
             GameRules.safePlaceWaitPoints[i] = safePlace[i];
         }
 
-        GameRules.randomBack[0] = randomBack[0];
-        GameRules.randomBack[1] = randomBack[1];
+        //GameRules.randomBack[0] = randomBack[0];
+        //GameRules.randomBack[1] = randomBack[1];
 
         GameRules.safePlacePrefabe = safePlacePrefabe;
     }

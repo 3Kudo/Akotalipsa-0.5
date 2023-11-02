@@ -5,11 +5,10 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
 
-    public GameObject pionek;
+    public GameObject pionek, arrowPattern, arrow;
+    public Transform parent;
 
     public Transform[] waitPoints;
-
-    private float moveSpeed = 2f;
 
     [HideInInspector]
     public int waitPointIndex = 0;
@@ -17,18 +16,20 @@ public class Move : MonoBehaviour
     public AudioClip[] soundTracks;
     AudioSource AS;
 
-    public bool defence;
+    public bool defence, activeArrow;
 
     //ruch pionka
     public bool ruch = false;
     public int pozycja = 0;
     private bool finished;
+    private float moveSpeed = 2f;
 
     // Start is called before the first frame update
     void Start()
     {
         //ustawienie pionków na miejscu startowym
         transform.position = waitPoints[waitPointIndex].transform.position;
+
 
         //ustwienie wartosci boola bDalejWGrze na starcie na true
         AS = GetComponent<AudioSource>();
@@ -66,14 +67,13 @@ public class Move : MonoBehaviour
             }
             if (transform.position == waitPoints[waitPointIndex].transform.position)
             {
-                ruch = false;                
+                ruch = false;
                 AS.Stop();
                 if (waitPointIndex != 0)
                 {
                     GetComponentInParent<Player>().MoveTheSame(pionek,
                         waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y);
                     GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
-                    Debug.Log("done");
 
                     if (GameRules.diceNumber != 6)
                     {
@@ -90,6 +90,27 @@ public class Move : MonoBehaviour
         }
 
     }
+
+    private void OnMouseEnter()
+    {
+        if (GetComponentInParent<Player>().active && arrow==null)
+        {
+            activeArrow = false;
+            arrow = Instantiate(arrowPattern, parent) as GameObject;
+            arrow.SetActive(true);
+        }
+            
+    }
+
+    private IEnumerator OnMouseExit()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (activeArrow == false)
+        {
+            Destroy(arrow);
+            arrow = null;
+        }
+    }
     private void OnMouseDown()
     {
         if (GetComponentInParent<Player>().active && MoveEnabled())
@@ -100,7 +121,6 @@ public class Move : MonoBehaviour
     {
         moveSpeed = 20f;
         GetComponentInParent<Player>().active = false;
-        Debug.Log(GetComponentInParent<Player>().active);
         if (waitPointIndex == 0 && GameRules.diceNumber == 6)
         {
             pozycja++;
