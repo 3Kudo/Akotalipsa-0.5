@@ -6,7 +6,7 @@ public class Cat : MonoBehaviour
 {
 
     private int wakeCounter;
-    private static int phaseThreshold[5] = [0, 10, 20, 35, 50];
+    private static int[] phaseThreshold = {0, 10, 20, 35, 50};
     private bool isLocked;
 
     public int WakeCounter { get => wakeCounter; set => wakeCounter = value; }
