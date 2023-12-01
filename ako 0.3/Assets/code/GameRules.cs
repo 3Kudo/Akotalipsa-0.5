@@ -16,6 +16,8 @@ public class GameRules : MonoBehaviour
 	public static int miejsce;
 	public static GameObject safePlacePrefabe;
 
+	public static Cat cat;
+
 
 	public static Transform[] randomBack = new Transform[2];
 
@@ -32,7 +34,7 @@ public class GameRules : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		//przypisanie odpowiednich obiektów
+		//przypisanie odpowiednich obiektï¿½w
 		pawn = new GameObject[4];
 
 		pawn[0] = GameObject.Find("Moles");
@@ -68,12 +70,15 @@ public class GameRules : MonoBehaviour
         pawn[3].GetComponent<Player>().nazwa = "duck";
 		
 
-		//przypisanie UI koñca gry
+		//przypisanie UI koï¿½ca gry
 		miejsce = 0;
 		ranking = new GameObject[3];
 
+		//tworzenie kota
+		cat = new Cat();
 
-		//losowanie czyja tura i ustawienie wszystkich na false ¿eby ka¿dy mog³ rzuciæ koœci¹
+
+		//losowanie czyja tura i ustawienie wszystkich na false ï¿½eby kaï¿½dy mogï¿½ rzuciï¿½ koï¿½ciï¿½
 		pawn[1].GetComponent<Player>().active = false;
 		pawn[3].GetComponent<Player>().active = false;
 		pawn[2].GetComponent<Player>().active = false;
@@ -85,12 +90,12 @@ public class GameRules : MonoBehaviour
 
 	}
 
-	//metoda opowiedzialna za za³¹czanie gracza
+	//metoda opowiedzialna za zaï¿½ï¿½czanie gracza
 	public static void MovePlayer()
 	{
 		pawn[whoseTurn - 1].GetComponent<Player>().active = pawn[whoseTurn - 1].GetComponent<Player>().EnambleMovement();
 	}
-	//metoda opowiedzialna za za³¹czanie tury gracza
+	//metoda opowiedzialna za zaï¿½ï¿½czanie tury gracza
 	public static void Turn()
 	{
 		for (int i = 0; i < 4; i++)
@@ -109,6 +114,8 @@ public class GameRules : MonoBehaviour
 			{
 				tura[whoseTurn - 1].gameObject.SetActive(true);
 			}
+			//zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
+			cat.incrementWakeCounter(1);
 		}
 		else
 			tura[4].gameObject.SetActive(false);
@@ -141,7 +148,7 @@ public class GameRules : MonoBehaviour
 	}
 
 	
-	//funkcje zwi¹zane z mechanik¹ gry
+	//funkcje zwiï¿½zane z mechanikï¿½ gry
 
 	public static void Chceck(Transform waitPoints, string nazwa, GameObject pionek)
 	{
