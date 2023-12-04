@@ -28,7 +28,7 @@ public class GameRules : MonoBehaviour
 
 
     public static int whoseTurn = 0;
-	public static int diceNumber = 6;
+	public static int diceNumber = 7;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -115,8 +115,13 @@ public class GameRules : MonoBehaviour
 
 	}
 
-	//metoda odpowiedzialana za przypisaywanie pozycji w rankigu
-	public static void PlayerFinishedGamed(GameObject gracz)
+	public static GameObject GetTura()
+	{
+		return pawn[whoseTurn-1];
+	}
+
+    //metoda odpowiedzialana za przypisaywanie pozycji w rankigu
+    public static void PlayerFinishedGamed(GameObject gracz)
 	{
 		ranking[miejsce] = gracz;
 		miejsce++;

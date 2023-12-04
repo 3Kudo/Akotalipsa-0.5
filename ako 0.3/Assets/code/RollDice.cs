@@ -35,7 +35,7 @@ public class RollDice : MonoBehaviour
             color.g = (float)0.90;
             color.b = (float)0.90;
             rend.color = color;
-            GameRules.diceNumber++;
+            GameRules.diceNumber=7;
         }
     }
 

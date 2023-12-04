@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 //klasas odpowiedzalna za ruch
 public class Move : MonoBehaviour
@@ -75,7 +77,7 @@ public class Move : MonoBehaviour
                         waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y);
                     GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
 
-                    if (GameRules.diceNumber != 6)
+                    if (GameRules.diceNumber < 6)
                     {
                         GameRules.whoseTurn++;
                         if (GameRules.whoseTurn == 5)
@@ -93,7 +95,8 @@ public class Move : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (GetComponentInParent<Player>().active && arrow==null)
+        Debug.Log(GameRules.GetTura());
+        if (GameRules.GetTura() == GetComponentInParent<Player>().gracz && arrow==null)
         {
             activeArrow = false;
             arrow = Instantiate(arrowPattern, parent) as GameObject;
@@ -121,7 +124,9 @@ public class Move : MonoBehaviour
     {
         moveSpeed = 20f;
         GetComponentInParent<Player>().active = false;
-        if (waitPointIndex == 0 && GameRules.diceNumber == 6)
+        if (GetComponentInParent<Player>().activePowerup)
+            pionek.GetComponent<FrogPowerup>().Use();
+        if (waitPointIndex == 0 && GameRules.diceNumber >= 6)
         {
             pozycja++;
             waitPointIndex++;
@@ -156,7 +161,6 @@ public class Move : MonoBehaviour
             GameRules.onBoard.Remove(pionek);
             GetComponentInParent<Player>().ChceckPlayerFinished(dice);
         }
-        
     }
 
     //sprawdza czy gracz moze sie poruszac
@@ -168,7 +172,7 @@ public class Move : MonoBehaviour
 
         if(finished)
             return false;
-        if(waitPointIndex == 0 && GameRules.diceNumber == 6)
+        if(waitPointIndex == 0 && (GameRules.diceNumber == 6 || (GameRules.diceNumber >= 6 && GetComponentInParent<Player>().activePowerup)))
             return true;
         if (waitPointIndex > 0)
             return true;

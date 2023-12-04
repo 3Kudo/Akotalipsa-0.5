@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     public GameObject[] pionek;
     public GameObject gracz;
+    public bool activePowerup=false;
 
     //czy jest aktywna tura gracza
     public bool active = false;

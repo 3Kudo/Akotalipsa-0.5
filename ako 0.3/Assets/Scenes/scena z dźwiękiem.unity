@@ -441,7 +441,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6698113, g: 0.42541474, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -459,12 +459,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52785877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.866541, y: 0, z: 0}
-  m_LocalScale: {x: 24.1, y: 10.77, z: 1}
+  m_LocalPosition: {x: -14.14, y: -0.00000040233135, z: 0}
+  m_LocalScale: {x: 36.98515, y: 21.839434, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &56466925
 GameObject:
@@ -532,7 +532,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &94507156
 GameObject:
@@ -639,6 +639,7 @@ GameObject:
   - component: {fileID: 145181911}
   - component: {fileID: 145181910}
   - component: {fileID: 145181909}
+  - component: {fileID: 145181913}
   - component: {fileID: 145181912}
   m_Layer: 8
   m_Name: Turtle (1)
@@ -675,6 +676,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 145181907}
+  arrowPattern: {fileID: 8293770997955952000, guid: b39833bc3bafa91459ddcece1be36c4e, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 145181908}
   waitPoints:
   - {fileID: 1351780551}
   - {fileID: 544553960}
@@ -734,6 +738,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &145181910
@@ -811,7 +816,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 311d3661c9660c44ca5fa9df27e68c6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -919,6 +924,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &145181913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145181907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45b27f09d7f28c49a3b6f920c14c2bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &145207963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,6 +1229,7 @@ MonoBehaviour:
   - {fileID: 565801311}
   - {fileID: 610892559}
   gracz: {fileID: 181445512}
+  activePowerup: 0
   active: 0
   nazwa: 
   finished: 0
@@ -1303,6 +1321,7 @@ GameObject:
   - component: {fileID: 209223032}
   - component: {fileID: 209223031}
   - component: {fileID: 209223030}
+  - component: {fileID: 209223034}
   - component: {fileID: 209223033}
   m_Layer: 8
   m_Name: Turtle
@@ -1339,6 +1358,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 209223028}
+  arrowPattern: {fileID: 8293770997955952000, guid: b39833bc3bafa91459ddcece1be36c4e, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 209223029}
   waitPoints:
   - {fileID: 1899655790}
   - {fileID: 544553960}
@@ -1398,6 +1420,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &209223031
@@ -1475,7 +1498,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 311d3661c9660c44ca5fa9df27e68c6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1583,6 +1606,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &209223034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209223028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45b27f09d7f28c49a3b6f920c14c2bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &211584193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2236,6 +2271,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 384831387}
+  arrowPattern: {fileID: 4472205106423966810, guid: 06f8e7034282a07418d8b26796e653ef, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 384831388}
   waitPoints:
   - {fileID: 1275619410}
   - {fileID: 768657895}
@@ -2295,6 +2333,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &384831390
@@ -2372,7 +2411,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 69f8f5b8fb2f28c45b90ee72fb95c225, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2636,7 +2675,7 @@ RectTransform:
   m_Children:
   - {fileID: 145207964}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2791,7 +2830,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7.9507127
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3068,7 +3107,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: dec88744564ecab47b72169ffd741779, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3126,6 +3165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 565801311}
+  arrowPattern: {fileID: 8498843523775087039, guid: 1614d50fb1829664d8b68407fa146214, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 565801312}
   waitPoints:
   - {fileID: 295036263}
   - {fileID: 566059256}
@@ -3185,6 +3227,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!82 &565801316
@@ -3393,6 +3436,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 604178498}
+  arrowPattern: {fileID: 4472205106423966810, guid: 06f8e7034282a07418d8b26796e653ef, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 604178499}
   waitPoints:
   - {fileID: 135798191}
   - {fileID: 768657895}
@@ -3452,6 +3498,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &604178501
@@ -3529,7 +3576,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 69f8f5b8fb2f28c45b90ee72fb95c225, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3712,7 +3759,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: dec88744564ecab47b72169ffd741779, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3770,6 +3817,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 609282487}
+  arrowPattern: {fileID: 8498843523775087039, guid: 1614d50fb1829664d8b68407fa146214, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 609282488}
   waitPoints:
   - {fileID: 1157568229}
   - {fileID: 566059256}
@@ -3829,6 +3879,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!82 &609282492
@@ -4002,7 +4053,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: dec88744564ecab47b72169ffd741779, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4060,6 +4111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 610892559}
+  arrowPattern: {fileID: 8498843523775087039, guid: 1614d50fb1829664d8b68407fa146214, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 610892560}
   waitPoints:
   - {fileID: 1361554899}
   - {fileID: 566059256}
@@ -4119,6 +4173,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!82 &610892564
@@ -4311,7 +4366,7 @@ RectTransform:
   m_Children:
   - {fileID: 1354535120}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4792,6 +4847,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 688237528}
+  arrowPattern: {fileID: 8187493395519676448, guid: 0bef065b80b1aad46bce758314579484, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 688237529}
   waitPoints:
   - {fileID: 138450985}
   - {fileID: 223277339}
@@ -4851,6 +4909,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &688237531
@@ -4926,7 +4985,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 56a714fd175615b4ab464d2eb7b405b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5195,6 +5254,7 @@ MonoBehaviour:
   - {fileID: 1333517152}
   - {fileID: 1063066514}
   gracz: {fileID: 729415138}
+  activePowerup: 0
   active: 0
   nazwa: 
   finished: 0
@@ -5449,7 +5509,7 @@ Transform:
   - {fileID: 1759401555}
   - {fileID: 2037938501}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &796000352
 GameObject:
@@ -5699,6 +5759,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 901403420}
+  arrowPattern: {fileID: 8187493395519676448, guid: 0bef065b80b1aad46bce758314579484, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 901403421}
   waitPoints:
   - {fileID: 822492063}
   - {fileID: 223277339}
@@ -5758,6 +5821,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &901403423
@@ -5833,7 +5897,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 56a714fd175615b4ab464d2eb7b405b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6189,6 +6253,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 1063066514}
+  arrowPattern: {fileID: 8187493395519676448, guid: 0bef065b80b1aad46bce758314579484, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 1063066515}
   waitPoints:
   - {fileID: 1996363797}
   - {fileID: 223277339}
@@ -6248,6 +6315,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &1063066517
@@ -6323,7 +6391,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 56a714fd175615b4ab464d2eb7b405b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6690,7 +6758,7 @@ Transform:
   - {fileID: 212521160}
   - {fileID: 1837506595}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1147974644
 GameObject:
@@ -6836,7 +6904,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1166884942
 GameObject:
@@ -6961,7 +7029,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 413ddfcf85050ac40bdafa7b818692bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -7062,7 +7130,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7334,6 +7402,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 1333517152}
+  arrowPattern: {fileID: 8187493395519676448, guid: 0bef065b80b1aad46bce758314579484, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 1333517153}
   waitPoints:
   - {fileID: 2033958011}
   - {fileID: 223277339}
@@ -7393,6 +7464,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &1333517155
@@ -7468,7 +7540,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 56a714fd175615b4ab464d2eb7b405b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8099,6 +8171,7 @@ MonoBehaviour:
   - {fileID: 384831387}
   - {fileID: 1869554854}
   gracz: {fileID: 1598017226}
+  activePowerup: 0
   active: 0
   nazwa: 
   finished: 0
@@ -8156,6 +8229,7 @@ MonoBehaviour:
   - {fileID: 1868742800}
   - {fileID: 2119415009}
   gracz: {fileID: 1610930975}
+  activePowerup: 0
   active: 0
   nazwa: 
   finished: 0
@@ -8353,7 +8427,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1692644718
 GameObject:
@@ -8492,7 +8566,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: dec88744564ecab47b72169ffd741779, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8550,6 +8624,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 1751368370}
+  arrowPattern: {fileID: 8498843523775087039, guid: 1614d50fb1829664d8b68407fa146214, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 1751368371}
   waitPoints:
   - {fileID: 1053030721}
   - {fileID: 566059256}
@@ -8609,6 +8686,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!82 &1751368375
@@ -8817,6 +8895,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 1809797739}
+  arrowPattern: {fileID: 4472205106423966810, guid: 06f8e7034282a07418d8b26796e653ef, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 1809797740}
   waitPoints:
   - {fileID: 714321883}
   - {fileID: 768657895}
@@ -8876,6 +8957,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &1809797742
@@ -8953,7 +9035,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 69f8f5b8fb2f28c45b90ee72fb95c225, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9250,6 +9332,7 @@ GameObject:
   - component: {fileID: 1868742804}
   - component: {fileID: 1868742803}
   - component: {fileID: 1868742802}
+  - component: {fileID: 1868742806}
   - component: {fileID: 1868742805}
   m_Layer: 8
   m_Name: Turtle (2)
@@ -9286,6 +9369,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 1868742800}
+  arrowPattern: {fileID: 8293770997955952000, guid: b39833bc3bafa91459ddcece1be36c4e, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 1868742801}
   waitPoints:
   - {fileID: 1818684313}
   - {fileID: 544553960}
@@ -9345,6 +9431,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &1868742803
@@ -9422,7 +9509,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 311d3661c9660c44ca5fa9df27e68c6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9530,6 +9617,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1868742806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868742800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45b27f09d7f28c49a3b6f920c14c2bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1869554854
 GameObject:
   m_ObjectHideFlags: 0
@@ -9578,6 +9677,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 1869554854}
+  arrowPattern: {fileID: 4472205106423966810, guid: 06f8e7034282a07418d8b26796e653ef, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 1869554855}
   waitPoints:
   - {fileID: 401177376}
   - {fileID: 768657895}
@@ -9637,6 +9739,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &1869554857
@@ -10463,7 +10566,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2082301969
 MonoBehaviour:
@@ -10477,6 +10580,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da405002f0afa04284672f25dcbbce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2089520002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2089520005}
+  - component: {fileID: 2089520004}
+  - component: {fileID: 2089520003}
+  m_Layer: 0
+  m_Name: VisualScripting SceneVariables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2089520003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089520002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 765181c9ef4b24d32a4f7cbd2ef370dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2089520004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089520002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"Kind":"Scene","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
+--- !u!4 &2089520005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089520002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2119415009
 GameObject:
   m_ObjectHideFlags: 0
@@ -10489,6 +10652,7 @@ GameObject:
   - component: {fileID: 2119415013}
   - component: {fileID: 2119415012}
   - component: {fileID: 2119415011}
+  - component: {fileID: 2119415015}
   - component: {fileID: 2119415014}
   m_Layer: 8
   m_Name: Turtle (3)
@@ -10525,6 +10689,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pionek: {fileID: 2119415009}
+  arrowPattern: {fileID: 8293770997955952000, guid: b39833bc3bafa91459ddcece1be36c4e, type: 3}
+  arrow: {fileID: 0}
+  parent: {fileID: 2119415010}
   waitPoints:
   - {fileID: 1390844536}
   - {fileID: 544553960}
@@ -10584,6 +10751,7 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
   defence: 0
+  activeArrow: 0
   ruch: 0
   pozycja: 0
 --- !u!60 &2119415012
@@ -10661,7 +10829,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 311d3661c9660c44ca5fa9df27e68c6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -10769,6 +10937,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2119415015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119415009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45b27f09d7f28c49a3b6f920c14c2bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2128273755
 GameObject:
   m_ObjectHideFlags: 0
