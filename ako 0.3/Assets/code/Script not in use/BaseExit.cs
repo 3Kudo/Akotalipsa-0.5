@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseExit : MonoBehaviour
 {
-    private void OnMouseDown()
+    /*private void OnMouseDown()
     {
         if (true && GetComponentInParent<Move>().waitPointIndex==0 && GameRules.diceNumber==7)
         {
@@ -15,5 +15,5 @@ public class BaseExit : MonoBehaviour
             Destroy(GetComponentInParent<Move>().arrow);
             GetComponentInParent<Move>().arrow = null;
         }
-    }
+    }*/
 }

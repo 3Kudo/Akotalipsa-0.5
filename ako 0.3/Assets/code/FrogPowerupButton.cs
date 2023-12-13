@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class FrogPowerupButton : MonoBehaviour
 {
-    private void OnMouseDown()
+    /*private void OnMouseDown()
     {
         // tutaj bedzie liczenie pieniedzy
         if (GetComponentInParent<Player>().active)
         {
-            GetComponentInParent<Player>().activePowerup = false;
+            GetComponentInParent<Move>().activePowerup = false;
             Destroy(GetComponentInParent<Move>().arrow);
             GetComponentInParent<Move>().arrow = null;
         }
         else
         {
-            GetComponentInParent<Player>().activePowerup = true;
+            GetComponentInParent<Move>().activePowerup = true;
             Destroy(GetComponentInParent<Move>().arrow);
             GetComponentInParent<Move>().arrow = null;
         }
-    }
+    }*/
 }

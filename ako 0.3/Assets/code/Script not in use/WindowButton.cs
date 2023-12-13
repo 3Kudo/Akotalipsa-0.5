@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WindowButton : MonoBehaviour
 {
-    public GameObject window;
+    /*public GameObject window;
     public SpriteRenderer sprite;
 
     void Start()
@@ -30,5 +30,5 @@ public class WindowButton : MonoBehaviour
     {
         sprite.enabled = false;
         window.SetActive(true);
-    }
+    }*/
 }

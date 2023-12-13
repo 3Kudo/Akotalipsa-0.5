@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ public class Player : MonoBehaviour
 {
     public GameObject[] pionek;
     public GameObject gracz;
-    public bool activePowerup=false;
 
     //czy jest aktywna tura gracza
     public bool active = false;
@@ -36,8 +36,12 @@ public class Player : MonoBehaviour
             }
             GameRules.Turn();
             GameRules.diceNumber = 0;
+            SetPawnToNormal(null);
             return false;
         }
+        for (int i = 0; i < 4; i++)
+            if (pionek[i].GetComponent<Move>().IsChosen())
+                break;
         return true;
     }
 
@@ -98,6 +102,18 @@ public class Player : MonoBehaviour
             GameRules.PlayerFinishedGamed(gracz);
         }
     }
+
+    public void SetPawnToNormal(GameObject pawn)
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            if (pionek[i] == pawn)
+                continue;
+            else
+                pionek[i].GetComponent<Move>().ToNormalState();
+        }
+    }
+
 }
 
 

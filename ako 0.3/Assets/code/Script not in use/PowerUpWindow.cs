@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PowerUpWindow : MonoBehaviour
 {
-    private void OnMouseDown()
+    /*private void OnMouseDown()
     {
         Destroy(GetComponentInParent<Move>().arrow);
         GetComponentInParent<Move>().arrow = null;
-    }
+    }*/
 }

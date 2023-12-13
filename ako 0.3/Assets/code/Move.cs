@@ -4,11 +4,12 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 //klasas odpowiedzalna za ruch
-public class Move : MonoBehaviour
+public abstract class Move : MonoBehaviour
 {
 
-    public GameObject pionek, arrowPattern, arrow;
+    public GameObject pionek, shadowPawnPattern, shadowPawn;
     public Transform parent;
+    public Sprite PawnSprite;
 
     public Transform[] waitPoints;
 
@@ -16,15 +17,15 @@ public class Move : MonoBehaviour
     public int waitPointIndex = 0;
       
     public AudioClip[] soundTracks;
-    AudioSource AS;
+    [HideInInspector] public AudioSource AS;
 
-    public bool defence, activeArrow;
+    public bool defence,activePowerup=false;
 
     //ruch pionka
-    public bool ruch = false;
-    public int pozycja = 0;
-    private bool finished;
-    private float moveSpeed = 2f;
+    [HideInInspector] public bool ruch = false, chosen = false;
+    [HideInInspector] public int pozycja = 0;
+    [HideInInspector] public bool finished;
+    public float moveSpeed = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -37,102 +38,63 @@ public class Move : MonoBehaviour
         AS = GetComponent<AudioSource>();
         finished = false;
         defence = false;
-    }
-    // Update is called once per frame
-    private void Update()
-    {
-        //wykonanie ruchu, nie wiem czy to jest dobry pomysł że to tutaj wstawiłem po porstu lepiej tutaj wygląda ruch
-        if (ruch)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, waitPoints[pozycja].transform.position, moveSpeed * Time.deltaTime);
-
-
-            if (transform.position == waitPoints[pozycja].transform.position && transform.position != waitPoints[waitPointIndex].transform.position)
-            {
-                if (waitPointIndex > pozycja)
-                {
-                    moveSpeed = 20f;
-                    pozycja++;
-                }
-                else
-                {
-                    moveSpeed = 12f;
-                    pozycja--;
-                }
-            }
-
-            if (AS.isPlaying == false)
-            {
-                AS.clip = soundTracks[0];
-
-                AS.Play();
-            }
-            if (transform.position == waitPoints[waitPointIndex].transform.position)
-            {
-                ruch = false;
-                AS.Stop();
-                if (waitPointIndex != 0)
-                {
-                    GetComponentInParent<Player>().MoveTheSame(pionek,
-                        waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y);
-                    GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
-
-                    if (GameRules.diceNumber < 6)
-                    {
-                        GameRules.whoseTurn++;
-                        if (GameRules.whoseTurn == 5)
-                        {
-                            GameRules.whoseTurn = 1;
-                        }
-                    }
-                    GameRules.Turn();
-                    GameRules.diceNumber = 0;
-                }
-            }
-        }
-
+        
     }
 
-    private void OnMouseEnter()
-    {
-        Debug.Log(GameRules.GetTura());
-        if (GameRules.GetTura() == GetComponentInParent<Player>().gracz && arrow==null)
-        {
-            activeArrow = false;
-            arrow = Instantiate(arrowPattern, parent) as GameObject;
-            arrow.SetActive(true);
-        }
-            
-    }
-
-    private IEnumerator OnMouseExit()
-    {
-        yield return new WaitForSeconds(0.1f);
-        if (activeArrow == false)
-        {
-            Destroy(arrow);
-            arrow = null;
-        }
-    }
     private void OnMouseDown()
     {
-        if (GetComponentInParent<Player>().active && MoveEnabled())
-            MoveOn();
+        if (GameRules.GetTura() == GetComponentInParent<Player>().gracz)
+        {
+            Sprite tymSrpite = this.GetComponent<SpriteRenderer>().sprite;
+            this.GetComponent<SpriteRenderer>().sprite = PawnSprite;
+            PawnSprite = tymSrpite;
+            chosen = !chosen;
+        }
+
+
+        if (shadowPawn != null)
+        {
+            Destroy(shadowPawn);
+            shadowPawn = null;
+        }
+        else if (GetComponentInParent<Player>().active && MoveEnabled())
+        {
+            shadowPawn = Instantiate(shadowPawnPattern, parent) as GameObject;
+            int position = ShadowPawn();
+            shadowPawn.transform.position = waitPoints[position].transform.position;
+            shadowPawn.GetComponent<SpriteRenderer>().sprite = PawnSprite;
+            shadowPawn.GetComponent<PolygonCollider2D>().points = this.GetComponent<PolygonCollider2D>().points;
+        }
+        GetComponentInParent<Player>().SetPawnToNormal(pionek);
     }
 
-    private void MoveOn()
+    private int ShadowPawn()
+    {
+        if (waitPointIndex == 0 && GameRules.diceNumber >= 6)
+            return waitPointIndex + 1;
+        else if ((waitPointIndex + GameRules.diceNumber) <= waitPoints.Length - 1)
+            return waitPointIndex + GameRules.diceNumber;
+        else
+        {
+            int countPosition = waitPointIndex;
+            countPosition = countPosition + GameRules.diceNumber;
+            countPosition = countPosition - (waitPoints.Length - 1);
+            countPosition = (waitPoints.Length - 1) - countPosition;
+            return countPosition;
+        }
+    }
+
+    public void MoveOn()
     {
         moveSpeed = 20f;
         GetComponentInParent<Player>().active = false;
-        if (GetComponentInParent<Player>().activePowerup)
-            pionek.GetComponent<FrogPowerup>().Use();
         if (waitPointIndex == 0 && GameRules.diceNumber >= 6)
         {
             pozycja++;
             waitPointIndex++;
             GameRules.onBoard.Add(pionek);
         }
-        else if((waitPointIndex + GameRules.diceNumber) <= waitPoints.Length - 1)
+        else if ((waitPointIndex + GameRules.diceNumber) <= waitPoints.Length - 1)
         {
             pozycja++;
             Transform waitPoint = waitPoints[waitPointIndex];
@@ -145,7 +107,7 @@ public class Move : MonoBehaviour
             int countPosition = waitPointIndex;
             countPosition = countPosition + GameRules.diceNumber;
             countPosition = countPosition - (waitPoints.Length - 1);
-            countPosition = (waitPoints.Length-1) - countPosition;
+            countPosition = (waitPoints.Length - 1) - countPosition;
             if (countPosition < waitPointIndex)
                 pozycja--;
             else if (countPosition > waitPointIndex)
@@ -153,7 +115,7 @@ public class Move : MonoBehaviour
             waitPointIndex = countPosition;
             GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
         }
-        int dice=GameRules.diceNumber;
+        int dice = GameRules.diceNumber;
         ruch = true;
         if (waitPointIndex == waitPoints.Length - 1)
         {
@@ -163,21 +125,34 @@ public class Move : MonoBehaviour
         }
     }
 
-    //sprawdza czy gracz moze sie poruszac
-    public bool MoveEnabled()
+    public void ToNormalState()
     {
-        //wyłączenie oborny
-        defence = false;
-
-
-        if(finished)
-            return false;
-        if(waitPointIndex == 0 && (GameRules.diceNumber == 6 || (GameRules.diceNumber >= 6 && GetComponentInParent<Player>().activePowerup)))
-            return true;
-        if (waitPointIndex > 0)
-            return true;
-        return false;
+        Destroy(shadowPawn);
+        shadowPawn = null;
+        if (chosen)
+        {
+            Sprite tymSrpite = this.GetComponent<SpriteRenderer>().sprite;
+            this.GetComponent<SpriteRenderer>().sprite = PawnSprite;
+            PawnSprite = tymSrpite;
+            chosen = !chosen;
+        }
     }
+
+    public bool IsChosen()
+    {
+        if (chosen)
+        {
+            shadowPawn = Instantiate(shadowPawnPattern, parent) as GameObject;
+            int position = ShadowPawn();
+            shadowPawn.transform.position = waitPoints[position].transform.position;
+            shadowPawn.GetComponent<SpriteRenderer>().sprite = PawnSprite;
+            shadowPawn.GetComponent<PolygonCollider2D>().points = this.GetComponent<PolygonCollider2D>().points;
+        }
+        return chosen;
+    }
+
+    //sprawdza czy gracz moze sie poruszac
+    public abstract bool MoveEnabled();
 
     public void Set(float x, float y)
     {
