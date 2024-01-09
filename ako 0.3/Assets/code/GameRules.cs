@@ -116,6 +116,27 @@ public class GameRules : MonoBehaviour
 			}
 			//zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
 			cat.incrementWakeCounter(1);
+			cat.phaseCheck();
+			switch(cat.Phase){
+				case 1:
+				//ruszanie losowych pionkow 1-(-2)
+				break;
+				case 2:
+				//ruszanie losowych pionkow 2-(-4)
+				//sciana w losowym miejscu (4 tury)
+				break;
+				case 3:
+				//ruszanie losowych pionkow 3-(-6)
+				//sciana w losowym miejscu (8 tur)
+				//losowa szansa na zabranie pionka do bazy
+				break;
+				case 4:
+				//ruszanie losowych pionkow 3-(-6)
+				//sciana w losowym miejscu (8 tur)
+				//losowa szansa na zabranie pionka do bazy
+				//lock ze nie mozna cofnac
+				break;
+			}
 		}
 		else
 			tura[4].gameObject.SetActive(false);
