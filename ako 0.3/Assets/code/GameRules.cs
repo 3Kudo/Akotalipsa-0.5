@@ -114,29 +114,14 @@ public class GameRules : MonoBehaviour
 			{
 				tura[whoseTurn - 1].gameObject.SetActive(true);
 			}
+			//akcje kota
+			if(cat.Phase == 1) losowePrzesuwanie(-2, 1);
+			else if(cat.Phase == 2) losowePrzesuwanie(-4, 2);
+			else if(cat.Phase == 3) losowePrzesuwanie(-6, 3);
+			else if(cat.Phase == 4) losowePrzesuwanie(-6, 3);
 			//zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
 			cat.incrementWakeCounter(1);
 			cat.phaseCheck();
-			switch(cat.Phase){
-				case 1:
-				//ruszanie losowych pionkow 1-(-2)
-				break;
-				case 2:
-				//ruszanie losowych pionkow 2-(-4)
-				//sciana w losowym miejscu (4 tury)
-				break;
-				case 3:
-				//ruszanie losowych pionkow 3-(-6)
-				//sciana w losowym miejscu (8 tur)
-				//losowa szansa na zabranie pionka do bazy
-				break;
-				case 4:
-				//ruszanie losowych pionkow 3-(-6)
-				//sciana w losowym miejscu (8 tur)
-				//losowa szansa na zabranie pionka do bazy
-				//lock ze nie mozna cofnac
-				break;
-			}
 		}
 		else
 			tura[4].gameObject.SetActive(false);
@@ -250,6 +235,20 @@ public class GameRules : MonoBehaviour
 		pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
         pionek.GetComponent<Move>().waitPointIndex = 0;
 		pionek.GetComponent<Move>().ruch = true;
+	}
+
+	public static void losowePrzesuwanie(int maxMove, int minMove)
+	{
+		if (onBoard.Count > 0)
+		{
+			int los = Random.Range(0, onBoard.Count);
+			GameObject pionek = onBoard.ElementAt(los);
+			onBoard.Remove(pionek);
+			Transform position = pionek.GetComponent<Move>().GetWaitpoint();
+			pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
+			pionek.GetComponent<Move>().waitPointIndex = pionek.GetComponent<Move>().pozycja + Random.Range(minMove, maxMove);
+			pionek.GetComponent<Move>().ruch = true;
+		}
 	}
 
 	public static void OnSafePlace(GameObject pionek, Transform waitPoint)
