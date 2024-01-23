@@ -19,7 +19,7 @@ public abstract class Move : MonoBehaviour
     public AudioClip[] soundTracks;
     [HideInInspector] public AudioSource AS;
 
-    public bool defence,activePowerup=false;
+    public bool defence;
 
     //ruch pionka
     [HideInInspector] public bool ruch = false, chosen = false;
@@ -41,34 +41,46 @@ public abstract class Move : MonoBehaviour
         
     }
 
-    private void OnMouseDown()
+    private IEnumerator OnMouseDown()
     {
+        int position = 0;
+        GetComponentInParent<Player>().SetPawnToNormal(pionek);
         if (GameRules.GetTura() == GetComponentInParent<Player>().gracz)
         {
             Sprite tymSrpite = this.GetComponent<SpriteRenderer>().sprite;
             this.GetComponent<SpriteRenderer>().sprite = PawnSprite;
             PawnSprite = tymSrpite;
             chosen = !chosen;
+            position = ShadowPawnPosition();
+            if (!GetComponentInParent<Player>().PowerupWindowInteraction(pionek))
+                yield return new WaitForSeconds(0.45f);
+            GetComponentInParent<Player>().SetPowerups(parent);
         }
+
+
+        
 
 
         if (shadowPawn != null)
         {
             Destroy(shadowPawn);
             shadowPawn = null;
+            GetComponentInParent<Player>().MoveOut(waitPoints[position], null);
         }
         else if (GetComponentInParent<Player>().active && MoveEnabled())
         {
             shadowPawn = Instantiate(shadowPawnPattern, parent) as GameObject;
-            int position = ShadowPawn();
             shadowPawn.transform.position = waitPoints[position].transform.position;
             shadowPawn.GetComponent<SpriteRenderer>().sprite = PawnSprite;
             shadowPawn.GetComponent<PolygonCollider2D>().points = this.GetComponent<PolygonCollider2D>().points;
+            GetComponentInParent<Player>().MoveTheSame(shadowPawn, waitPoints[position].transform.position.x, waitPoints[position].transform.position.y, position);
         }
-        GetComponentInParent<Player>().SetPawnToNormal(pionek);
+
+        
+
     }
 
-    private int ShadowPawn()
+    public int ShadowPawnPosition()
     {
         if (waitPointIndex == 0 && GameRules.diceNumber >= 6)
             return waitPointIndex + 1;
@@ -123,7 +135,9 @@ public abstract class Move : MonoBehaviour
             GameRules.onBoard.Remove(pionek);
             GetComponentInParent<Player>().ChceckPlayerFinished(dice);
         }
+        ToNormalState();
     }
+
 
     public void ToNormalState()
     {
@@ -131,22 +145,27 @@ public abstract class Move : MonoBehaviour
         shadowPawn = null;
         if (chosen)
         {
+            GetComponentInParent<Player>().SetPowerups(parent);
             Sprite tymSrpite = this.GetComponent<SpriteRenderer>().sprite;
             this.GetComponent<SpriteRenderer>().sprite = PawnSprite;
             PawnSprite = tymSrpite;
             chosen = !chosen;
+            GetComponentInParent<Player>().PowerupWindowInteraction(pionek);
         }
     }
 
     public bool IsChosen()
     {
+        if(!MoveEnabled())
+            return chosen;
         if (chosen)
         {
             shadowPawn = Instantiate(shadowPawnPattern, parent) as GameObject;
-            int position = ShadowPawn();
+            int position = ShadowPawnPosition();
             shadowPawn.transform.position = waitPoints[position].transform.position;
             shadowPawn.GetComponent<SpriteRenderer>().sprite = PawnSprite;
             shadowPawn.GetComponent<PolygonCollider2D>().points = this.GetComponent<PolygonCollider2D>().points;
+            GetComponentInParent<Player>().MoveTheSame(shadowPawn, waitPoints[position].transform.position.x, waitPoints[position].transform.position.y, position);
         }
         return chosen;
     }

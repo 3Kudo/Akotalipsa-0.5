@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mole : Move
 {
+    public bool poweruopActive;
     private void Update()
     {
         //wykonanie ruchu, nie wiem czy to jest dobry pomys³ ¿e to tutaj wstawi³em po porstu lepiej tutaj wygl¹da ruch
@@ -37,8 +38,17 @@ public class Mole : Move
                 AS.Stop();
                 if (waitPointIndex != 0)
                 {
+
+                    if (waitPointIndex == GetComponentInParent<PlayerMole>().molehillWaitPointsIndex[0])
+                    {
+                        waitPointIndex = GetComponentInParent<PlayerMole>().molehillWaitPointsIndex[1];
+                        pozycja = waitPointIndex;
+                        ruch = true;
+                        return;
+                    }
+
                     GetComponentInParent<Player>().MoveTheSame(pionek,
-                        waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y);
+                        waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y,waitPointIndex);
                     GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
 
                     if (GameRules.diceNumber < 6)
@@ -49,6 +59,15 @@ public class Mole : Move
                             GameRules.whoseTurn = 1;
                         }
                     }
+                    
+                    if (poweruopActive)
+                    {
+                        GetComponentInParent<PlayerMole>().molehill[1] = Instantiate(GetComponentInParent<PlayerMole>().molehillPattern) as GameObject;
+                        GetComponentInParent<PlayerMole>().molehillWaitPointsIndex[1] = waitPointIndex;
+                        GetComponentInParent<PlayerMole>().molehill[1].transform.position = waitPoints[waitPointIndex].transform.position;
+                    }
+                    GetComponentInParent<PlayerMole>().ResetPowerupActive(pionek);
+                    poweruopActive = false;
                     GameRules.Turn();
                     GameRules.diceNumber = 0;
                 }
@@ -56,6 +75,8 @@ public class Mole : Move
         }
 
     }
+
+    
 
     public override bool MoveEnabled()
     {

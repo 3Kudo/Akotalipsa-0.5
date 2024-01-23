@@ -33,12 +33,13 @@ public class Frog : Move
             }
             if (transform.position == waitPoints[waitPointIndex].transform.position)
             {
+                GetComponentInParent<PlayerFrog>().powerupActive = false;
                 ruch = false;
                 AS.Stop();
                 if (waitPointIndex != 0)
                 {
                     GetComponentInParent<Player>().MoveTheSame(pionek,
-                        waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y);
+                        waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y, waitPointIndex);
                     GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
 
                     if (GameRules.diceNumber < 6)
@@ -57,6 +58,8 @@ public class Frog : Move
 
     }
 
+    
+
     public override bool MoveEnabled()
     {
         //wy³¹czenie oborny
@@ -65,7 +68,7 @@ public class Frog : Move
 
         if (finished)
             return false;
-        if (waitPointIndex == 0 && (GameRules.diceNumber == 6 || (GameRules.diceNumber >= 6 && activePowerup)))
+        if (waitPointIndex == 0 && (GameRules.diceNumber == 6 || (GameRules.diceNumber >= 6 && GetComponentInParent<PlayerFrog>().powerupActive)))
             return true;
         if (waitPointIndex > 0)
             return true;

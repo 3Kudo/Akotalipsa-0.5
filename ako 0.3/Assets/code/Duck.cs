@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Duck : Move
 {
+    [HideInInspector] public bool powerupActive = false;
     private void Update()
     {
         //wykonanie ruchu, nie wiem czy to jest dobry pomys³ ¿e to tutaj wstawi³em po porstu lepiej tutaj wygl¹da ruch
@@ -38,9 +39,14 @@ public class Duck : Move
                 if (waitPointIndex != 0)
                 {
                     GetComponentInParent<Player>().MoveTheSame(pionek,
-                        waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y);
+                        waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y, waitPointIndex);
                     GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
 
+                    if (powerupActive)
+                    {
+                        powerupActive = false;
+                        return;
+                    }
                     if (GameRules.diceNumber < 6)
                     {
                         GameRules.whoseTurn++;
@@ -56,6 +62,8 @@ public class Duck : Move
         }
 
     }
+
+    
 
     public override bool MoveEnabled()
     {
