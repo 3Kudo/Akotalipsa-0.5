@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Akotacoiny;
 
 //klasa odpowiedzialna za wybór klasy pionka
 public class Player : MonoBehaviour
 {
     public GameObject[] pionek;
     public GameObject gracz;
+    public int[] Coin = new int[5];
 
     //czy jest aktywna tura gracza
     public bool active = false;
@@ -26,11 +28,13 @@ public class Player : MonoBehaviour
         {
             if (GameRules.diceNumber != 6 || GameRules.diceNumber != 0)
             {
+                CoinCounterD.instance.IncreaseCoins(1);
                 GameRules.whoseTurn++;
                 if (GameRules.whoseTurn == 5)
                 {
+                    GameRules.AddCoin(2);
+                    Debug.Log("Application has quit.");
                     GameRules.whoseTurn = 1;
-
                 }
             }
             GameRules.Turn();
@@ -96,6 +100,14 @@ public class Player : MonoBehaviour
             finished = true;
             GameRules.PlayerFinishedGamed(gracz);
         }
+    }
+
+    public void Money(int coin)
+    {
+        Coin[0] = 5;
+        Coin[1] = 5;
+        Coin[2] = 5;
+        Coin[3] = 5;
     }
 }
 
