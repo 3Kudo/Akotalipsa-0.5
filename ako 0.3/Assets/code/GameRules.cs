@@ -103,11 +103,10 @@ public class GameRules : MonoBehaviour
         if (miejsce != 3)
 		{
 			if (pawn[whoseTurn - 1].GetComponent<Player>().finished)
-			{
-				if (whoseTurn == 4)
-				{
-					AddCoin(2);
-					whoseTurn = 1;
+            {
+                if (whoseTurn == 4)
+                {
+                    whoseTurn = 1;
 				}
 				else
 					whoseTurn++;
@@ -121,7 +120,7 @@ public class GameRules : MonoBehaviour
 		else
 			tura[4].gameObject.SetActive(false);
 
-	}
+    }
 
 	//metoda odpowiedzialana za przypisaywanie pozycji w rankigu
 	public static void PlayerFinishedGamed(GameObject gracz)
