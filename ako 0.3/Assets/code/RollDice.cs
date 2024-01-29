@@ -9,7 +9,7 @@ public class RollDice : MonoBehaviour
 
     private Sprite[] dicesSides;
     private SpriteRenderer rend;
-    private bool diceThrowAllowed = true;
+    private static bool diceThrowAllowed = true;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class RollDice : MonoBehaviour
     private void Update()
     {
         if (GameRules.diceNumber == 0)
-        {
+        {      
             diceThrowAllowed = true;
             Color color = rend.color;
             color.r = (float)0.90;
@@ -87,7 +87,7 @@ public class RollDice : MonoBehaviour
         GameRules.MovePlayer();
     }
 
-    private void RollDiceBlock()
+    public static void RollDiceBlock()
     {
         diceThrowAllowed = false;
     }

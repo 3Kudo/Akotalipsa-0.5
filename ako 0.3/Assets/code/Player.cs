@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
         {
             if (GameRules.diceNumber != 6 || GameRules.diceNumber != 0)
             {
+                CoinCounterD.instance.IncreaseCoins(1);
                 GameRules.whoseTurn++;
                 if (GameRules.whoseTurn == 5)
                 {

@@ -15,16 +15,20 @@ public class GameRules : MonoBehaviour
 	public static Image[] images= new Image[4];
 	public static int miejsce;
 	public static GameObject safePlacePrefabe;
+	public static GameObject CoinPrefabe;
+
 
 
 	public static Transform[] randomBack = new Transform[2];
 
 	public static Transform[] safePlaceWaitPoints = new Transform[44];
+    public static Transform[] CoinWaitPoints = new Transform[44];
 
 
-	public static List<GameObject> onBoard = new List<GameObject>();
+    public static List<GameObject> onBoard = new List<GameObject>();
 
 	public static List<GameObject> safePlace = new List<GameObject>();
+    public static List<GameObject> Coin = new List<GameObject>();
 
 
     public static int whoseTurn = 0;
@@ -81,6 +85,7 @@ public class GameRules : MonoBehaviour
 		whoseTurn = Random.Range(1, 5);
 		AddSafePlace();
         AddSafePlace();
+		AddCoin(2);
         Turn();
 
 	}
@@ -89,21 +94,24 @@ public class GameRules : MonoBehaviour
 	public static void MovePlayer()
 	{
 		pawn[whoseTurn - 1].GetComponent<Player>().active = pawn[whoseTurn - 1].GetComponent<Player>().EnambleMovement();
-	}
+    }
 	//metoda opowiedzialna za za³¹czanie tury gracza
 	public static void Turn()
 	{
 		for (int i = 0; i < 4; i++)
 			tura[i].gameObject.SetActive(false);
-		if (miejsce != 3)
+        if (miejsce != 3)
 		{
 			if (pawn[whoseTurn - 1].GetComponent<Player>().finished)
 			{
 				if (whoseTurn == 4)
+				{
+					AddCoin(2);
 					whoseTurn = 1;
+				}
 				else
 					whoseTurn++;
-				Turn();
+                Turn();
 			}
 			else
 			{
@@ -211,6 +219,16 @@ public class GameRules : MonoBehaviour
 				OnSafePlace(pionek, waitPoints);
 			}
 		}
+		for(int i = 0; i <Coin.Count; i++)
+		{
+			if (Coin[i].GetComponent<Coin>().waitPoint == waitPoints)
+			{
+                GameObject toDestroy = Coin[i];
+                Coin.RemoveAt(i);
+                Destroy(toDestroy);
+                CoinCounterD.instance.IncreaseCoins(1);
+            }
+		}
     }
 
 	public static void losoweCofanie()
@@ -251,7 +269,27 @@ public class GameRules : MonoBehaviour
         safePlace[safePlace.Count - 1].GetComponent<SafePlace>().setPlace(newWaitPoint);
     }
 
-	public static Transform GetRandomPosition()
+    public static void AddCoin(int NumberofCoins)
+    {
+		for (int j = 0; j < NumberofCoins; j++)
+		{
+			Transform newWaitPoint = GetRandomCoinPosition();
+			List<Transform> CoinPosition = new List<Transform>();
+			for (int i = 0; i < Coin.Count; i++)
+				CoinPosition.Add(Coin[i].GetComponent<Coin>().waitPoint);
+			while (CoinPosition.Contains(newWaitPoint))
+				newWaitPoint = GetRandomCoinPosition();
+			Coin.Add(Instantiate(CoinPrefabe) as GameObject);
+			Coin[Coin.Count - 1].GetComponent<Coin>().setPlace(newWaitPoint);
+		}
+    }
+
+    public static Transform GetRandomCoinPosition()
+    {
+        return CoinWaitPoints[Random.Range(0, 44)];
+    }
+
+    public static Transform GetRandomPosition()
 	{
 		return safePlaceWaitPoints[Random.Range(0, 44)];
 	}
