@@ -19,7 +19,8 @@ public class Shark : Move
                 foreach (GameObject pawn in onBoard)
                 {
                     if (pawn.GetComponent<Move>().waitPoints[pawn.GetComponent<Move>().waitPointIndex] == waitPoints[pozycja] && 
-                        pawn.GetComponentInParent<Player>().gracz != GetComponentInParent<Player>().gracz)
+                        pawn.GetComponentInParent<Player>().gracz != GetComponentInParent<Player>().gracz &&
+                        !pawn.GetComponent<Move>().defence)
                     {
                         pawn.GetComponent<Move>().waitPointIndex = 0;
                         pawn.GetComponent<Move>().ruch = true;

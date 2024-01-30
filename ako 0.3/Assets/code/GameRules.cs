@@ -78,7 +78,7 @@ public class GameRules : MonoBehaviour
 		pawn[3].GetComponent<Player>().active = false;
 		pawn[2].GetComponent<Player>().active = false;
 		pawn[0].GetComponent<Player>().active = false;
-		whoseTurn = 2;// Random.Range(1, 5);
+		whoseTurn = Random.Range(1, 5);
 		AddSafePlace();
         AddSafePlace();
         Turn();

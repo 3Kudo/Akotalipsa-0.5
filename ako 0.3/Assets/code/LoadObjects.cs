@@ -25,8 +25,8 @@ public class LoadObjects : MonoBehaviour
             GameRules.safePlaceWaitPoints[i] = safePlace[i];
         }
 
-        //GameRules.randomBack[0] = randomBack[0];
-        //GameRules.randomBack[1] = randomBack[1];
+        GameRules.randomBack[0] = randomBack[0];
+        GameRules.randomBack[1] = randomBack[1];
 
         GameRules.safePlacePrefabe = safePlacePrefabe;
     }
