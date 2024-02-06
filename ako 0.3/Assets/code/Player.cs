@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
                 GameRules.whoseTurn++;
                 if (GameRules.whoseTurn == 5)
                 {
+                    GameRules.AddCoin(2);
+                    Debug.Log("Application has quit.");
                     GameRules.whoseTurn = 1;
                 }
             }
