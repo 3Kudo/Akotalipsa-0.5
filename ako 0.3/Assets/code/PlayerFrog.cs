@@ -6,7 +6,7 @@ public class PlayerFrog : Player
 {
     [HideInInspector] public bool powerupActive = false;
 
-    public override bool EnambleMovement()
+    public override void EnambleMovement()
     {
         if(powerupActive)
             GameRules.diceNumber += 2;
@@ -26,11 +26,12 @@ public class PlayerFrog : Player
             GameRules.diceNumber = 0;
             SetPawnToNormal(null);
             PowerupWindowInteraction(pionek[0]);
-            return false;
+            active = false;
+            return;
         }
+        active = true;
         for (int i = 0; i < 4; i++)
             if (pionek[i].GetComponent<Move>().IsChosen())
                 break;
-        return true;
     }
 }

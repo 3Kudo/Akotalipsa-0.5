@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerShark : Player
 {
-    public override bool EnambleMovement()
+    public override void EnambleMovement()
     {
         for (int i = 0; i < 4; i++)
         {
@@ -12,7 +12,8 @@ public class PlayerShark : Player
             {
                 pionek[i].GetComponent<Shark>().onBoard = GameRules.GetOnBoard();
                 pionek[i].GetComponent<Shark>().MoveOn();
-                return false;
+                active = false;
+                return;
             }
         }
         if (!pionek[0].GetComponent<Move>().MoveEnabled() && !pionek[1].GetComponent<Move>().MoveEnabled()
@@ -31,12 +32,13 @@ public class PlayerShark : Player
             GameRules.diceNumber = 0;
             SetPawnToNormal(null);
             PowerupWindowInteraction(pionek[0]);
-            return false;
+            active = false;
+            return;
         }
+        active = true;
         for (int i = 0; i < 4; i++)
             if (pionek[i].GetComponent<Move>().IsChosen())
                 break;
-        return true;
     }
 
     public void ResetPowerupActive(GameObject pawn)

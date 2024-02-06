@@ -7,7 +7,7 @@ public class PlayerMole : Player
     public GameObject molehillPattern;
     public GameObject[] molehill = new GameObject[2];
     public int[] molehillWaitPointsIndex = new int[2];
-    public override bool EnambleMovement()
+    public override void EnambleMovement()
     {
         for(int i = 0; i < 4; i++)
         {
@@ -25,7 +25,8 @@ public class PlayerMole : Player
                 molehillWaitPointsIndex[0] = pionek[i].GetComponent<Mole>().waitPointIndex;
                 molehill[0].transform.position = pionek[i].GetComponent<Mole>().waitPoints[molehillWaitPointsIndex[0]].transform.position;
                 pionek[i].GetComponent<Mole>().MoveOn();
-                return false;
+                active = false;
+                return;
             }
         }
         if (!pionek[0].GetComponent<Move>().MoveEnabled() && !pionek[1].GetComponent<Move>().MoveEnabled()
@@ -44,12 +45,13 @@ public class PlayerMole : Player
             GameRules.diceNumber = 0;
             SetPawnToNormal(null);
             PowerupWindowInteraction(pionek[0]);
-            return false;
+            active = false;
+            return;
         }
+        active = true;
         for (int i = 0; i < 4; i++)
             if (pionek[i].GetComponent<Move>().IsChosen())
                 break;
-        return true;
     }
 
 

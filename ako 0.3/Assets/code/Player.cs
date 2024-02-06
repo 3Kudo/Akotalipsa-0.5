@@ -20,7 +20,7 @@ public abstract class Player : MonoBehaviour
 
 
     // sprawdza czy jest mo¿liwy ruch
-    public abstract bool EnambleMovement();
+    public abstract void EnambleMovement();
 
     public Transform WitchWaitpoint(int i)
     {
@@ -38,7 +38,7 @@ public abstract class Player : MonoBehaviour
         }
         if (toMove.Count == 1)
         {
-            pio.GetComponent<Move>().Set(x, y);
+            pio.transform.position = new Vector2(x,y);
         }
         else if (toMove.Count == 2)
         {

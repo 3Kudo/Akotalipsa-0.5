@@ -88,7 +88,7 @@ public class GameRules : MonoBehaviour
 	//metoda opowiedzialna za za³¹czanie gracza
 	public static void MovePlayer()
 	{
-		pawn[whoseTurn - 1].GetComponent<Player>().active = pawn[whoseTurn - 1].GetComponent<Player>().EnambleMovement();
+		pawn[whoseTurn - 1].GetComponent<Player>().EnambleMovement();
 	}
 	//metoda opowiedzialna za za³¹czanie tury gracza
 	public static void Turn()

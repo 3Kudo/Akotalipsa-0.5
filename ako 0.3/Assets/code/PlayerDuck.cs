@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerDuck : Player
 {
 
-    public override bool EnambleMovement()
+    public override void EnambleMovement()
     {
         if (!pionek[0].GetComponent<Move>().MoveEnabled() && !pionek[1].GetComponent<Move>().MoveEnabled()
                 && !pionek[2].GetComponent<Move>().MoveEnabled() && !pionek[3].GetComponent<Move>().MoveEnabled())
@@ -23,12 +23,13 @@ public class PlayerDuck : Player
             GameRules.diceNumber = 0;
             SetPawnToNormal(null);
             PowerupWindowInteraction(pionek[0]);
-            return false;
+            active = false;
+            return;
         }
+        active = true;
         for (int i = 0; i < 4; i++)
             if (pionek[i].GetComponent<Move>().IsChosen())
                 break;
-        return true;
     }
 
     public int WaitPointIndex(GameObject pawn)
