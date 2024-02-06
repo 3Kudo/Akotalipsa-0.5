@@ -4,22 +4,29 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
+using static Akotacoiny;
 
-//klasa odpowiedzialna za wybór klasy pionka
+//klasa odpowiedzialna za wybÃ³r klasy pionka
 public abstract class Player : MonoBehaviour
 {
     public GameObject[] pionek;
     public GameObject gracz, powerupWindow;
 
+    public GameObject gracz;
+    public TMP_Text coinText;
+
     //czy jest aktywna tura gracza
     public bool active = false;
+    public int coin;
 
     public string nazwa;
 
     public bool finished;
 
 
-    // sprawdza czy jest mo¿liwy ruch
+    // sprawdza czy jest moÂ¿liwy ruch
+
     public abstract void EnambleMovement();
 
     public Transform WitchWaitpoint(int i)
@@ -83,6 +90,7 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+
     public void SetPawnToNormal(GameObject pawn)
     {
         for(int i = 0; i < 4; i++)
@@ -103,6 +111,15 @@ public abstract class Player : MonoBehaviour
     {
         powerupWindow.GetComponent<PowerupWindow>().SetPowerupsButtons(parent);
         
+    }
+
+
+
+    public void IncreaseCoins(int add)
+    {
+        coin += add;
+        coinText.text = coin.ToString();
+        Debug.Log(add);
     }
 
 
