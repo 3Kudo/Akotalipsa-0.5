@@ -35,7 +35,7 @@ public class RollDice : MonoBehaviour
             color.g = (float)0.90;
             color.b = (float)0.90;
             rend.color = color;
-            GameRules.diceNumber++;
+            GameRules.diceNumber=7;
         }
     }
 
@@ -74,7 +74,7 @@ public class RollDice : MonoBehaviour
         int randomDiceSide = 0;
         for (int i = 0; i <= 3; i++)
         {
-            randomDiceSide = Random.Range(3, 6);
+            randomDiceSide = Random.Range(0, 6);
             rend.sprite = dicesSides[randomDiceSide];
             yield return new WaitForSeconds(0.2f);
         }

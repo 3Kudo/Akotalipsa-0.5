@@ -37,7 +37,7 @@ public class GameRules : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		//przypisanie odpowiednich obiektów
+		//przypisanie odpowiednich obiektÃ³w
 		pawn = new GameObject[4];
 
 		pawn[0] = GameObject.Find("Moles");
@@ -73,12 +73,12 @@ public class GameRules : MonoBehaviour
         pawn[3].GetComponent<Player>().nazwa = "duck";
 		
 
-		//przypisanie UI koñca gry
+		//przypisanie UI koÃ±ca gry
 		miejsce = 0;
 		ranking = new GameObject[3];
 
 
-		//losowanie czyja tura i ustawienie wszystkich na false ¿eby ka¿dy mog³ rzuciæ koœci¹
+		//losowanie czyja tura i ustawienie wszystkich na false Â¿eby kaÂ¿dy mogÂ³ rzuciÃ¦ koÅ“ciÂ¹
 		pawn[1].GetComponent<Player>().active = false;
 		pawn[3].GetComponent<Player>().active = false;
 		pawn[2].GetComponent<Player>().active = false;
@@ -91,12 +91,12 @@ public class GameRules : MonoBehaviour
 
 	}
 
-	//metoda opowiedzialna za za³¹czanie gracza
+	//metoda opowiedzialna za zaÂ³Â¹czanie gracza
 	public static void MovePlayer()
 	{
-		pawn[whoseTurn - 1].GetComponent<Player>().active = pawn[whoseTurn - 1].GetComponent<Player>().EnambleMovement();
-    }
-	//metoda opowiedzialna za za³¹czanie tury gracza
+		pawn[whoseTurn - 1].GetComponent<Player>().EnambleMovement();
+	}
+	//metoda opowiedzialna za zaÂ³Â¹czanie tury gracza
 	public static void Turn()
 	{
 		for (int i = 0; i < 4; i++)
@@ -123,8 +123,13 @@ public class GameRules : MonoBehaviour
 
     }
 
-	//metoda odpowiedzialana za przypisaywanie pozycji w rankigu
-	public static void PlayerFinishedGamed(GameObject gracz)
+	public static GameObject GetTura()
+	{
+		return pawn[whoseTurn-1];
+	}
+
+    //metoda odpowiedzialana za przypisaywanie pozycji w rankigu
+    public static void PlayerFinishedGamed(GameObject gracz)
 	{
 		ranking[miejsce] = gracz;
 		miejsce++;
@@ -149,7 +154,7 @@ public class GameRules : MonoBehaviour
 	}
 
 	
-	//funkcje zwi¹zane z mechanik¹ gry
+	//funkcje zwiÂ¹zane z mechanikÂ¹ gry
 
 	public static void Chceck(Transform waitPoints, string nazwa, GameObject pionek)
 	{
@@ -296,10 +301,16 @@ public class GameRules : MonoBehaviour
 		return safePlaceWaitPoints[Random.Range(0, 44)];
 	}
 
+    public static List<GameObject> GetOnBoard()
+	{
+		int k = onBoard.Count;
+		return onBoard;
+	}
 	public static void TurnCounter()
 	{
 		turnCounter++;
         if (turnCounter % 4 == 0)
             AddCoin(Random.Range(1, 4));
-    } 
+   } 
+
 }

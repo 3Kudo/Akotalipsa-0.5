@@ -1,0 +1,56 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerShark : Player
+{
+    public override void EnambleMovement()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (pionek[i].GetComponent<Shark>().powerupActive)
+            {
+                pionek[i].GetComponent<Shark>().onBoard = GameRules.GetOnBoard();
+                pionek[i].GetComponent<Shark>().MoveOn();
+                active = false;
+                return;
+            }
+        }
+        if (!pionek[0].GetComponent<Move>().MoveEnabled() && !pionek[1].GetComponent<Move>().MoveEnabled()
+                && !pionek[2].GetComponent<Move>().MoveEnabled() && !pionek[3].GetComponent<Move>().MoveEnabled())
+        {
+            if (GameRules.diceNumber != 6 || GameRules.diceNumber != 0)
+            {
+                GameRules.whoseTurn++;
+                if (GameRules.whoseTurn == 5)
+                {
+                    GameRules.whoseTurn = 1;
+
+                }
+            }
+            GameRules.Turn();
+            GameRules.diceNumber = 0;
+            SetPawnToNormal(null);
+            PowerupWindowInteraction(pionek[0]);
+            active = false;
+            return;
+        }
+        active = true;
+        for (int i = 0; i < 4; i++)
+            if (pionek[i].GetComponent<Move>().IsChosen())
+                break;
+    }
+
+    public void ResetPowerupActive(GameObject pawn)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (pionek[i] != pawn && pionek[i].GetComponent<Shark>().powerupActive)
+            {
+                pionek[i].GetComponent<Shark>().powerupActive = false;
+
+                break;
+            }
+        }
+    }
+}
