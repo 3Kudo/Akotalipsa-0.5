@@ -5,7 +5,6 @@ using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
-using static Akotacoiny;
 
 //klasa odpowiedzialna za wybór klasy pionka
 public abstract class Player : MonoBehaviour
@@ -13,7 +12,6 @@ public abstract class Player : MonoBehaviour
     public GameObject[] pionek;
     public GameObject gracz, powerupWindow;
 
-    public GameObject gracz;
     public TMP_Text coinText;
 
     //czy jest aktywna tura gracza
@@ -119,7 +117,6 @@ public abstract class Player : MonoBehaviour
     {
         coin += add;
         coinText.text = coin.ToString();
-        Debug.Log(add);
     }
 
 

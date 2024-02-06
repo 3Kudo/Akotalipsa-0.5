@@ -123,7 +123,15 @@ public class GameRules : MonoBehaviour
 
     }
 
-	public static GameObject GetTura()
+    public static void TurnCounter()
+    {
+        turnCounter++;
+        if (turnCounter % 4 == 0)
+            AddCoin(Random.Range(1, 4));
+    }
+
+
+    public static GameObject GetTura()
 	{
 		return pawn[whoseTurn-1];
 	}
@@ -230,8 +238,6 @@ public class GameRules : MonoBehaviour
 			{
                 GameObject toDestroy = Coin[i];
                 Coin.RemoveAt(i);
-				Debug.Log(toDestroy.GetComponent<Coin>().price);
-				Debug.Log(pionek);
 				pionek.GetComponentInParent<Player>().IncreaseCoins(toDestroy.GetComponent<Coin>().price);
                 Destroy(toDestroy);               
             }
@@ -306,11 +312,5 @@ public class GameRules : MonoBehaviour
 		int k = onBoard.Count;
 		return onBoard;
 	}
-	public static void TurnCounter()
-	{
-		turnCounter++;
-        if (turnCounter % 4 == 0)
-            AddCoin(Random.Range(1, 4));
-   } 
-
+	
 }

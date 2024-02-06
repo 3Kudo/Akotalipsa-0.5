@@ -19,15 +19,13 @@ public class PlayerShark : Player
         if (!pionek[0].GetComponent<Move>().MoveEnabled() && !pionek[1].GetComponent<Move>().MoveEnabled()
                 && !pionek[2].GetComponent<Move>().MoveEnabled() && !pionek[3].GetComponent<Move>().MoveEnabled())
         {
-            if (GameRules.diceNumber != 6 || GameRules.diceNumber != 0)
-            {
-                GameRules.whoseTurn++;
-                if (GameRules.whoseTurn == 5)
-                {
-                    GameRules.whoseTurn = 1;
+            coin++;
+            coinText.text = coin.ToString();
+            GameRules.whoseTurn++;
+            if (GameRules.whoseTurn == 5)
+                GameRules.whoseTurn = 1;
 
-                }
-            }
+            GameRules.TurnCounter();
             GameRules.Turn();
             GameRules.diceNumber = 0;
             SetPawnToNormal(null);

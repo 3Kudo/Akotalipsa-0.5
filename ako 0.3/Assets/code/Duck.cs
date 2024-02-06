@@ -49,12 +49,14 @@ public class Duck : Move
                     }
                     if (GameRules.diceNumber < 6)
                     {
+                        GameRules.TurnCounter();
                         GameRules.whoseTurn++;
                         if (GameRules.whoseTurn == 5)
                         {
                             GameRules.whoseTurn = 1;
                         }
                     }
+                    
                     GameRules.Turn();
                     GameRules.diceNumber = 0;
                 }

@@ -56,6 +56,7 @@ public class Shark : Move
 
                     if (GameRules.diceNumber < 6)
                     {
+                        GameRules.TurnCounter();
                         GameRules.whoseTurn++;
                         if (GameRules.whoseTurn == 5)
                         {
