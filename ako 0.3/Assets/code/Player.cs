@@ -16,7 +16,7 @@ public abstract class Player : MonoBehaviour
 
     //czy jest aktywna tura gracza
     public bool active = false;
-    public int coin;
+    public int coin=0;
 
     public string nazwa;
 
@@ -116,6 +116,12 @@ public abstract class Player : MonoBehaviour
     public void IncreaseCoins(int add)
     {
         coin += add;
+        coinText.text = coin.ToString();
+    }
+
+    public void DecraseCoins(int sub)
+    {
+        coin -= sub;
         coinText.text = coin.ToString();
     }
 

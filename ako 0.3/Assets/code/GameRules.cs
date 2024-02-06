@@ -213,7 +213,6 @@ public class GameRules : MonoBehaviour
 			onBoard.Remove(pio);
             pio.GetComponent<Move>().waitPointIndex = 0;
             pio.GetComponent<Move>().ruch = true;
-			return;
         }
 		else if(ammount > 1)
 		{

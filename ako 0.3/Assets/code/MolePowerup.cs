@@ -8,7 +8,18 @@ public class MolePowerup : MonoBehaviour
 
     private void Start()
     {
-        if (GetComponentInParent<Move>().waitPointIndex == 0 || GetComponentInParent<PlayerMole>().active)
+        if (GetComponentInParent<Mole>().poweruopActive)
+        {
+            Sprite sprite = GetComponentInParent<SpriteRenderer>().sprite;
+            GetComponentInParent<SpriteRenderer>().sprite = powerup;
+            powerup = sprite;
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.80;
+            color.g = (float)0.80;
+            color.b = (float)0.80;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+        else if(GetComponentInParent<Move>().waitPointIndex == 0 || GetComponentInParent<Player>().coin < 3 || GetComponentInParent<PlayerMole>().active)
         {
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.50;
@@ -18,24 +29,70 @@ public class MolePowerup : MonoBehaviour
         }
         else
         {
-            if (GetComponentInParent<Mole>().poweruopActive)
-            {
-                Sprite sprite = GetComponentInParent<SpriteRenderer>().sprite;
-                GetComponentInParent<SpriteRenderer>().sprite = powerup;
-                powerup = sprite;
-            }
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.80;
+            color.g = (float)0.80;
+            color.b = (float)0.80;
+            GetComponent<SpriteRenderer>().color = color;
         }
     }
 
-    private void OnMouseDown()
+    private void OnMouseUpAsButton()
     {
-        if (GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active)
+        if ( (GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 3) ||
+            GetComponentInParent<Mole>().poweruopActive)
         {
             Sprite sprite = GetComponentInParent<SpriteRenderer>().sprite;
             GetComponentInParent<SpriteRenderer>().sprite = powerup;
             powerup = sprite;
             GetComponentInParent<Mole>().poweruopActive = !GetComponentInParent<Mole>().poweruopActive;
-            GetComponentInParent<PlayerMole>().ResetPowerupActive(GetComponentInParent<Mole>().pionek);
+            if (GetComponentInParent<Mole>().poweruopActive)
+            {
+                GetComponentInParent<Player>().DecraseCoins(3);
+                GetComponentInParent<PlayerMole>().ResetPowerupActive(GetComponentInParent<Mole>().pionek);
+            }
+            else
+                GetComponentInParent<Player>().IncreaseCoins(3);
+            
+        }
+    }
+
+    private void OnMouseOver()
+    {
+        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 3) ||
+            GetComponentInParent<Mole>().poweruopActive)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)1;
+            color.g = (float)1;
+            color.b = (float)1;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 3) ||
+            GetComponentInParent<Mole>().poweruopActive)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.80;
+            color.g = (float)0.80;
+            color.b = (float)0.80;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+    }
+
+    private void OnMouseDrag()
+    {
+        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 3) ||
+            GetComponentInParent<Mole>().poweruopActive)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.80;
+            color.g = (float)0.80;
+            color.b = (float)0.80;
+            GetComponent<SpriteRenderer>().color = color;
         }
     }
 }

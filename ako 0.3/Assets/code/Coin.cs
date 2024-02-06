@@ -10,6 +10,21 @@ public class Coin : MonoBehaviour
     public int price;
     public TMP_Text priceText;
 
+    public Animator anim;
+    public bool spin=false;
+    int klatki = 0;
+
+    private void Update()
+    {
+        klatki++;
+        if (klatki == 30)
+        {
+            klatki = 0;
+            spin = !spin;
+            anim.SetBool("Spin", spin);
+        }
+    }
+
     public void setPlace(Transform newWaitPoint)
     {
         waitPoint = newWaitPoint;
