@@ -30,9 +30,10 @@ public class GameRules : MonoBehaviour
 	public static List<GameObject> safePlace = new List<GameObject>();
     public static List<GameObject> Coin = new List<GameObject>();
 
-
+	
     public static int whoseTurn = 0;
 	public static int diceNumber = 6;
+	public static int turnCounter = 0;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -102,12 +103,11 @@ public class GameRules : MonoBehaviour
 			tura[i].gameObject.SetActive(false);
         if (miejsce != 3)
 		{
-			if (pawn[whoseTurn - 1].GetComponent<Player>().finished)
-			{
-				if (whoseTurn == 4)
+            if (pawn[whoseTurn - 1].GetComponent<Player>().finished)
+            {
+                if (whoseTurn == 4)
 				{
-					AddCoin(2);
-					whoseTurn = 1;
+                    whoseTurn = 1;
 				}
 				else
 					whoseTurn++;
@@ -115,13 +115,13 @@ public class GameRules : MonoBehaviour
 			}
 			else
 			{
-				tura[whoseTurn - 1].gameObject.SetActive(true);
+                tura[whoseTurn - 1].gameObject.SetActive(true);
 			}
 		}
 		else
 			tura[4].gameObject.SetActive(false);
 
-	}
+    }
 
 	//metoda odpowiedzialana za przypisaywanie pozycji w rankigu
 	public static void PlayerFinishedGamed(GameObject gracz)
@@ -225,8 +225,10 @@ public class GameRules : MonoBehaviour
 			{
                 GameObject toDestroy = Coin[i];
                 Coin.RemoveAt(i);
-                Destroy(toDestroy);
-                CoinCounterD.instance.IncreaseCoins(1);
+				Debug.Log(toDestroy.GetComponent<Coin>().price);
+				Debug.Log(pionek);
+				pionek.GetComponentInParent<Player>().IncreaseCoins(toDestroy.GetComponent<Coin>().price);
+                Destroy(toDestroy);               
             }
 		}
     }
@@ -293,4 +295,11 @@ public class GameRules : MonoBehaviour
 	{
 		return safePlaceWaitPoints[Random.Range(0, 44)];
 	}
+
+	public static void TurnCounter()
+	{
+		turnCounter++;
+        if (turnCounter % 4 == 0)
+            AddCoin(Random.Range(1, 4));
+    } 
 }

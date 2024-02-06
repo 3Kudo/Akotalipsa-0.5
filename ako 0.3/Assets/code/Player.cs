@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 using static Akotacoiny;
 
 //klasa odpowiedzialna za wybór klasy pionka
@@ -10,10 +11,11 @@ public class Player : MonoBehaviour
 {
     public GameObject[] pionek;
     public GameObject gracz;
-    public int[] Coin = new int[5];
+    public TMP_Text coinText;
 
     //czy jest aktywna tura gracza
     public bool active = false;
+    public int coin;
 
     public string nazwa;
 
@@ -28,14 +30,15 @@ public class Player : MonoBehaviour
         {
             if (GameRules.diceNumber != 6 || GameRules.diceNumber != 0)
             {
-                CoinCounterD.instance.IncreaseCoins(1);
+                coin++;
+                coinText.text = coin.ToString();
                 GameRules.whoseTurn++;
                 if (GameRules.whoseTurn == 5)
                 {
                     GameRules.whoseTurn = 1;
-
                 }
             }
+            GameRules.TurnCounter();
             GameRules.Turn();
             GameRules.diceNumber = 0;
             return false;
@@ -101,13 +104,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Money(int coin)
+    public void IncreaseCoins(int add)
     {
-        Coin[0] = 5;
-        Coin[1] = 5;
-        Coin[2] = 5;
-        Coin[3] = 5;
+        coin += add;
+        coinText.text = coin.ToString();
+        Debug.Log(add);
     }
+
 }
 
 

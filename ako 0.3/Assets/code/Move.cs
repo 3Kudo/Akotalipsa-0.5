@@ -77,6 +77,7 @@ public class Move : MonoBehaviour
 
                     if (GameRules.diceNumber != 6)
                     {
+                        GameRules.TurnCounter();
                         GameRules.whoseTurn++;
                         if (GameRules.whoseTurn == 5)
                         {
