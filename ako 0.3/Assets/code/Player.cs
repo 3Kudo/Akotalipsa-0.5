@@ -1,79 +1,69 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
-//klasa odpowiedzialna za wybór klasy pionka
-public class Player : MonoBehaviour
+//klasa odpowiedzialna za wybÃ³r klasy pionka
+public abstract class Player : MonoBehaviour
 {
     public GameObject[] pionek;
-    public GameObject gracz;
+    public GameObject gracz, powerupWindow;
+
+    public TMP_Text coinText;
 
     //czy jest aktywna tura gracza
     public bool active = false;
+    public int coin=0;
 
     public string nazwa;
 
     public bool finished;
 
 
-    // sprawdza czy jest mo¿liwy ruch
-    public bool EnambleMovement()
-    {
-        if (!pionek[0].GetComponent<Move>().MoveEnabled() && !pionek[1].GetComponent<Move>().MoveEnabled()
-                && !pionek[2].GetComponent<Move>().MoveEnabled() && !pionek[3].GetComponent<Move>().MoveEnabled())
-        {
-            if (GameRules.diceNumber != 6 || GameRules.diceNumber != 0)
-            {
-                GameRules.whoseTurn++;
-                if (GameRules.whoseTurn == 5)
-                {
-                    GameRules.whoseTurn = 1;
+    // sprawdza czy jest moÂ¿liwy ruch
 
-                }
-            }
-            GameRules.Turn();
-            GameRules.diceNumber = 0;
-            return false;
-        }
-        return true;
-    }
+    public abstract void EnambleMovement();
 
     public Transform WitchWaitpoint(int i)
     {
         return pionek[i].GetComponent<Move>().waitPoints[pionek[i].GetComponent<Move>().waitPointIndex];
     }
 
-    public void MoveTheSame(GameObject pio, float x, float y)
+    public void MoveTheSame(GameObject pio, float x, float y, int waitPoint)
     {
         List<GameObject> toMove = new List<GameObject>();
+        toMove.Add(pio);
         for (int i = 0; i < 4; i++)
         {
-            if (pio.GetComponent<Move>().waitPointIndex == pionek[i].GetComponent<Move>().waitPointIndex)
+            if (waitPoint == pionek[i].GetComponent<Move>().waitPointIndex && pio != pionek[i])
                 toMove.Add(pionek[i]);
         }
         if (toMove.Count == 1)
         {
-            pio.GetComponent<Move>().Set(x, y);
+            pio.transform.position = new Vector2(x,y);
         }
         else if (toMove.Count == 2)
         {
-            toMove[0].GetComponent<Move>().Set(x - 0.2F, y);
-            toMove[1].GetComponent<Move>().Set(x + 0.2F, y);
+            toMove[0].transform.position = new Vector2(x - 0.2F, y);
+            toMove[1].transform.position = new Vector2(x + 0.2F, y);
+            //toMove[0].GetComponent<Move>().Set(x - 0.2F, y);
+            //toMove[1].GetComponent<Move>().Set(x + 0.2F, y);
         }
         else if(toMove.Count == 3)
         {
-            toMove[0].GetComponent<Move>().Set(x - 0.2F, y + 0.2F);
-            toMove[1].GetComponent<Move>().Set(x + 0.2F, y + 0.2F);
-            toMove[2].GetComponent<Move>().Set(x, y - 0.2F);
+            toMove[0].transform.position = new Vector2(x - 0.2F, y + 0.2F);
+            toMove[1].transform.position = new Vector2(x + 0.2F, y + 0.2F);
+            toMove[2].transform.position = new Vector2(x, y - 0.2F);
         }
         else
         {
-            toMove[0].GetComponent<Move>().Set(x - 0.2F, y + 0.2F);
-            toMove[1].GetComponent<Move>().Set(x + 0.2F, y + 0.2F);
-            toMove[2].GetComponent<Move>().Set(x - 0.2F, y - 0.2F);
-            toMove[3].GetComponent<Move>().Set(x + 0.2F, y - 0.2F);
+            toMove[0].transform.position = new Vector2(x - 0.2F, y + 0.2F);
+            toMove[1].transform.position = new Vector2(x + 0.2F, y + 0.2F);
+            toMove[2].transform.position = new Vector2(x - 0.2F, y - 0.2F);
+            toMove[3].transform.position = new Vector2(x + 0.2F, y - 0.2F);
         }
     }
 
@@ -83,7 +73,7 @@ public class Player : MonoBehaviour
         {
             if(waitPoint == pionek[i].GetComponent<Move>().GetWaitpoint() && pio != pionek[i])
             {
-                MoveTheSame(pionek[i], waitPoint.transform.position.x,waitPoint.transform.position.y);
+                MoveTheSame(pionek[i], waitPoint.transform.position.x,waitPoint.transform.position.y, pionek[i].GetComponent<Move>().waitPointIndex);
             }
         }
     }
@@ -97,6 +87,45 @@ public class Player : MonoBehaviour
             GameRules.PlayerFinishedGamed(gracz);
         }
     }
+
+
+    public void SetPawnToNormal(GameObject pawn)
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            if (pionek[i] == pawn)
+                continue;
+            else
+                pionek[i].GetComponent<Move>().ToNormalState();
+        }
+    }
+
+    public bool PowerupWindowInteraction(GameObject pawn)
+    {
+        return powerupWindow.GetComponent<PowerupWindow>().ChangeState(pawn);
+    }
+
+    public void SetPowerups(Transform parent)
+    {
+        powerupWindow.GetComponent<PowerupWindow>().SetPowerupsButtons(parent);
+        
+    }
+
+
+
+    public void IncreaseCoins(int add)
+    {
+        coin += add;
+        coinText.text = coin.ToString();
+    }
+
+    public void DecraseCoins(int sub)
+    {
+        coin -= sub;
+        coinText.text = coin.ToString();
+    }
+
+
 }
 
 
