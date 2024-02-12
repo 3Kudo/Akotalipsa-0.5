@@ -146,24 +146,24 @@ public class GameRules : MonoBehaviour
 
 	public static void catTurn()
 	{
-		if(cat.Phase == 1)
+		if(cat.GetComponent<Cat>().Phase == 1)
 		{
 			losowePrzesuwanie(-2, 1);
 		}
-		else if(cat.Phase == 2) 
+		else if(cat.GetComponent<Cat>().Phase == 2) 
 		{
 			losowePrzesuwanie(-4, 2);
 			losowaSciana();
 		}
-		else if(cat.Phase == 3) 
+		else if(cat.GetComponent<Cat>().Phase == 3) 
 		{
 			losowePrzesuwanie(-6, 3);
 			losowaSciana();
 			losoweCofanie();
 		}
 		//zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
-		cat.incrementWakeCounter(1);
-		cat.phaseCheck();
+		cat.GetComponent<Cat>().incrementWakeCounter(1);
+		cat.GetComponent<Cat>().phaseCheck();
 	}
 
 	//metoda odpowiedzialana za przypisaywanie pozycji w rankigu
