@@ -18,6 +18,8 @@ public class GameRules : MonoBehaviour
 	public static GameObject CoinPrefabe;
 
 
+	public static Cat cat;
+
 
 	public static Transform[] randomBack = new Transform[2];
 
@@ -77,6 +79,9 @@ public class GameRules : MonoBehaviour
 		miejsce = 0;
 		ranking = new GameObject[3];
 
+		//tworzenie kota
+		cat = new Cat();
+
 
 		//losowanie czyja tura i ustawienie wszystkich na false ¿eby ka¿dy mog³ rzuciæ koœci¹
 		pawn[1].GetComponent<Player>().active = false;
@@ -117,6 +122,9 @@ public class GameRules : MonoBehaviour
 			{
                 tura[whoseTurn - 1].gameObject.SetActive(true);
 			}
+			//akcje kota
+			//TODO: gdzies to trzeba przeniesc, bo wywoluje sie kilka razy...
+			// catTurn();
 		}
 		else
 			tura[4].gameObject.SetActive(false);
@@ -136,8 +144,31 @@ public class GameRules : MonoBehaviour
 		return pawn[whoseTurn-1];
 	}
 
-    //metoda odpowiedzialana za przypisaywanie pozycji w rankigu
-    public static void PlayerFinishedGamed(GameObject gracz)
+
+	public static void catTurn()
+	{
+		if(cat.Phase == 1)
+		{
+			losowePrzesuwanie(-2, 1);
+		}
+		else if(cat.Phase == 2) 
+		{
+			losowePrzesuwanie(-4, 2);
+			losowaSciana();
+		}
+		else if(cat.Phase == 3) 
+		{
+			losowePrzesuwanie(-6, 3);
+			losowaSciana();
+			losoweCofanie();
+		}
+		//zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
+		cat.incrementWakeCounter(1);
+		cat.phaseCheck();
+	}
+
+	//metoda odpowiedzialana za przypisaywanie pozycji w rankigu
+	public static void PlayerFinishedGamed(GameObject gracz)
 	{
 		ranking[miejsce] = gracz;
 		miejsce++;
@@ -252,6 +283,25 @@ public class GameRules : MonoBehaviour
 		pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
         pionek.GetComponent<Move>().waitPointIndex = 0;
 		pionek.GetComponent<Move>().ruch = true;
+	}
+
+	public static void losowePrzesuwanie(int maxMove, int minMove)
+	{
+		if (onBoard.Count > 0)
+		{
+			int los = Random.Range(0, onBoard.Count);
+			GameObject pionek = onBoard.ElementAt(los);
+			onBoard.Remove(pionek);
+			Transform position = pionek.GetComponent<Move>().GetWaitpoint();
+			pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
+			pionek.GetComponent<Move>().waitPointIndex = pionek.GetComponent<Move>().pozycja + Random.Range(minMove, maxMove);
+			pionek.GetComponent<Move>().ruch = true;
+		}
+	}
+
+	public static void losowaSciana()
+	{
+		//TODO: mechanika losowej sciany (pole nie do przejscia)
 	}
 
 	public static void OnSafePlace(GameObject pionek, Transform waitPoint)
