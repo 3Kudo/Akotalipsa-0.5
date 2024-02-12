@@ -115,17 +115,34 @@ public class GameRules : MonoBehaviour
 				tura[whoseTurn - 1].gameObject.SetActive(true);
 			}
 			//akcje kota
-			if(cat.Phase == 1) losowePrzesuwanie(-2, 1);
-			else if(cat.Phase == 2) losowePrzesuwanie(-4, 2);
-			else if(cat.Phase == 3) losowePrzesuwanie(-6, 3);
-			else if(cat.Phase == 4) losowePrzesuwanie(-6, 3);
-			//zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
-			cat.incrementWakeCounter(1);
-			cat.phaseCheck();
+			//TODO: gdzies to trzeba przeniesc, bo wywoluje sie kilka razy...
+			// catTurn();
 		}
 		else
 			tura[4].gameObject.SetActive(false);
 
+	}
+
+	public static void catTurn()
+	{
+		if(cat.Phase == 1)
+		{
+			losowePrzesuwanie(-2, 1);
+		}
+		else if(cat.Phase == 2) 
+		{
+			losowePrzesuwanie(-4, 2);
+			losowaSciana();
+		}
+		else if(cat.Phase == 3) 
+		{
+			losowePrzesuwanie(-6, 3);
+			losowaSciana();
+			losoweCofanie();
+		}
+		//zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
+		cat.incrementWakeCounter(1);
+		cat.phaseCheck();
 	}
 
 	//metoda odpowiedzialana za przypisaywanie pozycji w rankigu
@@ -249,6 +266,11 @@ public class GameRules : MonoBehaviour
 			pionek.GetComponent<Move>().waitPointIndex = pionek.GetComponent<Move>().pozycja + Random.Range(minMove, maxMove);
 			pionek.GetComponent<Move>().ruch = true;
 		}
+	}
+
+	public static void losowaSciana()
+	{
+		//TODO: mechanika losowej sciany (pole nie do przejscia)
 	}
 
 	public static void OnSafePlace(GameObject pionek, Transform waitPoint)

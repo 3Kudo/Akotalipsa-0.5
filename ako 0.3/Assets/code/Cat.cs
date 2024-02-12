@@ -7,12 +7,14 @@ public class Cat : MonoBehaviour
 
     private int wakeCounter;
     private int phase;
-    private static int[] phaseThreshold = { 0, 10, 20, 35, 50 };
+    private static int[] phaseThreshold = { 0, 3, 20, 35 };
     private bool isLocked;
+    private bool isCatsTurn;
 
     public int WakeCounter { get => wakeCounter; set => wakeCounter = value; }
     public global::System.Boolean IsLocked { get => isLocked; set => isLocked = value; }
     public global::System.Int32 Phase { get => phase; set => phase = value; }
+    public global::System.Boolean IsCatsTurn { get => isCatsTurn; set => isCatsTurn = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,7 @@ public class Cat : MonoBehaviour
         WakeCounter = 0;
         Phase = 0;
         IsLocked = false;
+        IsCatsTurn = false;
     }
 
     // Update is called once per frame
@@ -30,25 +33,25 @@ public class Cat : MonoBehaviour
 
     public void incrementWakeCounter(int value)
     {
-        WakeCounter += value;
+        if (!IsLocked) WakeCounter += value;
         Debug.Log("Cat counter: " + WakeCounter);
     }
 
     public void decrementWakeCounter(int value)
     {
-        if (WakeCounter > phaseThreshold[0]) WakeCounter -= value;
+        if (WakeCounter > phaseThreshold[0] && !IsLocked) WakeCounter -= value;
         Debug.Log("Cat counter: " + WakeCounter);
     }
 
     public void isCounterLocked()
     {
-        if (WakeCounter >= phaseThreshold[4]) IsLocked = true;
+        if (WakeCounter >= phaseThreshold[3]) IsLocked = true;
         Debug.Log("Cat phase 4 lock is " + IsLocked);
     }
 
     public void phaseCheck()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (WakeCounter >= phaseThreshold[i]) phase = i;
         }
