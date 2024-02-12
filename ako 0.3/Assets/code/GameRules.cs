@@ -121,9 +121,6 @@ public class GameRules : MonoBehaviour
 			{
                 tura[whoseTurn - 1].gameObject.SetActive(true);
 			}
-			//akcje kota
-			//TODO: gdzies to trzeba przeniesc, bo wywoluje sie kilka razy...
-			// catTurn();
 		}
 		else
 			tura[4].gameObject.SetActive(false);
@@ -133,8 +130,12 @@ public class GameRules : MonoBehaviour
     public static void TurnCounter()
     {
         turnCounter++;
-        if (turnCounter % 4 == 0)
+		if (turnCounter % 4 == 0)
+		{
+            cat.GetComponent<Cat>().catTurn();
             AddCoin(Random.Range(1, 4));
+		}
+		
     }
 
 
@@ -144,27 +145,7 @@ public class GameRules : MonoBehaviour
 	}
 
 
-	public static void catTurn()
-	{
-		if(cat.GetComponent<Cat>().Phase == 1)
-		{
-			losowePrzesuwanie(-2, 1);
-		}
-		else if(cat.GetComponent<Cat>().Phase == 2) 
-		{
-			losowePrzesuwanie(-4, 2);
-			losowaSciana();
-		}
-		else if(cat.GetComponent<Cat>().Phase == 3) 
-		{
-			losowePrzesuwanie(-6, 3);
-			losowaSciana();
-			losoweCofanie();
-		}
-		//zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
-		cat.GetComponent<Cat>().incrementWakeCounter(1);
-		cat.GetComponent<Cat>().phaseCheck();
-	}
+	
 
 	//metoda odpowiedzialana za przypisaywanie pozycji w rankigu
 	public static void PlayerFinishedGamed(GameObject gracz)
@@ -284,24 +265,7 @@ public class GameRules : MonoBehaviour
 		pionek.GetComponent<Move>().ruch = true;
 	}
 
-	public static void losowePrzesuwanie(int maxMove, int minMove)
-	{
-		if (onBoard.Count > 0)
-		{
-			int los = Random.Range(0, onBoard.Count);
-			GameObject pionek = onBoard.ElementAt(los);
-			onBoard.Remove(pionek);
-			Transform position = pionek.GetComponent<Move>().GetWaitpoint();
-			pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
-			pionek.GetComponent<Move>().waitPointIndex = pionek.GetComponent<Move>().pozycja + Random.Range(minMove, maxMove);
-			pionek.GetComponent<Move>().ruch = true;
-		}
-	}
-
-	public static void losowaSciana()
-	{
-		//TODO: mechanika losowej sciany (pole nie do przejscia)
-	}
+	
 
 	public static void OnSafePlace(GameObject pionek, Transform waitPoint)
 	{
