@@ -1,0 +1,73 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BaseExitClass : MonoBehaviour
+{
+    private void Start()
+    {
+        if (GetComponentInParent<Move>().waitPointIndex > 0 || GetComponentInParent<Player>().coin<3)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.40;
+            color.g = (float)0.40;
+            color.b = (float)0.40;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+        else
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.80;
+            color.g = (float)0.80;
+            color.b = (float)0.80;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+    }
+    private void OnMouseUpAsButton()
+    {
+        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin>=3)
+        {
+            GameRules.diceNumber = 6;
+            GetComponentInParent<Player>().DecraseCoins(3);
+            GetComponentInParent<Player>().PowerupWindowInteraction(null);
+            GetComponentInParent<Move>().ToNormalState();
+            GetComponentInParent<Move>().MoveOn();
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin >= 3)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)1;
+            color.g = (float)1;
+            color.b = (float)1;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin >= 3)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.80;
+            color.g = (float)0.80;
+            color.b = (float)0.80;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+    }
+
+    private void OnMouseDrag()
+    {
+        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin >= 3)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.80;
+            color.g = (float)0.80;
+            color.b = (float)0.80;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+    }
+}

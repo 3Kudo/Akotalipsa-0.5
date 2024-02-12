@@ -15,6 +15,8 @@ public class GameRules : MonoBehaviour
 	public static Image[] images= new Image[4];
 	public static int miejsce;
 	public static GameObject safePlacePrefabe;
+	public static GameObject CoinPrefabe;
+
 
 	public static Cat cat;
 
@@ -22,19 +24,22 @@ public class GameRules : MonoBehaviour
 	public static Transform[] randomBack = new Transform[2];
 
 	public static Transform[] safePlaceWaitPoints = new Transform[44];
+    public static Transform[] CoinWaitPoints = new Transform[44];
 
 
-	public static List<GameObject> onBoard = new List<GameObject>();
+    public static List<GameObject> onBoard = new List<GameObject>();
 
 	public static List<GameObject> safePlace = new List<GameObject>();
+    public static List<GameObject> Coin = new List<GameObject>();
 
-
+	
     public static int whoseTurn = 0;
 	public static int diceNumber = 6;
+	public static int turnCounter = 0;
 	// Start is called before the first frame update
 	void Start()
 	{
-		//przypisanie odpowiednich obiekt�w
+		//przypisanie odpowiednich obiektów
 		pawn = new GameObject[4];
 
 		pawn[0] = GameObject.Find("Moles");
@@ -70,7 +75,7 @@ public class GameRules : MonoBehaviour
         pawn[3].GetComponent<Player>().nazwa = "duck";
 		
 
-		//przypisanie UI ko�ca gry
+		//przypisanie UI koñca gry
 		miejsce = 0;
 		ranking = new GameObject[3];
 
@@ -78,7 +83,7 @@ public class GameRules : MonoBehaviour
 		cat = new Cat();
 
 
-		//losowanie czyja tura i ustawienie wszystkich na false �eby ka�dy mog� rzuci� ko�ci�
+		//losowanie czyja tura i ustawienie wszystkich na false ¿eby ka¿dy mog³ rzuciæ koœci¹
 		pawn[1].GetComponent<Player>().active = false;
 		pawn[3].GetComponent<Player>().active = false;
 		pawn[2].GetComponent<Player>().active = false;
@@ -86,33 +91,36 @@ public class GameRules : MonoBehaviour
 		whoseTurn = Random.Range(1, 5);
 		AddSafePlace();
         AddSafePlace();
+		AddCoin(2);
         Turn();
 
 	}
 
-	//metoda opowiedzialna za za��czanie gracza
+	//metoda opowiedzialna za za³¹czanie gracza
 	public static void MovePlayer()
 	{
-		pawn[whoseTurn - 1].GetComponent<Player>().active = pawn[whoseTurn - 1].GetComponent<Player>().EnambleMovement();
+		pawn[whoseTurn - 1].GetComponent<Player>().EnambleMovement();
 	}
-	//metoda opowiedzialna za za��czanie tury gracza
+	//metoda opowiedzialna za za³¹czanie tury gracza
 	public static void Turn()
 	{
 		for (int i = 0; i < 4; i++)
 			tura[i].gameObject.SetActive(false);
-		if (miejsce != 3)
+        if (miejsce != 3)
 		{
-			if (pawn[whoseTurn - 1].GetComponent<Player>().finished)
-			{
-				if (whoseTurn == 4)
-					whoseTurn = 1;
+            if (pawn[whoseTurn - 1].GetComponent<Player>().finished)
+            {
+                if (whoseTurn == 4)
+				{
+                    whoseTurn = 1;
+				}
 				else
 					whoseTurn++;
-				Turn();
+                Turn();
 			}
 			else
 			{
-				tura[whoseTurn - 1].gameObject.SetActive(true);
+                tura[whoseTurn - 1].gameObject.SetActive(true);
 			}
 			//akcje kota
 			//TODO: gdzies to trzeba przeniesc, bo wywoluje sie kilka razy...
@@ -121,7 +129,21 @@ public class GameRules : MonoBehaviour
 		else
 			tura[4].gameObject.SetActive(false);
 
+    }
+
+    public static void TurnCounter()
+    {
+        turnCounter++;
+        if (turnCounter % 4 == 0)
+            AddCoin(Random.Range(1, 4));
+    }
+
+
+    public static GameObject GetTura()
+	{
+		return pawn[whoseTurn-1];
 	}
+
 
 	public static void catTurn()
 	{
@@ -171,7 +193,7 @@ public class GameRules : MonoBehaviour
 	}
 
 	
-	//funkcje zwi�zane z mechanik� gry
+	//funkcje zwi¹zane z mechanik¹ gry
 
 	public static void Chceck(Transform waitPoints, string nazwa, GameObject pionek)
 	{
@@ -222,7 +244,6 @@ public class GameRules : MonoBehaviour
 			onBoard.Remove(pio);
             pio.GetComponent<Move>().waitPointIndex = 0;
             pio.GetComponent<Move>().ruch = true;
-			return;
         }
 		else if(ammount > 1)
 		{
@@ -240,6 +261,16 @@ public class GameRules : MonoBehaviour
 				Destroy(toDestroy);
 				OnSafePlace(pionek, waitPoints);
 			}
+		}
+		for(int i = 0; i <Coin.Count; i++)
+		{
+			if (Coin[i].GetComponent<Coin>().waitPoint == waitPoints)
+			{
+                GameObject toDestroy = Coin[i];
+                Coin.RemoveAt(i);
+				pionek.GetComponentInParent<Player>().IncreaseCoins(toDestroy.GetComponent<Coin>().price);
+                Destroy(toDestroy);               
+            }
 		}
     }
 
@@ -300,8 +331,35 @@ public class GameRules : MonoBehaviour
         safePlace[safePlace.Count - 1].GetComponent<SafePlace>().setPlace(newWaitPoint);
     }
 
-	public static Transform GetRandomPosition()
+    public static void AddCoin(int NumberofCoins)
+    {
+		for (int j = 0; j < NumberofCoins; j++)
+		{
+			Transform newWaitPoint = GetRandomCoinPosition();
+			List<Transform> CoinPosition = new List<Transform>();
+			for (int i = 0; i < Coin.Count; i++)
+				CoinPosition.Add(Coin[i].GetComponent<Coin>().waitPoint);
+			while (CoinPosition.Contains(newWaitPoint))
+				newWaitPoint = GetRandomCoinPosition();
+			Coin.Add(Instantiate(CoinPrefabe) as GameObject);
+			Coin[Coin.Count - 1].GetComponent<Coin>().setPlace(newWaitPoint);
+		}
+    }
+
+    public static Transform GetRandomCoinPosition()
+    {
+        return CoinWaitPoints[Random.Range(0, 44)];
+    }
+
+    public static Transform GetRandomPosition()
 	{
 		return safePlaceWaitPoints[Random.Range(0, 44)];
 	}
+
+    public static List<GameObject> GetOnBoard()
+	{
+		int k = onBoard.Count;
+		return onBoard;
+	}
+	
 }
