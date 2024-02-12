@@ -10,6 +10,7 @@ public class LoadObjects : MonoBehaviour
     public Transform[] randomBack;
     public GameObject safePlacePrefabe;
     public GameObject CoinPrefabe;
+    public GameObject cat;
 
     public Transform[] safePlace;
     public Transform[] Coin;
@@ -42,5 +43,6 @@ public class LoadObjects : MonoBehaviour
 
         GameRules.safePlacePrefabe = safePlacePrefabe;
         GameRules.CoinPrefabe = CoinPrefabe;
+        GameRules.cat = cat;
     }
 }

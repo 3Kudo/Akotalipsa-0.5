@@ -18,7 +18,7 @@ public class GameRules : MonoBehaviour
 	public static GameObject CoinPrefabe;
 
 
-	public static Cat cat;
+	public static GameObject cat;
 
 
 	public static Transform[] randomBack = new Transform[2];
@@ -80,7 +80,6 @@ public class GameRules : MonoBehaviour
 		ranking = new GameObject[3];
 
 		//tworzenie kota
-		cat = new Cat();
 
 
 		//losowanie czyja tura i ustawienie wszystkich na false ¿eby ka¿dy mog³ rzuciæ koœci¹
