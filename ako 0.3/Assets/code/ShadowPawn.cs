@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ShadowPawn : MonoBehaviour
 {
+    public int waitPointIndex = 0;
     private void OnMouseDown()
     {
-        GetComponentInParent<Move>().MoveOn();
+        GetComponentInParent<Move>().MoveOn(waitPointIndex);
     }
 }

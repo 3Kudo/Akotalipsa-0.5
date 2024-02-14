@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Cat : MonoBehaviour
 {
 
     private int wakeCounter;
     private int phase;
-    private static int[] phaseThreshold = { 0, 3, 20, 35, 55};
-    private bool isLocked;
+    private static int[] phaseThreshold = { 0, 3, 10, 35, 55};
+    public bool isLocked;
     public Sprite[] catSprites;
     public Sprite[] akotametrSprites;
     public GameObject akotametr;
@@ -27,6 +28,8 @@ public class Cat : MonoBehaviour
         WakeCounter = 0;
         Phase = 0;
         IsLocked = false;
+        this.GetComponent<SpriteRenderer>().sprite = catSprites[0];
+        akotametr.GetComponent<SpriteRenderer>().sprite = akotametrSprites[0];
     }
 
     public void catTurn()
@@ -38,13 +41,13 @@ public class Cat : MonoBehaviour
         else if (Phase == 2)
         {
             losowePrzesuwanie(-4, 3);
-            losowaSciana();
+            GameRules.RandomFluff();
         }
         else if (Phase == 3)
         {
+            RandomBack();
             losowePrzesuwanie(-6, 4);
-            losowaSciana();
-            GameRules.losoweCofanie();
+            GameRules.RandomFluff();
         }
         //zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
         incrementWakeCounter(1);
@@ -53,17 +56,69 @@ public class Cat : MonoBehaviour
 
     public void losowePrzesuwanie(int maxMove, int minMove)
     {
-        GameObject pionek = pawns[0];
+        int money = 4;
+        for (int i = 0; i < 4; i++)
+            money += pawns[i].GetComponent<Player>().coin;
+        GameObject[] players = new GameObject[money];
+        for(int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j <= pawns[i].GetComponent<Player>().coin; j++)
+            {
+                players[money-1] = pawns[i];
+                money--;
+            }
+        }
+        GameObject pionek = players[Random.Range(0, players.Length)];
+        pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
+        int move = Random.Range(minMove, maxMove);
+        Debug.Log(move);
+        if (pionek.GetComponent<Move>().waitPointIndex < 1 || move == 0)
+            return;
         Transform position = pionek.GetComponent<Move>().GetWaitpoint();
-        pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
-        pionek.GetComponent<Move>().waitPointIndex = pionek.GetComponent<Move>().pozycja + Random.Range(minMove, maxMove);
+        if (move < 0)
+        {
+            move = move + pionek.GetComponent<Move>().waitPointIndex;
+            if (move < 1)
+                move = 1;
+            pionek.GetComponent<Move>().waitPointIndex = move;
+        }
+        else
+        {
+            move = move + pionek.GetComponent<Move>().waitPointIndex;
+            if (move > 53)
+                move = 53;
+            pionek.GetComponent<Move>().waitPointIndex = move;
+        }
+
         pionek.GetComponent<Move>().ruch = true;
+        pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
     }
 
-    public void losowaSciana()
+    public void RandomBack()
     {
-        //TODO: mechanika losowej sciany (pole nie do przejscia)
+        int money = 4;
+        for (int i = 0; i < 4; i++)
+            money += pawns[i].GetComponent<Player>().coin;
+        GameObject[] players = new GameObject[money];
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j <= pawns[i].GetComponent<Player>().coin; j++)
+            {
+                players[money - 1] = pawns[i];
+                money--;
+            }
+        }
+        GameObject pionek = players[Random.Range(0, players.Length)];
+        pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
+        if (pionek.GetComponent<Move>().waitPointIndex == 0)
+            return;
+        Transform position = pionek.GetComponent<Move>().GetWaitpoint();
+        pionek.GetComponent<Move>().pozycja = 0;
+        pionek.GetComponent<Move>().waitPointIndex = 0;
+        pionek.GetComponent<Move>().ruch = true;
+        pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
     }
+
 
     public void incrementWakeCounter(int value)
     {
@@ -100,6 +155,8 @@ public class Cat : MonoBehaviour
             phase = 0;
             wakeCounter = 0;
         }
+        this.GetComponent<SpriteRenderer>().sprite = catSprites[phase];
+        akotametr.GetComponent<SpriteRenderer>().sprite = akotametrSprites[phase];
         Debug.Log("Cat phase: " + phase);
     }
 }

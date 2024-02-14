@@ -11,7 +11,7 @@ public class PlayerShark : Player
             if (pionek[i].GetComponent<Shark>().powerupActive)
             {
                 pionek[i].GetComponent<Shark>().onBoard = GameRules.GetOnBoard();
-                pionek[i].GetComponent<Shark>().MoveOn();
+                pionek[i].GetComponent<Shark>().MoveOn(0);
                 active = false;
                 return;
             }
@@ -35,7 +35,7 @@ public class PlayerShark : Player
         }
         active = true;
         for (int i = 0; i < 4; i++)
-            if (pionek[i].GetComponent<Move>().IsChosen())
+            if (pionek[i].GetComponent<Move>().IsChosen(false))
                 break;
     }
 

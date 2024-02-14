@@ -48,20 +48,20 @@ public class FrogPowerup : MonoBehaviour
             if (GetComponentInParent<PlayerFrog>().active && GetComponentInParent<PlayerFrog>().powerupActive)
             {
                 Destroy(GetComponentInParent<Move>().shadowPawn);
-                int position = GetComponentInParent<Move>().ShadowPawnPosition();
+                int position = GetComponentInParent<Move>().ShadowPawnPosition(true);
                 GetComponentInParent<Player>().MoveOut(GetComponentInParent<Move>().waitPoints[position], null);
                 GameRules.diceNumber += 2;
                 GetComponentInParent<Player>().DecraseCoins(3);
-                GetComponentInParent<Move>().IsChosen();
+                GetComponentInParent<Move>().IsChosen(false);
             }
             else if(GetComponentInParent<PlayerFrog>().active && !GetComponentInParent<PlayerFrog>().powerupActive)
             {
                 Destroy(GetComponentInParent<Move>().shadowPawn);
-                int position = GetComponentInParent<Move>().ShadowPawnPosition();
+                int position = GetComponentInParent<Move>().ShadowPawnPosition(true);
                 GetComponentInParent<Player>().MoveOut(GetComponentInParent<Move>().waitPoints[position], null);
                 GameRules.diceNumber -= 2;
                 GetComponentInParent<Player>().IncreaseCoins(3);
-                GetComponentInParent<Move>().IsChosen();
+                GetComponentInParent<Move>().IsChosen(true);
             }
             else if(GetComponentInParent<PlayerFrog>().powerupActive)
                 GetComponentInParent<Player>().DecraseCoins(3);
@@ -100,9 +100,9 @@ public class FrogPowerup : MonoBehaviour
         if (GetComponentInParent<Player>().coin >= 3 || GetComponentInParent<PlayerFrog>().powerupActive)
         {
             Color color = GetComponent<SpriteRenderer>().color;
-            color.r = (float)0.80;
-            color.g = (float)0.80;
-            color.b = (float)0.80;
+            color.r = (float)0.70;
+            color.g = (float)0.70;
+            color.b = (float)0.70;
             GetComponent<SpriteRenderer>().color = color;
         }
     }

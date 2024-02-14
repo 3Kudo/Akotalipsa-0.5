@@ -8,12 +8,10 @@ public class LoadObjects : MonoBehaviour
     public Sprite[] sprites;
     public Image[] images;
     public Transform[] randomBack;
-    public GameObject safePlacePrefabe;
-    public GameObject CoinPrefabe;
-    public GameObject cat;
+    public GameObject safePlacePrefabe, CoinPrefabe, fluffPrefab;
+    public GameObject cat, milk, catnip;
 
     public Transform[] safePlace;
-    public Transform[] Coin;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,24 +23,22 @@ public class LoadObjects : MonoBehaviour
 
         for(int i = 0; i < safePlace.Length; i++)
         {
-            GameRules.safePlaceWaitPoints[i] = safePlace[i];
+            GameRules.boardWaitPoints[i] = safePlace[i];
         }
 
 
         GameRules.randomBack[0] = randomBack[0];
         GameRules.randomBack[1] = randomBack[1];
 
-        for (int i = 0; i < Coin.Length; i++)
-        {
-            GameRules.CoinWaitPoints[i] = Coin[i];
-        }
 
         //GameRules.randomBack[0] = randomBack[0];
         //GameRules.randomBack[1] = randomBack[1];
 
-
+        GameRules.fluffPrefab = fluffPrefab;
         GameRules.safePlacePrefabe = safePlacePrefabe;
         GameRules.CoinPrefabe = CoinPrefabe;
         GameRules.cat = cat;
+        GameRules.milk = milk;
+        GameRules.catnip = catnip;
     }
 }

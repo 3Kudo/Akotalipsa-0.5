@@ -24,7 +24,7 @@ public class PlayerMole : Player
                 molehill[0] = Instantiate(molehillPattern) as GameObject;
                 molehillWaitPointsIndex[0] = pionek[i].GetComponent<Mole>().waitPointIndex;
                 molehill[0].transform.position = pionek[i].GetComponent<Mole>().waitPoints[molehillWaitPointsIndex[0]].transform.position;
-                pionek[i].GetComponent<Mole>().MoveOn();
+                pionek[i].GetComponent<Mole>().MoveOn(0);
                 active = false;
                 return;
             }
@@ -48,7 +48,7 @@ public class PlayerMole : Player
         }
         active = true;
         for (int i = 0; i < 4; i++)
-            if (pionek[i].GetComponent<Move>().IsChosen())
+            if (pionek[i].GetComponent<Move>().IsChosen(false))
                 break;
     }
 

@@ -36,6 +36,14 @@ public class DuckPowerup : MonoBehaviour
             GetComponentInParent<Player>().DecraseCoins(3);
             Destroy(GetComponentInParent<Move>().shadowPawn);
             GetComponentInParent<Duck>().powerupActive = true;
+            foreach(GameObject wall in GameRules.fluff)
+            {
+                if (wall.GetComponent<Fluff>().waitPoint == GetComponentInParent<Move>().waitPoints[GetComponentInParent<Move>().waitPointIndex + ammount])
+                {
+                    ammount++;
+                    break;
+                }
+            }
             GetComponentInParent<Move>().waitPointIndex += ammount;
             GetComponentInParent<Move>().ruch = true;
         }

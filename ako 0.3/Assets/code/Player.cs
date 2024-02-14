@@ -78,7 +78,7 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-    public void ChceckPlayerFinished(int dice)
+    public void ChceckPlayerFinished()
     {
         if (pionek[0].GetComponent<Move>().GetFinish() && pionek[1].GetComponent<Move>().GetFinish()
                 && pionek[2].GetComponent<Move>().GetFinish() && pionek[3].GetComponent<Move>().GetFinish())

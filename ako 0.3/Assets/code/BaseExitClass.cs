@@ -31,7 +31,7 @@ public class BaseExitClass : MonoBehaviour
             GetComponentInParent<Player>().DecraseCoins(3);
             GetComponentInParent<Player>().PowerupWindowInteraction(null);
             GetComponentInParent<Move>().ToNormalState();
-            GetComponentInParent<Move>().MoveOn();
+            GetComponentInParent<Move>().MoveOn(0);
         }
     }
 

@@ -38,7 +38,22 @@ public class Mole : Move
                 AS.Stop();
                 if (waitPointIndex != 0)
                 {
-
+                    if (poweruopActive)
+                    {
+                        foreach(GameObject wall in GameRules.fluff)
+                        {
+                            if(wall.GetComponent<Fluff>().waitPoint == waitPoints[waitPointIndex])
+                            {
+                                waitPointIndex++;
+                                return;
+                            }
+                        }
+                        GetComponentInParent<PlayerMole>().molehill[1] = Instantiate(GetComponentInParent<PlayerMole>().molehillPattern) as GameObject;
+                        GetComponentInParent<PlayerMole>().molehillWaitPointsIndex[1] = waitPointIndex;
+                        GetComponentInParent<PlayerMole>().molehill[1].transform.position = waitPoints[waitPointIndex].transform.position;
+                    }
+                    GetComponentInParent<PlayerMole>().ResetPowerupActive(pionek);
+                    poweruopActive = false;
                     if (waitPointIndex == GetComponentInParent<PlayerMole>().molehillWaitPointsIndex[0])
                     {
                         waitPointIndex = GetComponentInParent<PlayerMole>().molehillWaitPointsIndex[1];
@@ -53,22 +68,15 @@ public class Mole : Move
 
                     if (GameRules.diceNumber < 6)
                     {
-                        GameRules.TurnCounter();
                         GameRules.whoseTurn++;
                         if (GameRules.whoseTurn == 5)
                         {
                             GameRules.whoseTurn = 1;
                         }
+                        GameRules.TurnCounter();
                     }
                     
-                    if (poweruopActive)
-                    {
-                        GetComponentInParent<PlayerMole>().molehill[1] = Instantiate(GetComponentInParent<PlayerMole>().molehillPattern) as GameObject;
-                        GetComponentInParent<PlayerMole>().molehillWaitPointsIndex[1] = waitPointIndex;
-                        GetComponentInParent<PlayerMole>().molehill[1].transform.position = waitPoints[waitPointIndex].transform.position;
-                    }
-                    GetComponentInParent<PlayerMole>().ResetPowerupActive(pionek);
-                    poweruopActive = false;
+                    
                     GameRules.Turn();
                     GameRules.diceNumber = 0;
                 }

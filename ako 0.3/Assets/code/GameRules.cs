@@ -14,22 +14,22 @@ public class GameRules : MonoBehaviour
 	public static Sprite[] sprites = new Sprite[4];
 	public static Image[] images= new Image[4];
 	public static int miejsce;
-	public static GameObject safePlacePrefabe;
-	public static GameObject CoinPrefabe;
+	public static GameObject safePlacePrefabe, CoinPrefabe, fluffPrefab;
 
 
-	public static GameObject cat;
+	public static GameObject cat, milk, catnip;
 
 
 	public static Transform[] randomBack = new Transform[2];
 
-	public static Transform[] safePlaceWaitPoints = new Transform[44];
-    public static Transform[] CoinWaitPoints = new Transform[44];
+	public static Transform[] boardWaitPoints = new Transform[44];
 
 
     public static List<GameObject> onBoard = new List<GameObject>();
 
-	public static List<GameObject> safePlace = new List<GameObject>();
+    public static List<GameObject> fluff = new List<GameObject>();
+
+    public static List<GameObject> safePlace = new List<GameObject>();
     public static List<GameObject> Coin = new List<GameObject>();
 
 	
@@ -92,13 +92,17 @@ public class GameRules : MonoBehaviour
         AddSafePlace();
 		AddCoin(2);
         Turn();
+		milk.GetComponent<Milk>().setMilkButton();
+		catnip.GetComponent<Catnip>().setCatnipButton();
 
-	}
+
+    }
 
 	//metoda opowiedzialna za za³¹czanie gracza
 	public static void MovePlayer()
 	{
 		pawn[whoseTurn - 1].GetComponent<Player>().EnambleMovement();
+
 	}
 	//metoda opowiedzialna za za³¹czanie tury gracza
 	public static void Turn()
@@ -129,9 +133,13 @@ public class GameRules : MonoBehaviour
 
     public static void TurnCounter()
     {
+        milk.GetComponent<Milk>().setMilkButton();
+        catnip.GetComponent<Catnip>().setCatnipButton();
         turnCounter++;
 		if (turnCounter % 4 == 0)
 		{
+            for (int i = 0; i < fluff.Count(); i++)
+                fluff[i].GetComponent<Fluff>().FadeAway();
             cat.GetComponent<Cat>().catTurn();
             AddCoin(Random.Range(1, 4));
 		}
@@ -265,6 +273,35 @@ public class GameRules : MonoBehaviour
 		pionek.GetComponent<Move>().ruch = true;
 	}
 
+	public static void RandomFluff()
+	{
+		Transform newWaitPoint;
+        List<Transform> fluffPosition = new List<Transform>();
+        foreach(GameObject wall in fluff)
+            fluffPosition.Add(wall.GetComponent<Fluff>().waitPoint);
+		while (true)
+		{
+			bool con = false;
+			newWaitPoint = GetRandomPosition();
+			for(int i = 0; i < onBoard.Count(); i++)
+			{
+				if(onBoard[i].GetComponent<Move>().waitPoints[onBoard[i].GetComponent<Move>().waitPointIndex] == newWaitPoint)
+				{
+					con = true;
+					break;
+				}
+			}
+			if (con)
+				continue;
+			con = fluffPosition.Contains(newWaitPoint);
+			if (con)
+				continue;
+			break;
+		}
+        fluff.Add(Instantiate(fluffPrefab) as GameObject);
+        fluff[fluff.Count - 1].GetComponent<Fluff>().setPlace(newWaitPoint);
+	}
+
 	
 
 	public static void OnSafePlace(GameObject pionek, Transform waitPoint)
@@ -298,25 +335,20 @@ public class GameRules : MonoBehaviour
     {
 		for (int j = 0; j < NumberofCoins; j++)
 		{
-			Transform newWaitPoint = GetRandomCoinPosition();
+			Transform newWaitPoint = GetRandomPosition();
 			List<Transform> CoinPosition = new List<Transform>();
 			for (int i = 0; i < Coin.Count; i++)
 				CoinPosition.Add(Coin[i].GetComponent<Coin>().waitPoint);
 			while (CoinPosition.Contains(newWaitPoint))
-				newWaitPoint = GetRandomCoinPosition();
+				newWaitPoint = GetRandomPosition();
 			Coin.Add(Instantiate(CoinPrefabe) as GameObject);
 			Coin[Coin.Count - 1].GetComponent<Coin>().setPlace(newWaitPoint);
 		}
     }
 
-    public static Transform GetRandomCoinPosition()
-    {
-        return CoinWaitPoints[Random.Range(0, 44)];
-    }
-
     public static Transform GetRandomPosition()
 	{
-		return safePlaceWaitPoints[Random.Range(0, 44)];
+		return boardWaitPoints[Random.Range(0, 44)];
 	}
 
     public static List<GameObject> GetOnBoard()
