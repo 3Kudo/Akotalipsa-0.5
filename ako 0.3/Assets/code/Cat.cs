@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,12 +9,15 @@ public class Cat : MonoBehaviour
 
     private int wakeCounter;
     private int phase;
-    private static int[] phaseThreshold = { 0, 3, 10, 35, 55};
+    private static int[] phaseThreshold = { 0, 3, 10, 20, 35};
     public bool isLocked;
     public Sprite[] catSprites;
     public Sprite[] akotametrSprites;
     public GameObject akotametr;
     public GameObject[] pawns;
+    public AudioClip[] soundTracks;
+    int clip=0;
+    AudioSource AS;
 
 
     public int WakeCounter { get => wakeCounter; set => wakeCounter = value; }
@@ -25,12 +29,26 @@ public class Cat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AS = GetComponent<AudioSource>();
         WakeCounter = 0;
         Phase = 0;
         IsLocked = false;
         this.GetComponent<SpriteRenderer>().sprite = catSprites[0];
         akotametr.GetComponent<SpriteRenderer>().sprite = akotametrSprites[0];
     }
+    /*private void Update()
+    {
+        if (AS.isPlaying == false)
+        {
+            int clipOn = 4 * phase + clip;
+            AS.clip = soundTracks[clipOn];
+
+            AS.Play();
+            clip++;
+            if (clip == 4)
+                clip = 0;
+        }
+    }*/
 
     public void catTurn()
     {
@@ -72,7 +90,7 @@ public class Cat : MonoBehaviour
         pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
         int move = Random.Range(minMove, maxMove);
         Debug.Log(move);
-        if (pionek.GetComponent<Move>().waitPointIndex < 1 || move == 0)
+        if (pionek.GetComponent<Move>().waitPointIndex < 1 || move == 0 || pionek.GetComponent<Move>().defence)
             return;
         Transform position = pionek.GetComponent<Move>().GetWaitpoint();
         if (move < 0)
@@ -110,7 +128,7 @@ public class Cat : MonoBehaviour
         }
         GameObject pionek = players[Random.Range(0, players.Length)];
         pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
-        if (pionek.GetComponent<Move>().waitPointIndex == 0)
+        if (pionek.GetComponent<Move>().waitPointIndex == 0 || pionek.GetComponent<Move>().defence)
             return;
         Transform position = pionek.GetComponent<Move>().GetWaitpoint();
         pionek.GetComponent<Move>().pozycja = 0;
@@ -123,30 +141,31 @@ public class Cat : MonoBehaviour
     public void incrementWakeCounter(int value)
     {
         WakeCounter += value;
-        Debug.Log("Cat counter: " + WakeCounter);
     }
 
     public void decrementWakeCounter(int value)
     {
-        if (WakeCounter > phaseThreshold[0])
-            WakeCounter -= value;
-        Debug.Log("Cat counter: " + WakeCounter);
+        WakeCounter -= value;
+        if (wakeCounter < 0)
+            wakeCounter = 0;
+
     }
 
     public void isCounterLocked()
     {
         if (WakeCounter >= phaseThreshold[3])
             IsLocked = true;
-        Debug.Log("Cat phase 4 lock is " + IsLocked);
     }
 
     public void phaseCheck()
     {
+        int counPhase = 0;
         for (int i = 0; i < 5; i++)
         {
             if (WakeCounter >= phaseThreshold[i])
-                phase = i;
+                counPhase = i;
         }
+        phase = counPhase;
         if (phase == 3)
             isLocked = true;
         if (phase == 4)

@@ -9,7 +9,7 @@ public class Milk : MonoBehaviour
 
     public void setMilkButton()
     {
-        if(GameRules.GetTura().GetComponent<Player>().coin >= 3 && !cat.GetComponent<Cat>().isLocked)
+        if(GameRules.GetTura().GetComponent<Player>().coin >= 2 && !cat.GetComponent<Cat>().isLocked)
         {
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.80;
@@ -29,9 +29,10 @@ public class Milk : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        if(GameRules.GetTura().GetComponent<Player>().coin >= 3 && !cat.GetComponent<Cat>().isLocked)
+        if(GameRules.GetTura().GetComponent<Player>().coin >= 2 && !cat.GetComponent<Cat>().isLocked)
         {
-            GameRules.GetTura().GetComponent<Player>().DecraseCoins(3);
+            MouseControle.instance.Default();
+            GameRules.GetTura().GetComponent<Player>().DecraseCoins(2);
             cat.GetComponent<Cat>().decrementWakeCounter(4);
             cat.GetComponent<Cat>().phaseCheck();
             setMilkButton();
@@ -40,8 +41,9 @@ public class Milk : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (GameRules.GetTura().GetComponent<Player>().coin >= 3 && !cat.GetComponent<Cat>().isLocked)
+        if (GameRules.GetTura().GetComponent<Player>().coin >= 2 && !cat.GetComponent<Cat>().isLocked)
         {
+            MouseControle.instance.Clickable();
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)1;
             color.g = (float)1;
@@ -52,8 +54,9 @@ public class Milk : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (GameRules.GetTura().GetComponent<Player>().coin >= 3 && !cat.GetComponent<Cat>().isLocked)
+        if (GameRules.GetTura().GetComponent<Player>().coin >= 2 && !cat.GetComponent<Cat>().isLocked)
         {
+            MouseControle.instance.Default();
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.80;
             color.g = (float)0.80;
@@ -64,7 +67,7 @@ public class Milk : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (GameRules.GetTura().GetComponent<Player>().coin >= 3 && !cat.GetComponent<Cat>().isLocked)
+        if (GameRules.GetTura().GetComponent<Player>().coin >= 2 && !cat.GetComponent<Cat>().isLocked)
         {
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.70;

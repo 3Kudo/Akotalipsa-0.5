@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.XR.WSA;
 
@@ -10,10 +11,14 @@ public class RollDice : MonoBehaviour
     private Sprite[] dicesSides;
     private SpriteRenderer rend;
     private static bool diceThrowAllowed = true;
+    private AudioSource AS;
+    public AudioClip[] soundTracks;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        AS = GetComponent<AudioSource>();
         rend = GetComponent<SpriteRenderer>();
         dicesSides = Resources.LoadAll<Sprite>("Dice/");
         rend.sprite = dicesSides[5];
@@ -31,9 +36,9 @@ public class RollDice : MonoBehaviour
         {      
             diceThrowAllowed = true;
             Color color = rend.color;
-            color.r = (float)0.90;
-            color.g = (float)0.90;
-            color.b = (float)0.90;
+            color.r = (float)0.80;
+            color.g = (float)0.80;
+            color.b = (float)0.80;
             rend.color = color;
             GameRules.diceNumber=7;
         }
@@ -43,6 +48,7 @@ public class RollDice : MonoBehaviour
     {
         if (diceThrowAllowed)
         {
+            MouseControle.instance.Clickable();
             Color color = rend.color;
             color.r = 1;
             color.g = 1;
@@ -55,28 +61,52 @@ public class RollDice : MonoBehaviour
     {
         if (diceThrowAllowed)
         {
+            MouseControle.instance.Default();
             Color color = rend.color;
-            color.r = (float)0.90;
-            color.g = (float)0.90;
-            color.b = (float)0.90;
+            color.r = (float)0.80;
+            color.g = (float)0.80;
+            color.b = (float)0.80;
             rend.color = color;
         }
     }
 
-    private void OnMouseDown()
+    private void OnMouseUpAsButton()
     {
-        if (diceThrowAllowed && GameRules.miejsce!=3)
+        if (diceThrowAllowed && GameRules.miejsce != 3)
+        {
+            MouseControle.instance.Clickable();
+            Color color = rend.color;
+            color.r = 1;
+            color.g = 1;
+            color.b = 1;
+            rend.color = color;
+            AS.clip = soundTracks[0];
+            AS.Play();
             StartCoroutine("RollTheDice");
+        }
+    }
+    private void OnMouseDrag()
+    {
+        if (diceThrowAllowed)
+        {
+            MouseControle.instance.Half();
+            Color color = rend.color;
+            color.r = (float)0.70;
+            color.g = (float)0.70;
+            color.b = (float)0.70;
+            rend.color = color;
+        }
     }
     private IEnumerator RollTheDice()
     {
         diceThrowAllowed = false;
         int randomDiceSide = 0;
-        for (int i = 0; i <= 3; i++)
+        for (int i = 0; i <= 4; i++)
         {
             randomDiceSide = Random.Range(0, 6);
             rend.sprite = dicesSides[randomDiceSide];
             yield return new WaitForSeconds(0.2f);
+            MouseControle.instance.Default();
         }
         Color color = rend.color;
         color.r = (float)0.60;
@@ -84,6 +114,11 @@ public class RollDice : MonoBehaviour
         color.b = (float)0.60;
         rend.color = color;
         GameRules.diceNumber = randomDiceSide + 1;
+        if (GameRules.diceNumber == 6)
+        {
+            AS.clip = soundTracks[1];
+            AS.Play();
+        }
         GameRules.MovePlayer();
     }
 

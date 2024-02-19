@@ -2018,14 +2018,14 @@ MonoBehaviour:
     packingMode: 4
     atlasWidth: 1024
     atlasHeight: 1024
-    characterSetSelectionMode: 1
-    characterSequence: 32 - 126, 160 - 255, 8192 - 8303, 8364, 8482, 9633
+    characterSetSelectionMode: 6
+    characterSequence: 20-21,2B-2E,30-3B,3D,3F-5A,61-7A,A0-A1
     referencedFontAssetGUID: ea703189b3423bb46ab00a6e978a6605
     referencedTextAssetGUID: 
     fontStyle: 0
     fontStyleModifier: 0
     renderMode: 4165
-    includeFontFeatures: 0
+    includeFontFeatures: 1
   m_FontWeightTable:
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}

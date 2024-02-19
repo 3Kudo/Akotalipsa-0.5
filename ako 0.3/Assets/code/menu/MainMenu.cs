@@ -10,11 +10,13 @@ public class MainMenu : MonoBehaviour
 
     public void GameBegin()
     {
+        MouseControle.instance.Default();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void QuitApp()
     {
+        MouseControle.instance.Default();
         Application.Quit();
         Debug.Log("Application has quit.");
     }

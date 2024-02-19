@@ -23,7 +23,7 @@ public abstract class Move : MonoBehaviour
 
     //ruch pionka
     [HideInInspector] public bool ruch = false, chosen = false;
-    [HideInInspector] public int pozycja = 0;
+    [HideInInspector] public int pozycja;
     [HideInInspector] public bool finished;
     public float moveSpeed = 2f;
 
@@ -38,6 +38,7 @@ public abstract class Move : MonoBehaviour
         AS = GetComponent<AudioSource>();
         finished = false;
         defence = false;
+        pozycja = waitPointIndex;
         
     }
 
@@ -76,9 +77,18 @@ public abstract class Move : MonoBehaviour
             shadowPawn.GetComponent<ShadowPawn>().waitPointIndex = position;
             GetComponentInParent<Player>().MoveTheSame(shadowPawn, waitPoints[position].transform.position.x, waitPoints[position].transform.position.y, position);
         }
+    }
 
-        
+    private void OnMouseEnter()
+    {
+        if(GameRules.GetTura() == GetComponentInParent<Player>().gracz)
+            MouseControle.instance.Clickable();
+    }
 
+    private void OnMouseExit()
+    {
+        if (GameRules.GetTura() == GetComponentInParent<Player>().gracz)
+            MouseControle.instance.Default();
     }
 
     public int ShadowPawnPosition(bool activPowerup)
@@ -122,6 +132,7 @@ public abstract class Move : MonoBehaviour
         GetComponentInParent<Player>().active = false;
         if(moveTo != 0)
         {
+            Transform waitPoint = waitPoints[waitPointIndex];
             if (moveTo < waitPointIndex)
                 pozycja--;
             else if (moveTo > waitPointIndex)
@@ -129,6 +140,7 @@ public abstract class Move : MonoBehaviour
             if (waitPointIndex == 0)
                 GameRules.onBoard.Add(pionek);
             waitPointIndex = moveTo;
+            GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
         }
         else if (waitPointIndex == 0 && GameRules.diceNumber >= 6)
         {

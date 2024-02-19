@@ -276,6 +276,7 @@ MonoBehaviour:
   priceText: {fileID: 3755642726665937404}
   anim: {fileID: 6906904640640634556}
   spin: 0
+  soundTracks: {fileID: 8300000, guid: 2f8403dc5d2144b4392bbde106a62e15, type: 3}
 --- !u!95 &6906904640640634556
 Animator:
   serializedVersion: 4

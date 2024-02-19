@@ -19,7 +19,7 @@ public class FrogPowerup : MonoBehaviour
             color.b = (float)0.80;
             GetComponent<SpriteRenderer>().color = color;
         }
-        else if(GetComponentInParent<Player>().coin < 3)
+        else if(GetComponentInParent<Player>().coin < 4)
         {
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.40;
@@ -39,8 +39,9 @@ public class FrogPowerup : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        if (GetComponentInParent<Player>().coin >= 3 || GetComponentInParent<PlayerFrog>().powerupActive)
+        if (GetComponentInParent<Player>().coin >= 4 || GetComponentInParent<PlayerFrog>().powerupActive)
         {
+            MouseControle.instance.Default();
             Sprite sprite = GetComponentInParent<SpriteRenderer>().sprite;
             GetComponentInParent<SpriteRenderer>().sprite = powerup;
             powerup = sprite;
@@ -51,7 +52,7 @@ public class FrogPowerup : MonoBehaviour
                 int position = GetComponentInParent<Move>().ShadowPawnPosition(true);
                 GetComponentInParent<Player>().MoveOut(GetComponentInParent<Move>().waitPoints[position], null);
                 GameRules.diceNumber += 2;
-                GetComponentInParent<Player>().DecraseCoins(3);
+                GetComponentInParent<Player>().DecraseCoins(4);
                 GetComponentInParent<Move>().IsChosen(false);
             }
             else if(GetComponentInParent<PlayerFrog>().active && !GetComponentInParent<PlayerFrog>().powerupActive)
@@ -60,21 +61,22 @@ public class FrogPowerup : MonoBehaviour
                 int position = GetComponentInParent<Move>().ShadowPawnPosition(true);
                 GetComponentInParent<Player>().MoveOut(GetComponentInParent<Move>().waitPoints[position], null);
                 GameRules.diceNumber -= 2;
-                GetComponentInParent<Player>().IncreaseCoins(3);
+                GetComponentInParent<Player>().IncreaseCoins(4);
                 GetComponentInParent<Move>().IsChosen(true);
             }
             else if(GetComponentInParent<PlayerFrog>().powerupActive)
-                GetComponentInParent<Player>().DecraseCoins(3);
+                GetComponentInParent<Player>().DecraseCoins(4);
             else
-                GetComponentInParent<Player>().IncreaseCoins(3);
+                GetComponentInParent<Player>().IncreaseCoins(4);
 
         }
     }
 
     private void OnMouseOver()
     {
-        if (GetComponentInParent<Player>().coin >= 3 || GetComponentInParent<PlayerFrog>().powerupActive)
+        if (GetComponentInParent<Player>().coin >= 4 || GetComponentInParent<PlayerFrog>().powerupActive)
         {
+            MouseControle.instance.Clickable();
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)1;
             color.g = (float)1;
@@ -85,8 +87,9 @@ public class FrogPowerup : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (GetComponentInParent<Player>().coin >= 3 || GetComponentInParent<PlayerFrog>().powerupActive)
+        if (GetComponentInParent<Player>().coin >= 4 || GetComponentInParent<PlayerFrog>().powerupActive)
         {
+            MouseControle.instance.Default();
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.80;
             color.g = (float)0.80;
@@ -97,7 +100,7 @@ public class FrogPowerup : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (GetComponentInParent<Player>().coin >= 3 || GetComponentInParent<PlayerFrog>().powerupActive)
+        if (GetComponentInParent<Player>().coin >= 4 || GetComponentInParent<PlayerFrog>().powerupActive)
         {
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.70;

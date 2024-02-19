@@ -15,9 +15,10 @@ public class GameRules : MonoBehaviour
 	public static Image[] images= new Image[4];
 	public static int miejsce;
 	public static GameObject safePlacePrefabe, CoinPrefabe, fluffPrefab;
+	public static AudioSource AS;
 
 
-	public static GameObject cat, milk, catnip;
+    public static GameObject cat, milk, catnip;
 
 
 	public static Transform[] randomBack = new Transform[2];
@@ -39,8 +40,9 @@ public class GameRules : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		//przypisanie odpowiednich obiektów
-		pawn = new GameObject[4];
+        AS = GetComponent<AudioSource>();
+        //przypisanie odpowiednich obiektów
+        pawn = new GameObject[4];
 
 		pawn[0] = GameObject.Find("Moles");
 		pawn[1] = GameObject.Find("Sharks");
@@ -141,8 +143,11 @@ public class GameRules : MonoBehaviour
             for (int i = 0; i < fluff.Count(); i++)
                 fluff[i].GetComponent<Fluff>().FadeAway();
             cat.GetComponent<Cat>().catTurn();
-            AddCoin(Random.Range(1, 4));
 		}
+		if(turnCounter % 7 == 0)
+		{
+            AddCoin(Random.Range(1, 3));
+        }
 		
     }
 
@@ -255,6 +260,8 @@ public class GameRules : MonoBehaviour
 			if (Coin[i].GetComponent<Coin>().waitPoint == waitPoints)
 			{
                 GameObject toDestroy = Coin[i];
+                AS.clip = toDestroy.GetComponent<Coin>().soundTracks;
+                AS.Play();
                 Coin.RemoveAt(i);
 				pionek.GetComponentInParent<Player>().IncreaseCoins(toDestroy.GetComponent<Coin>().price);
                 Destroy(toDestroy);               
@@ -335,14 +342,19 @@ public class GameRules : MonoBehaviour
     {
 		for (int j = 0; j < NumberofCoins; j++)
 		{
-			Transform newWaitPoint = GetRandomPosition();
-			List<Transform> CoinPosition = new List<Transform>();
-			for (int i = 0; i < Coin.Count; i++)
-				CoinPosition.Add(Coin[i].GetComponent<Coin>().waitPoint);
-			while (CoinPosition.Contains(newWaitPoint))
-				newWaitPoint = GetRandomPosition();
-			Coin.Add(Instantiate(CoinPrefabe) as GameObject);
-			Coin[Coin.Count - 1].GetComponent<Coin>().setPlace(newWaitPoint);
+			if (Coin.Count < 12)
+			{
+				Transform newWaitPoint = GetRandomPosition();
+				List<Transform> CoinPosition = new List<Transform>();
+				for (int i = 0; i < Coin.Count; i++)
+					CoinPosition.Add(Coin[i].GetComponent<Coin>().waitPoint);
+				while (CoinPosition.Contains(newWaitPoint))
+					newWaitPoint = GetRandomPosition();
+				Coin.Add(Instantiate(CoinPrefabe) as GameObject);
+				Coin[Coin.Count - 1].GetComponent<Coin>().setPlace(newWaitPoint);
+			}
+			else
+				break;
 		}
     }
 
