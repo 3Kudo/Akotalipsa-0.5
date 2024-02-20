@@ -16,7 +16,7 @@ public class Fluff : MonoBehaviour
     public void FadeAway()
     {
         Color color = this.GetComponent<SpriteRenderer>().color;
-        color.a -= 0.5f;
+        color.a -= 0.3f;
         this.GetComponent<SpriteRenderer>().color = color;
         exist--;
         if (exist == 0)
