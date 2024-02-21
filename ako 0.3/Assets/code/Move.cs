@@ -109,8 +109,8 @@ public abstract class Move : MonoBehaviour
         {
             if ((waitPointIndex + GameRules.diceNumber) <= waitPoints.Length - 1)
             {
-                for (int j = 1; j < GameRules.diceNumber; j++)
-                    for (int i = 0; i <= GameRules.fluff.Count; i++)
+                for (int j = 1; j <= GameRules.diceNumber; j++)
+                    for (int i = 0; i < GameRules.fluff.Count; i++)
                         if (waitPoints[waitPointIndex + j] == GameRules.fluff[i].GetComponent<Fluff>().waitPoint)
                             return waitPointIndex + j - 1;
                 return waitPointIndex + GameRules.diceNumber;
@@ -203,6 +203,7 @@ public abstract class Move : MonoBehaviour
         {
             shadowPawn = Instantiate(shadowPawnPattern, parent) as GameObject;
             int position = ShadowPawnPosition(isPowerup);
+            shadowPawn.GetComponent<ShadowPawn>().waitPointIndex = position;
             shadowPawn.transform.position = waitPoints[position].transform.position;
             shadowPawn.GetComponent<SpriteRenderer>().sprite = PawnSprite;
             shadowPawn.GetComponent<PolygonCollider2D>().points = this.GetComponent<PolygonCollider2D>().points;
