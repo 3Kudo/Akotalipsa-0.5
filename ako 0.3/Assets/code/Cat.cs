@@ -128,7 +128,7 @@ public class Cat : MonoBehaviour
         }
         GameObject pionek = players[Random.Range(0, players.Length)];
         pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
-        if (pionek.GetComponent<Move>().waitPointIndex == 0 || pionek.GetComponent<Move>().defence)
+        if (pionek.GetComponent<Move>().waitPointIndex == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
             return;
         Transform position = pionek.GetComponent<Move>().GetWaitpoint();
         pionek.GetComponent<Move>().pozycja = 0;
