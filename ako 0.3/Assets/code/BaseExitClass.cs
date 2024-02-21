@@ -6,7 +6,7 @@ public class BaseExitClass : MonoBehaviour
 {
     private void Start()
     {
-        if (GetComponentInParent<Move>().waitPointIndex > 0 || GetComponentInParent<Player>().coin<3)
+        if (GetComponentInParent<Move>().waitPointIndex > 0 || GetComponentInParent<Player>().coin<5)
         {
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.40;

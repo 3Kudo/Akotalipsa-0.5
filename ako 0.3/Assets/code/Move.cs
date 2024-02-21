@@ -109,10 +109,10 @@ public abstract class Move : MonoBehaviour
         {
             if ((waitPointIndex + GameRules.diceNumber) <= waitPoints.Length - 1)
             {
-                for (int j = 0; j < GameRules.fluff.Count; j++)
-                    for (int i = 1; i <= GameRules.diceNumber; i++)
-                        if (waitPoints[waitPointIndex + i] == GameRules.fluff[j].GetComponent<Fluff>().waitPoint)
-                            return waitPointIndex + i - 1;
+                for (int j = 1; j < GameRules.diceNumber; j++)
+                    for (int i = 0; i <= GameRules.fluff.Count; i++)
+                        if (waitPoints[waitPointIndex + j] == GameRules.fluff[i].GetComponent<Fluff>().waitPoint)
+                            return waitPointIndex + j - 1;
                 return waitPointIndex + GameRules.diceNumber;
             }
         }
