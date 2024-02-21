@@ -90,7 +90,7 @@ public class Cat : MonoBehaviour
         pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
         int move = Random.Range(minMove, maxMove);
         Debug.Log(move);
-        if (pionek.GetComponent<Move>().waitPointIndex < 1 || move == 0 || pionek.GetComponent<Move>().defence)
+        if (pionek.GetComponent<Move>().waitPointIndex < 1 || move == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
             return;
         Transform position = pionek.GetComponent<Move>().GetWaitpoint();
         if (move < 0)
