@@ -13,8 +13,7 @@ public abstract class Move : MonoBehaviour
 
     public Transform[] waitPoints;
 
-    [HideInInspector]
-    public int waitPointIndex = 0;
+    public int waitPointIndex;
       
     public AudioClip[] soundTracks;
     [HideInInspector] public AudioSource AS;
