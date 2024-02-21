@@ -173,6 +173,7 @@ public abstract class Move : MonoBehaviour
         {
             finished = true;
             GameRules.onBoard.Remove(pionek);
+            GetComponent<PolygonCollider2D>().enabled = false;
             GetComponentInParent<Player>().ChceckPlayerFinished();
         }
         ToNormalState();
