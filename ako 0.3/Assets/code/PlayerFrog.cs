@@ -30,6 +30,9 @@ public class PlayerFrog : Player
         active = true;
         for (int i = 0; i < 4; i++)
             if (pionek[i].GetComponent<Move>().IsChosen(powerupActive))
+            {
+                powerupWindow.GetComponent<PowerupWindow>().powerups[1].GetComponent<FrogPowerup>().SetUp();
                 break;
+            }
     }
 }

@@ -46,7 +46,7 @@ public class GameRules : MonoBehaviour
 
 		pawn[0] = GameObject.Find("Moles");
 		pawn[1] = GameObject.Find("Sharks");
-		pawn[2] = GameObject.Find("Turtles");
+		pawn[2] = GameObject.Find("Frogs");
 		pawn[3] = GameObject.Find("Ducks");
 
 
@@ -73,7 +73,7 @@ public class GameRules : MonoBehaviour
         //przypisanie nazw
         pawn[0].GetComponent<Player>().nazwa = "mole";
         pawn[1].GetComponent<Player>().nazwa = "shark";
-        pawn[2].GetComponent<Player>().nazwa = "turtle";
+        pawn[2].GetComponent<Player>().nazwa = "frog";
         pawn[3].GetComponent<Player>().nazwa = "duck";
 		
 
@@ -273,6 +273,8 @@ public class GameRules : MonoBehaviour
 	{
 		int los = Random.Range(0, onBoard.Count);
 		GameObject pionek = onBoard.ElementAt(los);
+		if (pionek.GetComponent<Move>().defence)
+			return;
 		onBoard.Remove(pionek);
 		Transform position = pionek.GetComponent<Move>().GetWaitpoint();
 		pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
@@ -367,6 +369,12 @@ public class GameRules : MonoBehaviour
 	{
 		int k = onBoard.Count;
 		return onBoard;
+	}
+
+	public static void SetCatnipMik()
+	{
+		milk.GetComponent<Milk>().setMilkButton();
+		catnip.GetComponent<Catnip>().setCatnipButton();
 	}
 	
 }

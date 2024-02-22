@@ -49,7 +49,10 @@ public class PlayerMole : Player
         active = true;
         for (int i = 0; i < 4; i++)
             if (pionek[i].GetComponent<Move>().IsChosen(false))
+            {
+                powerupWindow.GetComponent<PowerupWindow>().powerups[1].GetComponent<MolePowerup>().SetUp();
                 break;
+            }
     }
 
 

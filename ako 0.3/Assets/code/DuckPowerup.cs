@@ -35,6 +35,7 @@ public class DuckPowerup : MonoBehaviour
             MouseControle.instance.Default();
             GetComponentInParent<Move>().ToNormalState();
             GetComponentInParent<Player>().DecraseCoins(3);
+            GameRules.SetCatnipMik();
             Destroy(GetComponentInParent<Move>().shadowPawn);
             GetComponentInParent<Duck>().powerupActive = true;
             foreach(GameObject wall in GameRules.fluff)

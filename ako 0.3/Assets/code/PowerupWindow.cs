@@ -6,7 +6,7 @@ using UnityEngine.Analytics;
 public class PowerupWindow : MonoBehaviour
 {
     public GameObject[] powerupsPatter;
-    GameObject[] powerups = new GameObject[2];
+    public GameObject[] powerups = new GameObject[2];
     public Transform[] powerupsPosiotns;
     public Animator anim;
     public Sprite baseExit;

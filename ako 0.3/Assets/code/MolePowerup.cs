@@ -37,6 +37,11 @@ public class MolePowerup : MonoBehaviour
         }
     }
 
+    public void SetUp()
+    {
+
+    }
+
     private void OnMouseUpAsButton()
     {
         if ( (GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 2) ||
@@ -50,10 +55,14 @@ public class MolePowerup : MonoBehaviour
             if (GetComponentInParent<Mole>().poweruopActive)
             {
                 GetComponentInParent<Player>().DecraseCoins(2);
+                GameRules.SetCatnipMik();
                 GetComponentInParent<PlayerMole>().ResetPowerupActive(GetComponentInParent<Mole>().pionek);
             }
             else
+            {
                 GetComponentInParent<Player>().IncreaseCoins(2);
+                GameRules.SetCatnipMik();
+            }
             
         }
     }

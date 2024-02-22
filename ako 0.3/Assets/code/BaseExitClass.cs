@@ -30,6 +30,7 @@ public class BaseExitClass : MonoBehaviour
             MouseControle.instance.Default();
             GameRules.diceNumber = 6;
             GetComponentInParent<Player>().DecraseCoins(5);
+            GameRules.SetCatnipMik();
             GetComponentInParent<Player>().PowerupWindowInteraction(null);
             GetComponentInParent<Move>().ToNormalState();
             GetComponentInParent<Move>().MoveOn(0);

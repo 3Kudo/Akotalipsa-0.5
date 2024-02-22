@@ -35,7 +35,7 @@ public class Milk : MonoBehaviour
             GameRules.GetTura().GetComponent<Player>().DecraseCoins(2);
             cat.GetComponent<Cat>().decrementWakeCounter(4);
             cat.GetComponent<Cat>().phaseCheck();
-            setMilkButton();
+            GameRules.SetCatnipMik();
         }
     }
 

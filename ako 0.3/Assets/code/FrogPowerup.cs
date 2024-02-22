@@ -37,6 +37,37 @@ public class FrogPowerup : MonoBehaviour
         }
     }
 
+    public void SetUp()
+    {
+        if ((GetComponentInParent<Player>().coin < 4 || !GetComponentInParent<Player>().active) && !GetComponentInParent<PlayerFrog>().powerupActive)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.40;
+            color.g = (float)0.40;
+            color.b = (float)0.40;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+        else if (GetComponentInParent<PlayerFrog>().powerupActive)
+        {
+            Sprite sprite = GetComponentInParent<SpriteRenderer>().sprite;
+            GetComponentInParent<SpriteRenderer>().sprite = powerup;
+            powerup = sprite;
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.80;
+            color.g = (float)0.80;
+            color.b = (float)0.80;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+        else
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.80;
+            color.g = (float)0.80;
+            color.b = (float)0.80;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+    }
+
     private void OnMouseUpAsButton()
     {
         if ((GetComponentInParent<Player>().coin >= 4 || GetComponentInParent<PlayerFrog>().powerupActive) && GetComponentInParent<Player>().active)
@@ -53,6 +84,7 @@ public class FrogPowerup : MonoBehaviour
                 GetComponentInParent<Player>().MoveOut(GetComponentInParent<Move>().waitPoints[position], null);
                 GameRules.diceNumber += 2;
                 GetComponentInParent<Player>().DecraseCoins(4);
+                GameRules.SetCatnipMik();
                 GetComponentInParent<Move>().IsChosen(true);
             }
             else if(GetComponentInParent<PlayerFrog>().active && !GetComponentInParent<PlayerFrog>().powerupActive)
@@ -62,12 +94,9 @@ public class FrogPowerup : MonoBehaviour
                 GetComponentInParent<Player>().MoveOut(GetComponentInParent<Move>().waitPoints[position], null);
                 GameRules.diceNumber -= 2;
                 GetComponentInParent<Player>().IncreaseCoins(4);
+                GameRules.SetCatnipMik();
                 GetComponentInParent<Move>().IsChosen(false);
             }
-            else if(GetComponentInParent<PlayerFrog>().powerupActive)
-                GetComponentInParent<Player>().DecraseCoins(4);
-            else
-                GetComponentInParent<Player>().IncreaseCoins(4);
 
         }
     }

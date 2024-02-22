@@ -36,7 +36,10 @@ public class PlayerShark : Player
         active = true;
         for (int i = 0; i < 4; i++)
             if (pionek[i].GetComponent<Move>().IsChosen(false))
+            {
+                powerupWindow.GetComponent<PowerupWindow>().powerups[1].GetComponent<SharkPowerup>().SetUp();
                 break;
+            }
     }
 
     public void ResetPowerupActive(GameObject pawn)

@@ -182,6 +182,9 @@ public abstract class Move : MonoBehaviour
 
     public void ToNormalState()
     {
+        int index = 0;
+        if (shadowPawn!=null)
+             index = shadowPawn.GetComponent<ShadowPawn>().waitPointIndex;
         Destroy(shadowPawn);
         shadowPawn = null;
         if (chosen)
@@ -193,6 +196,8 @@ public abstract class Move : MonoBehaviour
             chosen = !chosen;
             GetComponentInParent<Player>().PowerupWindowInteraction(pionek);
         }
+        if (index != 0)
+            GetComponentInParent<Player>().MoveOut(waitPoints[index], pionek);
     }
 
     public bool IsChosen(bool isPowerup)

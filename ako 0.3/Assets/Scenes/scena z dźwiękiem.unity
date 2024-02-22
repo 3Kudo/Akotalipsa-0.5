@@ -678,7 +678,7 @@ GameObject:
   - component: {fileID: 145181913}
   - component: {fileID: 145181912}
   m_Layer: 8
-  m_Name: Turtle (1)
+  m_Name: Frog (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1870,6 +1870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cat: {fileID: 1194998735}
+  catnip: {fileID: 578743733}
 --- !u!1 &197007701
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,7 +2057,7 @@ GameObject:
   - component: {fileID: 209223033}
   - component: {fileID: 211292473}
   m_Layer: 8
-  m_Name: Turtle
+  m_Name: Frog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3720,6 +3721,9 @@ MonoBehaviour:
   powerupsPatter:
   - {fileID: 7092299213621164428, guid: 3dcbd56e5c456224cbdd71ad9c0546bf, type: 3}
   - {fileID: 6744886348741738525, guid: 4852610a3bd1b1647bac0d70811eaf30, type: 3}
+  powerups:
+  - {fileID: 0}
+  - {fileID: 0}
   powerupsPosiotns:
   - {fileID: 735795515}
   - {fileID: 1837765624}
@@ -5968,6 +5972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cat: {fileID: 1194998735}
+  milk: {fileID: 194103811}
 --- !u!1 &590570924
 GameObject:
   m_ObjectHideFlags: 0
@@ -8015,7 +8020,7 @@ GameObject:
   - component: {fileID: 757359049}
   - component: {fileID: 757359051}
   - component: {fileID: 757359050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "Zas\u0142ona"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8075,8 +8080,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1464367735
+  m_SortingLayer: 1
   m_SortingOrder: 9
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 0.41960785}
@@ -9530,6 +9535,9 @@ MonoBehaviour:
   powerupsPatter:
   - {fileID: 7092299213621164428, guid: 3dcbd56e5c456224cbdd71ad9c0546bf, type: 3}
   - {fileID: 6744886348741738525, guid: d981d58c79f66c44ca7dbdcf85fafd19, type: 3}
+  powerups:
+  - {fileID: 0}
+  - {fileID: 0}
   powerupsPosiotns:
   - {fileID: 1906606508}
   - {fileID: 387267640}
@@ -12135,6 +12143,9 @@ MonoBehaviour:
   powerupsPatter:
   - {fileID: 7092299213621164428, guid: 3dcbd56e5c456224cbdd71ad9c0546bf, type: 3}
   - {fileID: 6744886348741738525, guid: b1bf5494b61fec34e8049b04e8bc1961, type: 3}
+  powerups:
+  - {fileID: 0}
+  - {fileID: 0}
   powerupsPosiotns:
   - {fileID: 1861701682}
   - {fileID: 889221949}
@@ -12516,7 +12527,7 @@ GameObject:
   - component: {fileID: 1610930976}
   - component: {fileID: 1610930977}
   m_Layer: 0
-  m_Name: Turtles
+  m_Name: Frogs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13885,7 +13896,7 @@ GameObject:
   - component: {fileID: 1868742806}
   - component: {fileID: 1868742805}
   m_Layer: 8
-  m_Name: Turtle (2)
+  m_Name: Frog (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15704,6 +15715,9 @@ MonoBehaviour:
   powerupsPatter:
   - {fileID: 7092299213621164428, guid: 3dcbd56e5c456224cbdd71ad9c0546bf, type: 3}
   - {fileID: 6744886348741738525, guid: c89f049d03fc1e447b58c11641bf0d62, type: 3}
+  powerups:
+  - {fileID: 0}
+  - {fileID: 0}
   powerupsPosiotns:
   - {fileID: 1994762533}
   - {fileID: 878002696}
@@ -16185,7 +16199,7 @@ GameObject:
   - component: {fileID: 2119415015}
   - component: {fileID: 2119415014}
   m_Layer: 8
-  m_Name: Turtle (3)
+  m_Name: Frog (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
