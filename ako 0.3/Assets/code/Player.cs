@@ -34,6 +34,8 @@ public abstract class Player : MonoBehaviour
 
     public void MoveTheSame(GameObject pio, float x, float y, int waitPoint)
     {
+        if (waitPoint == 0)
+            return;
         List<GameObject> toMove = new List<GameObject>();
         toMove.Add(pio);
         for (int i = 0; i < 4; i++)

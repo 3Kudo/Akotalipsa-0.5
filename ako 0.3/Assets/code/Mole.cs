@@ -5,6 +5,8 @@ using UnityEngine;
 public class Mole : Move
 {
     public bool poweruopActive;
+    public GameObject[] molehill = new GameObject[2];
+    public int[] molehillWaitPointsIndex = new int[2];
     private void Update()
     {
         //wykonanie ruchu, nie wiem czy to jest dobry pomys³ ¿e to tutaj wstawi³em po porstu lepiej tutaj wygl¹da ruch
@@ -34,7 +36,6 @@ public class Mole : Move
             }
             if (transform.position == waitPoints[waitPointIndex].transform.position)
             {
-                ruch = false;
                 AS.Stop();
                 if (waitPointIndex != 0)
                 {
@@ -48,23 +49,29 @@ public class Mole : Move
                                 return;
                             }
                         }
-                        GetComponentInParent<PlayerMole>().molehill[1] = Instantiate(GetComponentInParent<PlayerMole>().molehillPattern) as GameObject;
-                        GetComponentInParent<PlayerMole>().molehillWaitPointsIndex[1] = waitPointIndex;
-                        GetComponentInParent<PlayerMole>().molehill[1].transform.position = waitPoints[waitPointIndex].transform.position;
+                        molehill[1] = Instantiate(GetComponentInParent<PlayerMole>().molehillPattern) as GameObject;
+                        molehillWaitPointsIndex[1] = waitPointIndex;
+                        GetComponentInParent<PlayerMole>().molehillExit.Add(waitPointIndex);
+                        molehill[1].transform.position = waitPoints[waitPointIndex].transform.position;
+                        GetComponent<SpriteRenderer>().enabled = true;
                     }
+                    ruch = false;
+                    GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
                     GetComponentInParent<PlayerMole>().ResetPowerupActive(pionek);
                     poweruopActive = false;
-                    if (waitPointIndex == GetComponentInParent<PlayerMole>().molehillWaitPointsIndex[0])
+                    for (int i = 0; i < GetComponentInParent<PlayerMole>().molehillEntrancce.Count; i++)
                     {
-                        waitPointIndex = GetComponentInParent<PlayerMole>().molehillWaitPointsIndex[1];
-                        pozycja = waitPointIndex;
-                        ruch = true;
-                        return;
+                        if (waitPointIndex == GetComponentInParent<PlayerMole>().molehillEntrancce[i])
+                        {
+                            waitPointIndex = GetComponentInParent<PlayerMole>().molehillExit[i];
+                            pozycja = waitPointIndex;
+                            ruch = true;
+                            return;
+                        }
                     }
 
                     GetComponentInParent<Player>().MoveTheSame(pionek,
                         waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y,waitPointIndex);
-                    GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
 
                     if (GameRules.diceNumber < 6)
                     {
