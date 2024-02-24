@@ -74,67 +74,101 @@ public class Cat : MonoBehaviour
 
     public void losowePrzesuwanie(int maxMove, int minMove)
     {
-        int money = 4;
-        for (int i = 0; i < 4; i++)
-            money += pawns[i].GetComponent<Player>().coin;
-        GameObject[] players = new GameObject[money];
-        for(int i = 0; i < 4; i++)
+        int los = Random.Range(1, 4);
+        if (los == 3)
         {
-            for (int j = 0; j <= pawns[i].GetComponent<Player>().coin; j++)
+            int money = 4;
+            for (int i = 0; i < 4; i++)
+                money += pawns[i].GetComponent<Player>().coin;
+            GameObject[] players = new GameObject[money];
+            for (int i = 0; i < 4; i++)
             {
-                players[money-1] = pawns[i];
-                money--;
+                for (int j = 0; j <= pawns[i].GetComponent<Player>().coin; j++)
+                {
+                    players[money - 1] = pawns[i];
+                    money--;
+                }
             }
-        }
-        GameObject pionek = players[Random.Range(0, players.Length)];
-        pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
-        int move = Random.Range(minMove, maxMove);
-        Debug.Log(move);
-        if (pionek.GetComponent<Move>().waitPointIndex < 1 || move == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
-            return;
-        Transform position = pionek.GetComponent<Move>().GetWaitpoint();
-        if (move < 0)
-        {
-            move = move + pionek.GetComponent<Move>().waitPointIndex;
-            if (move < 1)
-                move = 1;
-            pionek.GetComponent<Move>().waitPointIndex = move;
-        }
-        else
-        {
-            move = move + pionek.GetComponent<Move>().waitPointIndex;
-            if (move > 53)
-                move = 53;
-            pionek.GetComponent<Move>().waitPointIndex = move;
-        }
+            GameObject pionek = players[Random.Range(0, players.Length)];
+            pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
+            int move = Random.Range(minMove, maxMove);
+            Debug.Log(move);
+            if (pionek.GetComponent<Move>().waitPointIndex < 1 || move == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
+                return;
+            Transform position = pionek.GetComponent<Move>().GetWaitpoint();
 
-        pionek.GetComponent<Move>().ruch = true;
-        pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
+            if (move < 0)
+            {
+                for(int i = -1; i > move; i--)
+                {
+                    for(int j = 0; j < GameRules.fluff.Count; j++)
+                    {
+                        if (pionek.GetComponent<Move>().waitPoints[pionek.GetComponent<Move>().waitPointIndex+i] == GameRules.fluff[j].GetComponent<Fluff>().waitPoint)
+                        {
+                            pionek.GetComponent<Move>().waitPointIndex += (i + 1);
+                            pionek.GetComponent<Move>().ruch = true;
+                            pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
+                            return;
+                        }
+                    }
+                }
+                move = move + pionek.GetComponent<Move>().waitPointIndex;
+                if (move < 1)
+                    move = 1;
+                pionek.GetComponent<Move>().waitPointIndex = move;
+            }
+            else
+            {
+                for (int i = 1; i > move; i++)
+                {
+                    for (int j = 0; j < GameRules.fluff.Count; j++)
+                    {
+                        if (pionek.GetComponent<Move>().waitPoints[pionek.GetComponent<Move>().waitPointIndex + i] == GameRules.fluff[j].GetComponent<Fluff>().waitPoint)
+                        {
+                            pionek.GetComponent<Move>().waitPointIndex += (i - 1);
+                            pionek.GetComponent<Move>().ruch = true;
+                            pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
+                            return;
+                        }
+                    }
+                }
+                move = move + pionek.GetComponent<Move>().waitPointIndex;
+                if (move > 53)
+                    move = 53;
+                pionek.GetComponent<Move>().waitPointIndex = move;
+            }
+
+            pionek.GetComponent<Move>().ruch = true;
+            pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
+        }
     }
-
     public void RandomBack()
     {
-        int money = 4;
-        for (int i = 0; i < 4; i++)
-            money += pawns[i].GetComponent<Player>().coin;
-        GameObject[] players = new GameObject[money];
-        for (int i = 0; i < 4; i++)
+        int los = Random.Range(1, 4);
+        if (los == 3)
         {
-            for (int j = 0; j <= pawns[i].GetComponent<Player>().coin; j++)
+            int money = 4;
+            for (int i = 0; i < 4; i++)
+                money += pawns[i].GetComponent<Player>().coin;
+            GameObject[] players = new GameObject[money];
+            for (int i = 0; i < 4; i++)
             {
-                players[money - 1] = pawns[i];
-                money--;
+                for (int j = 0; j <= pawns[i].GetComponent<Player>().coin; j++)
+                {
+                    players[money - 1] = pawns[i];
+                    money--;
+                }
             }
+            GameObject pionek = players[Random.Range(0, players.Length)];
+            pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
+            if (pionek.GetComponent<Move>().waitPointIndex == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
+                return;
+            Transform position = pionek.GetComponent<Move>().GetWaitpoint();
+            pionek.GetComponent<Move>().pozycja = 0;
+            pionek.GetComponent<Move>().waitPointIndex = 0;
+            pionek.GetComponent<Move>().ruch = true;
+            pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
         }
-        GameObject pionek = players[Random.Range(0, players.Length)];
-        pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
-        if (pionek.GetComponent<Move>().waitPointIndex == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
-            return;
-        Transform position = pionek.GetComponent<Move>().GetWaitpoint();
-        pionek.GetComponent<Move>().pozycja = 0;
-        pionek.GetComponent<Move>().waitPointIndex = 0;
-        pionek.GetComponent<Move>().ruch = true;
-        pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
     }
 
 

@@ -25,7 +25,6 @@ public class GameRules : MonoBehaviour
 
 	public static Transform[] boardWaitPoints = new Transform[44];
 
-
     public static List<GameObject> onBoard = new List<GameObject>();
 
     public static List<GameObject> fluff = new List<GameObject>();
@@ -33,7 +32,7 @@ public class GameRules : MonoBehaviour
     public static List<GameObject> safePlace = new List<GameObject>();
     public static List<GameObject> Coin = new List<GameObject>();
 
-	
+	public static int fluffCount = 0;
     public static int whoseTurn = 0;
 	public static int diceNumber = 6;
 	public static int turnCounter = 0;
@@ -284,31 +283,35 @@ public class GameRules : MonoBehaviour
 
 	public static void RandomFluff()
 	{
-		Transform newWaitPoint;
-        List<Transform> fluffPosition = new List<Transform>();
-        foreach(GameObject wall in fluff)
-            fluffPosition.Add(wall.GetComponent<Fluff>().waitPoint);
-		while (true)
+        int los = Random.Range(1, 4);
+		if (los == 3)
 		{
-			bool con = false;
-			newWaitPoint = GetRandomPosition();
-			for(int i = 0; i < onBoard.Count(); i++)
+			Transform newWaitPoint;
+            List<Transform> fluffPosition = new List<Transform>();
+            foreach (GameObject wall in fluff)
+				fluffPosition.Add(wall.GetComponent<Fluff>().waitPoint);
+            while (true)
 			{
-				if(onBoard[i].GetComponent<Move>().waitPoints[onBoard[i].GetComponent<Move>().waitPointIndex] == newWaitPoint)
+				bool con = false;
+				newWaitPoint = GetRandomPosition();
+				for (int i = 0; i < onBoard.Count(); i++)
 				{
-					con = true;
-					break;
+					if (onBoard[i].GetComponent<Move>().waitPoints[onBoard[i].GetComponent<Move>().waitPointIndex] == newWaitPoint)
+					{
+						con = true;
+						break;
+					}
 				}
+				if (con)
+					continue;
+				con = fluffPosition.Contains(newWaitPoint);
+				if (con)
+					continue;
+				break;
 			}
-			if (con)
-				continue;
-			con = fluffPosition.Contains(newWaitPoint);
-			if (con)
-				continue;
-			break;
+			fluff.Add(Instantiate(fluffPrefab) as GameObject);
+			fluff[fluff.Count - 1].GetComponent<Fluff>().setPlace(newWaitPoint);
 		}
-        fluff.Add(Instantiate(fluffPrefab) as GameObject);
-        fluff[fluff.Count - 1].GetComponent<Fluff>().setPlace(newWaitPoint);
 	}
 
 	

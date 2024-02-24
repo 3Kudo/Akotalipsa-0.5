@@ -20,4 +20,9 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("Application has quit.");
     }
+
+    public void Credits()
+    {
+
+    }
 }

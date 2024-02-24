@@ -1870,7 +1870,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cat: {fileID: 1194998735}
-  catnip: {fileID: 578743733}
 --- !u!1 &197007701
 GameObject:
   m_ObjectHideFlags: 0
@@ -5972,7 +5971,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cat: {fileID: 1194998735}
-  milk: {fileID: 194103811}
 --- !u!1 &590570924
 GameObject:
   m_ObjectHideFlags: 0
@@ -7893,7 +7891,7 @@ MonoBehaviour:
   powerupWindow: {fileID: 2069679630}
   coinText: {fileID: 197007702}
   active: 0
-  coin: 0
+  coin: 40
   nazwa: 
   finished: 0
   molehillPattern: {fileID: 4648657561776326780, guid: 384aefd88289b394798a1d268a299cb4, type: 3}
