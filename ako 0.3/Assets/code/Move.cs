@@ -24,6 +24,8 @@ public abstract class Move : MonoBehaviour
     [HideInInspector] public bool ruch = false, chosen = false;
     [HideInInspector] public int pozycja;
     [HideInInspector] public bool finished;
+
+    [HideInInspector] public float changeValue = (float)0.0001;
     public float moveSpeed = 2f;
 
     // Start is called before the first frame update
@@ -39,6 +41,23 @@ public abstract class Move : MonoBehaviour
         defence = false;
         pozycja = waitPointIndex;
         
+    }
+
+    public void setFlashAmount(float amount)
+    {
+        this.GetComponent<SpriteRenderer>().material.SetFloat("_FlashAmount", amount);
+    }
+
+    public float getFlashAmount()
+    {
+        return this.GetComponent<SpriteRenderer>().material.GetFloat("_FlashAmount");
+    }
+
+    protected void onUpdate()
+    {
+        if (getFlashAmount() >= (float)1.0 || getFlashAmount() <= (float)0.0)
+            changeValue = -changeValue;
+        setFlashAmount(getFlashAmount() + changeValue);
     }
 
     private IEnumerator OnMouseDown()

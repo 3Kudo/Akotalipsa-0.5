@@ -83,7 +83,8 @@ public class Shark : Move
                 }
             }
         }
-
+        if(MoveEnabled())
+            base.onUpdate();
     }
 
    
