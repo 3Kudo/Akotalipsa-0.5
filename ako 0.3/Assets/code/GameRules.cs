@@ -307,7 +307,18 @@ public class GameRules : MonoBehaviour
 				con = fluffPosition.Contains(newWaitPoint);
 				if (con)
 					continue;
-				break;
+				for(int i = 0; i < pawn[0].GetComponent<PlayerMole>().molehillEntrancce.Count; i++)
+				{
+					if(newWaitPoint == pawn[0].GetComponent<Player>().pionek[0].GetComponent<Move>().waitPoints[pawn[0].GetComponent<PlayerMole>().molehillEntrancce[i]]
+						|| newWaitPoint == pawn[0].GetComponent<Player>().pionek[0].GetComponent<Move>().waitPoints[pawn[0].GetComponent<PlayerMole>().molehillExit[i]])
+                    {
+                        con = true;
+                        break;
+                    }
+				}
+                if (con)
+                    continue;
+                break;
 			}
 			fluff.Add(Instantiate(fluffPrefab) as GameObject);
 			fluff[fluff.Count - 1].GetComponent<Fluff>().setPlace(newWaitPoint);

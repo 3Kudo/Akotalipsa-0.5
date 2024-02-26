@@ -76,6 +76,7 @@ public abstract class Player : MonoBehaviour
             if(waitPoint == pionek[i].GetComponent<Move>().GetWaitpoint() && pio != pionek[i])
             {
                 MoveTheSame(pionek[i], waitPoint.transform.position.x,waitPoint.transform.position.y, pionek[i].GetComponent<Move>().waitPointIndex);
+                break;
             }
         }
     }
