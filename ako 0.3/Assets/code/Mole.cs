@@ -9,7 +9,7 @@ public class Mole : Move
     public int[] molehillWaitPointsIndex = new int[2];
     private void Update()
     {
-        //wykonanie ruchu, nie wiem czy to jest dobry pomys³ ¿e to tutaj wstawi³em po porstu lepiej tutaj wygl¹da ruch
+        //wykonanie ruchu, nie wiem czy to jest dobry pomysï¿½ ï¿½e to tutaj wstawiï¿½em po porstu lepiej tutaj wyglï¿½da ruch
         if (ruch)
         {
             transform.position = Vector3.MoveTowards(transform.position, waitPoints[pozycja].transform.position, moveSpeed * Time.deltaTime);
@@ -89,14 +89,15 @@ public class Mole : Move
                 }
             }
         }
-
+        if(MoveEnabled() && GetComponentInParent<Player>().active)
+            base.onUpdate();
     }
 
     
 
     public override bool MoveEnabled()
     {
-        //wy³¹czenie oborny
+        //wyï¿½ï¿½czenie oborny
         defence = false;
 
 

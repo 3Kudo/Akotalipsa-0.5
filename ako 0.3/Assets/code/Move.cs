@@ -25,7 +25,7 @@ public abstract class Move : MonoBehaviour
     [HideInInspector] public int pozycja;
     [HideInInspector] public bool finished;
 
-    [HideInInspector] public float changeValue = (float)0.0001;
+    [HideInInspector] public float changeValue = (float)0.1;
     public float moveSpeed = 2f;
 
     // Start is called before the first frame update
@@ -53,9 +53,9 @@ public abstract class Move : MonoBehaviour
         return this.GetComponent<SpriteRenderer>().material.GetFloat("_FlashAmount");
     }
 
-    protected void onUpdate()
+    public void onUpdate()
     {
-        if (getFlashAmount() >= (float)1.0 || getFlashAmount() <= (float)0.0)
+        if (getFlashAmount() > (float)1.0 || getFlashAmount() < (float)0.0)
             changeValue = -changeValue;
         setFlashAmount(getFlashAmount() + changeValue);
     }
