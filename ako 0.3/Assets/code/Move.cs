@@ -127,7 +127,7 @@ public abstract class Move : MonoBehaviour
 
     public void MoveOn(int moveTo)
     {
-        moveSpeed = 20f;
+        moveSpeed = 8f;
         GetComponentInParent<Player>().active = false;
         if(moveTo != 0)
         {

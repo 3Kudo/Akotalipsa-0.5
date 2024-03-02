@@ -7457,9 +7457,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f52c1a541aee040a91a05bbb0b3dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultCursor: {fileID: 0}
-  clickableCursor: {fileID: 0}
-  halfClicked: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 6122fc16a2582ff4ebf1d5efb84b94d3, type: 3}
+  clickableCursor: {fileID: 2800000, guid: 69af4c24f6867ce478fdf135c388c66d, type: 3}
+  halfClicked: {fileID: 2800000, guid: 3365a50f14076274caa6df1ea7f6e579, type: 3}
 --- !u!4 &1794357928
 Transform:
   m_ObjectHideFlags: 0

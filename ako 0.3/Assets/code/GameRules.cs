@@ -139,7 +139,6 @@ public class GameRules : MonoBehaviour
         turnCounter++;
 		if (turnCounter % 4 == 0)
 		{
-			EndGame();
             for (int i = 0; i < fluff.Count(); i++)
                 fluff[i].GetComponent<Fluff>().FadeAway();
             cat.GetComponent<Cat>().catTurn();

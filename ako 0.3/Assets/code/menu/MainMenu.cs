@@ -12,8 +12,6 @@ public class MainMenu : MonoBehaviour
     public void GameBegin()
     {
         MouseControle.instance.Default();
-        koniec = GameObject.Find("Panel");
-        koniec.gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

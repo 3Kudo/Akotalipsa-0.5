@@ -17,7 +17,7 @@ public class Duck : Move
             {
                 if (waitPointIndex > pozycja)
                 {
-                    moveSpeed = 20f;
+                    moveSpeed = 8f;
                     pozycja++;
                 }
                 else

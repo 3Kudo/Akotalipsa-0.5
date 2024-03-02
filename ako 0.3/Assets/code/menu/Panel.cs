@@ -14,8 +14,7 @@ public class Panel : MonoBehaviour
         MouseControle.instance.Default();
         koniec = GameObject.Find("Panel");
         koniec.gameObject.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        SceneManager.LoadScene("Assets/Scenes/scena z dŸwiêkiem.unity");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GameToMenu()
