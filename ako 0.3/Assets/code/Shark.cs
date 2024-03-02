@@ -29,11 +29,11 @@ public class Shark : Move
                             onBoard.Remove(pawn);
                         }
                     }
-                    foreach(GameObject fluff in GameRules.fluff)
+                    foreach(GameObject fluff in GetComponentInParent<GameRules>().fluff)
                     {
                         if (waitPoints[pozycja]==fluff.GetComponent<Fluff>().waitPoint)
                         {
-                            GameRules.fluff.Remove(fluff);
+                            GetComponentInParent<GameRules>().fluff.Remove(fluff);
                             Destroy(fluff);
                         }
                     }
@@ -62,24 +62,24 @@ public class Shark : Move
                 if (waitPointIndex != 0)
                 {
                     if (powerupActive)
-                        GameRules.onBoard = onBoard;
+                        GetComponentInParent<GameRules>().onBoard = onBoard;
                     powerupActive = false;
                     GetComponentInParent<Player>().MoveTheSame(pionek,
                         waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y, waitPointIndex);
-                    GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
+                    GetComponentInParent<GameRules>().Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
 
-                    if (GameRules.diceNumber < 6)
+                    if (GetComponentInParent<GameRules>().diceNumber < 6)
                     {
-                        GameRules.whoseTurn++;
-                        if (GameRules.whoseTurn == 5)
+                        GetComponentInParent<GameRules>().whoseTurn++;
+                        if (GetComponentInParent<GameRules>().whoseTurn == 5)
                         {
-                            GameRules.whoseTurn = 1;
+                            GetComponentInParent<GameRules>().whoseTurn = 1;
                         }
-                        GameRules.TurnCounter();
+                        GetComponentInParent<GameRules>().TurnCounter();
                     }
                     GetComponentInParent<PlayerShark>().ResetPowerupActive(pionek);
-                    GameRules.Turn();
-                    GameRules.diceNumber = 0;
+                    GetComponentInParent<GameRules>().Turn();
+                    GetComponentInParent<GameRules>().diceNumber = 0;
                 }
             }
         }
@@ -96,7 +96,7 @@ public class Shark : Move
 
         if (finished)
             return false;
-        if (waitPointIndex == 0 && (GameRules.diceNumber == 6))
+        if (waitPointIndex == 0 && (GetComponentInParent<GameRules>().diceNumber == 6))
             return true;
         if (waitPointIndex > 0)
             return true;

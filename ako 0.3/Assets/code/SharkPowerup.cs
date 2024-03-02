@@ -82,13 +82,13 @@ public class SharkPowerup : MonoBehaviour
             if (GetComponentInParent<Shark>().powerupActive)
             {
                 GetComponentInParent<Player>().DecraseCoins(5);
-                GameRules.SetCatnipMik();
+                GetComponentInParent<GameRules>().SetCatnipMik();
                 GetComponentInParent<PlayerShark>().ResetPowerupActive(GetComponentInParent<Shark>().pionek);
             }
             else
             {
                 GetComponentInParent<Player>().IncreaseCoins(5);
-                GameRules.SetCatnipMik();
+                GetComponentInParent<GameRules>().SetCatnipMik();
             }
         }
     }

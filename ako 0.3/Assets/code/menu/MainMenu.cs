@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
-    private static GameObject menu;
+    private GameObject menu;
+    private GameObject koniec;
 
     public void GameBegin()
     {
         MouseControle.instance.Default();
+        koniec = GameObject.Find("Panel");
+        koniec.gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -19,10 +22,5 @@ public class MainMenu : MonoBehaviour
         MouseControle.instance.Default();
         Application.Quit();
         Debug.Log("Application has quit.");
-    }
-
-    public void Credits()
-    {
-
     }
 }

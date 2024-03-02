@@ -12,13 +12,13 @@ public class PlayerDuck : Player
         {
             coin++;
             coinText.text = coin.ToString();
-            GameRules.whoseTurn++;
-            if (GameRules.whoseTurn == 5)
-                GameRules.whoseTurn = 1;
+            GetComponentInParent<GameRules>().whoseTurn++;
+            if (GetComponentInParent<GameRules>().whoseTurn == 5)
+                GetComponentInParent<GameRules>().whoseTurn = 1;
 
-            GameRules.TurnCounter();
-            GameRules.Turn();
-            GameRules.diceNumber = 0;
+            GetComponentInParent<GameRules>().TurnCounter();
+            GetComponentInParent<GameRules>().Turn();
+            GetComponentInParent<GameRules>().diceNumber = 0;
             SetPawnToNormal(null);
             PowerupWindowInteraction(pionek[0]);
             active = false;

@@ -32,7 +32,7 @@ public class RollDice : MonoBehaviour
 
     private void Update()
     {
-        if (GameRules.diceNumber == 0)
+        if (GetComponentInParent<GameRules>().diceNumber == 0)
         {      
             diceThrowAllowed = true;
             Color color = rend.color;
@@ -40,7 +40,7 @@ public class RollDice : MonoBehaviour
             color.g = (float)0.80;
             color.b = (float)0.80;
             rend.color = color;
-            GameRules.diceNumber=7;
+            GetComponentInParent<GameRules>().diceNumber =7;
         }
     }
 
@@ -72,7 +72,7 @@ public class RollDice : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        if (diceThrowAllowed && GameRules.miejsce != 3)
+        if (diceThrowAllowed && GetComponentInParent<GameRules>().miejsce != 3)
         {
             MouseControle.instance.Clickable();
             Color color = rend.color;
@@ -113,13 +113,13 @@ public class RollDice : MonoBehaviour
         color.g = (float)0.60;
         color.b = (float)0.60;
         rend.color = color;
-        GameRules.diceNumber = randomDiceSide + 1;
-        if (GameRules.diceNumber == 6)
+        GetComponentInParent<GameRules>().diceNumber = randomDiceSide + 1;
+        if (GetComponentInParent<GameRules>().diceNumber == 6)
         {
             AS.clip = soundTracks[1];
             AS.Play();
         }
-        GameRules.MovePlayer();
+        GetComponentInParent<GameRules>().MovePlayer();
     }
 
     public static void RollDiceBlock()

@@ -40,19 +40,19 @@ public class Frog : Move
                 {
                     GetComponentInParent<Player>().MoveTheSame(pionek,
                         waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y, waitPointIndex);
-                    GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
+                    GetComponentInParent<GameRules>().Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
 
-                    if (GameRules.diceNumber < 6)
+                    if (GetComponentInParent<GameRules>().diceNumber < 6)
                     {
-                        GameRules.whoseTurn++;
-                        if (GameRules.whoseTurn == 5)
+                        GetComponentInParent<GameRules>().whoseTurn++;
+                        if (GetComponentInParent<GameRules>().whoseTurn == 5)
                         {
-                            GameRules.whoseTurn = 1;
+                            GetComponentInParent<GameRules>().whoseTurn = 1;
                         }
-                        GameRules.TurnCounter();
+                        GetComponentInParent<GameRules>().TurnCounter();
                     }
-                    GameRules.Turn();
-                    GameRules.diceNumber = 0;
+                    GetComponentInParent<GameRules>().Turn();
+                    GetComponentInParent<GameRules>().diceNumber = 0;
                 }
             }
         }
@@ -69,7 +69,7 @@ public class Frog : Move
 
         if (finished)
             return false;
-        if (waitPointIndex == 0 && (GameRules.diceNumber == 6 || (GameRules.diceNumber >= 6 && GetComponentInParent<PlayerFrog>().powerupActive)))
+        if (waitPointIndex == 0 && (GetComponentInParent<GameRules>().diceNumber == 6 || (GetComponentInParent<GameRules>().diceNumber >= 6 && GetComponentInParent<PlayerFrog>().powerupActive)))
             return true;
         if (waitPointIndex > 0)
             return true;

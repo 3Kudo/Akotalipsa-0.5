@@ -32,8 +32,8 @@ public class RollDiceButton : MonoBehaviour
             image.sprite = dicesSides[randomDiceSide];
             yield return new WaitForSeconds(0.2f);
         }
-        GameRules.diceNumber = randomDiceSide + 1;
-        GameRules.MovePlayer();
+        GetComponentInParent<GameRules>().diceNumber = randomDiceSide + 1;
+        GetComponentInParent<GameRules>().MovePlayer();
         button.interactable = false;
     }
 }

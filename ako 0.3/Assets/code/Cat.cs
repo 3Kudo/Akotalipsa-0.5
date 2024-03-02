@@ -59,13 +59,13 @@ public class Cat : MonoBehaviour
         else if (Phase == 2)
         {
             losowePrzesuwanie(-4, 3);
-            GameRules.RandomFluff();
+            GetComponentInParent<GameRules>().RandomFluff();
         }
         else if (Phase == 3)
         {
             RandomBack();
             losowePrzesuwanie(-6, 4);
-            GameRules.RandomFluff();
+            GetComponentInParent<GameRules>().RandomFluff();
         }
         //zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
         incrementWakeCounter(1);
@@ -101,9 +101,9 @@ public class Cat : MonoBehaviour
             {
                 for(int i = -1; i > move; i--)
                 {
-                    for(int j = 0; j < GameRules.fluff.Count; j++)
+                    for(int j = 0; j < GetComponentInParent<GameRules>().fluff.Count; j++)
                     {
-                        if (pionek.GetComponent<Move>().waitPoints[pionek.GetComponent<Move>().waitPointIndex+i] == GameRules.fluff[j].GetComponent<Fluff>().waitPoint)
+                        if (pionek.GetComponent<Move>().waitPoints[pionek.GetComponent<Move>().waitPointIndex+i] == GetComponentInParent<GameRules>().fluff[j].GetComponent<Fluff>().waitPoint)
                         {
                             pionek.GetComponent<Move>().waitPointIndex += (i + 1);
                             pionek.GetComponent<Move>().ruch = true;
@@ -121,9 +121,9 @@ public class Cat : MonoBehaviour
             {
                 for (int i = 1; i > move; i++)
                 {
-                    for (int j = 0; j < GameRules.fluff.Count; j++)
+                    for (int j = 0; j < GetComponentInParent<GameRules>().fluff.Count; j++)
                     {
-                        if (pionek.GetComponent<Move>().waitPoints[pionek.GetComponent<Move>().waitPointIndex + i] == GameRules.fluff[j].GetComponent<Fluff>().waitPoint)
+                        if (pionek.GetComponent<Move>().waitPoints[pionek.GetComponent<Move>().waitPointIndex + i] == GetComponentInParent<GameRules>().fluff[j].GetComponent<Fluff>().waitPoint)
                         {
                             pionek.GetComponent<Move>().waitPointIndex += (i - 1);
                             pionek.GetComponent<Move>().ruch = true;

@@ -82,9 +82,9 @@ public class FrogPowerup : MonoBehaviour
                 Destroy(GetComponentInParent<Move>().shadowPawn);
                 int position = GetComponentInParent<Move>().ShadowPawnPosition(true);
                 GetComponentInParent<Player>().MoveOut(GetComponentInParent<Move>().waitPoints[position], null);
-                GameRules.diceNumber += 2;
+                GetComponentInParent<GameRules>().diceNumber += 2;
                 GetComponentInParent<Player>().DecraseCoins(4);
-                GameRules.SetCatnipMik();
+                GetComponentInParent<GameRules>().SetCatnipMik();
                 GetComponentInParent<Move>().IsChosen(true);
             }
             else if(GetComponentInParent<PlayerFrog>().active && !GetComponentInParent<PlayerFrog>().powerupActive)
@@ -92,9 +92,9 @@ public class FrogPowerup : MonoBehaviour
                 Destroy(GetComponentInParent<Move>().shadowPawn);
                 int position = GetComponentInParent<Move>().ShadowPawnPosition(false);
                 GetComponentInParent<Player>().MoveOut(GetComponentInParent<Move>().waitPoints[position], null);
-                GameRules.diceNumber -= 2;
+                GetComponentInParent<GameRules>().diceNumber -= 2;
                 GetComponentInParent<Player>().IncreaseCoins(4);
-                GameRules.SetCatnipMik();
+                GetComponentInParent<GameRules>().SetCatnipMik();
                 GetComponentInParent<Move>().IsChosen(false);
             }
 

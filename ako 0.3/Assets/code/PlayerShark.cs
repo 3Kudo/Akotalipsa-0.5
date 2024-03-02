@@ -10,7 +10,7 @@ public class PlayerShark : Player
         {
             if (pionek[i].GetComponent<Shark>().powerupActive)
             {
-                pionek[i].GetComponent<Shark>().onBoard = GameRules.GetOnBoard();
+                pionek[i].GetComponent<Shark>().onBoard = GetComponentInParent<GameRules>().GetOnBoard();
                 pionek[i].GetComponent<Shark>().MoveOn(0);
                 active = false;
                 return;
@@ -21,13 +21,13 @@ public class PlayerShark : Player
         {
             coin++;
             coinText.text = coin.ToString();
-            GameRules.whoseTurn++;
-            if (GameRules.whoseTurn == 5)
-                GameRules.whoseTurn = 1;
+            GetComponentInParent<GameRules>().whoseTurn++;
+            if (GetComponentInParent<GameRules>().whoseTurn == 5)
+                GetComponentInParent<GameRules>().whoseTurn = 1;
 
-            GameRules.TurnCounter();
-            GameRules.Turn();
-            GameRules.diceNumber = 0;
+            GetComponentInParent<GameRules>().TurnCounter();
+            GetComponentInParent<GameRules>().Turn();
+            GetComponentInParent<GameRules>().diceNumber = 0;
             SetPawnToNormal(null);
             PowerupWindowInteraction(pionek[0]);
             active = false;

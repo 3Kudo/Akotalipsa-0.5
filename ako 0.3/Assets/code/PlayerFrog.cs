@@ -9,19 +9,19 @@ public class PlayerFrog : Player
     public override void EnambleMovement()
     {
         if(powerupActive)
-            GameRules.diceNumber += 2;
+            GetComponentInParent<GameRules>().diceNumber += 2;
         if (!pionek[0].GetComponent<Move>().MoveEnabled() && !pionek[1].GetComponent<Move>().MoveEnabled()
                 && !pionek[2].GetComponent<Move>().MoveEnabled() && !pionek[3].GetComponent<Move>().MoveEnabled())
         {
             coin++;
             coinText.text = coin.ToString();
-            GameRules.whoseTurn++;
-            if (GameRules.whoseTurn == 5)
-                GameRules.whoseTurn = 1;
+            GetComponentInParent<GameRules>().whoseTurn++;
+            if (GetComponentInParent<GameRules>().whoseTurn == 5)
+                GetComponentInParent<GameRules>().whoseTurn = 1;
 
-            GameRules.TurnCounter();
-            GameRules.Turn();
-            GameRules.diceNumber = 0;
+            GetComponentInParent<GameRules>().TurnCounter();
+            GetComponentInParent<GameRules>().Turn();
+            GetComponentInParent<GameRules>().diceNumber = 0;
             SetPawnToNormal(null);
             PowerupWindowInteraction(pionek[0]);
             active = false;

@@ -87,10 +87,9 @@ public abstract class Player : MonoBehaviour
                 && pionek[2].GetComponent<Move>().GetFinish() && pionek[3].GetComponent<Move>().GetFinish())
         {
             finished = true;
-            GameRules.PlayerFinishedGamed(gracz);
+            GetComponentInParent<GameRules>().PlayerFinishedGamed(gracz);
         }
     }
-
 
     public void SetPawnToNormal(GameObject pawn)
     {
@@ -113,8 +112,6 @@ public abstract class Player : MonoBehaviour
         powerupWindow.GetComponent<PowerupWindow>().SetPowerupsButtons(parent);
         
     }
-
-
 
     public void IncreaseCoins(int add)
     {

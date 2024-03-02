@@ -21,7 +21,7 @@ public class Fluff : MonoBehaviour
         exist--;
         if (exist == 0)
         {
-            GameRules.fluff.Remove(this.gameObject);
+            GetComponentInParent<GameRules>().fluff.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
     }

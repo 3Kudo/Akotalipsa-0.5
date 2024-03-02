@@ -28,9 +28,9 @@ public class BaseExitClass : MonoBehaviour
         if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin>=5)
         {
             MouseControle.instance.Default();
-            GameRules.diceNumber = 6;
+            GetComponentInParent<GameRules>().diceNumber = 6;
             GetComponentInParent<Player>().DecraseCoins(5);
-            GameRules.SetCatnipMik();
+            GetComponentInParent<GameRules>().SetCatnipMik();
             GetComponentInParent<Player>().PowerupWindowInteraction(null);
             GetComponentInParent<Move>().ToNormalState();
             GetComponentInParent<Move>().MoveOn(0);

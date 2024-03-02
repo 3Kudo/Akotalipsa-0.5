@@ -41,7 +41,7 @@ public class Mole : Move
                 {
                     if (poweruopActive)
                     {
-                        foreach(GameObject wall in GameRules.fluff)
+                        foreach(GameObject wall in GetComponentInParent<GameRules>().fluff)
                         {
                             if(wall.GetComponent<Fluff>().waitPoint == waitPoints[waitPointIndex])
                             {
@@ -56,7 +56,7 @@ public class Mole : Move
                         GetComponent<SpriteRenderer>().enabled = true;
                     }
                     ruch = false;
-                    GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
+                    GetComponentInParent<GameRules>().Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
                     GetComponentInParent<PlayerMole>().ResetPowerupActive(pionek);
                     poweruopActive = false;
                     for (int i = 0; i < GetComponentInParent<PlayerMole>().molehillEntrancce.Count; i++)
@@ -73,19 +73,19 @@ public class Mole : Move
                     GetComponentInParent<Player>().MoveTheSame(pionek,
                         waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y,waitPointIndex);
 
-                    if (GameRules.diceNumber < 6)
+                    if (GetComponentInParent<GameRules>().diceNumber < 6)
                     {
-                        GameRules.whoseTurn++;
-                        if (GameRules.whoseTurn == 5)
+                        GetComponentInParent<GameRules>().whoseTurn++;
+                        if (GetComponentInParent<GameRules>().whoseTurn == 5)
                         {
-                            GameRules.whoseTurn = 1;
+                            GetComponentInParent<GameRules>().whoseTurn = 1;
                         }
-                        GameRules.TurnCounter();
+                        GetComponentInParent<GameRules>().TurnCounter();
                     }
-                    
-                    
-                    GameRules.Turn();
-                    GameRules.diceNumber = 0;
+
+
+                    GetComponentInParent<GameRules>().Turn();
+                    GetComponentInParent<GameRules>().diceNumber = 0;
                 }
             }
         }
@@ -102,7 +102,7 @@ public class Mole : Move
 
         if (finished)
             return false;
-        if (waitPointIndex == 0 && (GameRules.diceNumber == 6))
+        if (waitPointIndex == 0 && (GetComponentInParent<GameRules>().diceNumber == 6))
             return true;
         if (waitPointIndex > 0)
             return true;

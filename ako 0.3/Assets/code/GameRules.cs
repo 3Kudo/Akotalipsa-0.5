@@ -9,35 +9,35 @@ using UnityEngine.UI;
 public class GameRules : MonoBehaviour
 {
 
-	private static GameObject koniec;
-	private static GameObject[] pawn, tura, ranking;
-	public static Sprite[] sprites = new Sprite[4];
-	public static Image[] images= new Image[4];
-	public static int miejsce;
-	public static GameObject safePlacePrefabe, CoinPrefabe, fluffPrefab;
-	public static AudioSource AS;
+	private GameObject koniec;
+	private GameObject[] pawn, tura, ranking;
+	public Sprite[] sprites = new Sprite[4];
+	public Image[] images= new Image[4];
+	public int miejsce;
+	public GameObject safePlacePrefabe, CoinPrefabe, fluffPrefab;
+    [HideInInspector] public AudioSource AS;
 
 
-    public static GameObject cat, milk, catnip;
+    public GameObject cat, milk, catnip;
 
 
-	public static Transform[] randomBack = new Transform[2];
+	public Transform[] randomBack = new Transform[2];
 
-	public static Transform[] boardWaitPoints = new Transform[44];
+	public Transform[] boardWaitPoints = new Transform[44];
 
-    public static List<GameObject> onBoard = new List<GameObject>();
+	public List<GameObject> onBoard = new List<GameObject>();
 
-    public static List<GameObject> fluff = new List<GameObject>();
+	public List<GameObject> fluff = new List<GameObject>();
 
-    public static List<GameObject> safePlace = new List<GameObject>();
-    public static List<GameObject> Coin = new List<GameObject>();
+	public List<GameObject> safePlace = new List<GameObject>();
+	public List<GameObject> Coin = new List<GameObject>();
 
-	public static int fluffCount = 0;
-    public static int whoseTurn = 0;
-	public static int diceNumber = 6;
-	public static int turnCounter = 0;
+	public int fluffCount = 0;
+    public int whoseTurn = 0;
+	public int diceNumber = 6;
+	public int turnCounter = 0;
 	// Start is called before the first frame update
-	void Start()
+	public void Start()
 	{
         AS = GetComponent<AudioSource>();
         //przypisanie odpowiednich obiektów
@@ -100,13 +100,13 @@ public class GameRules : MonoBehaviour
     }
 
 	//metoda opowiedzialna za za³¹czanie gracza
-	public static void MovePlayer()
+	public void MovePlayer()
 	{
 		pawn[whoseTurn - 1].GetComponent<Player>().EnambleMovement();
 
 	}
 	//metoda opowiedzialna za za³¹czanie tury gracza
-	public static void Turn()
+	public void Turn()
 	{
 		for (int i = 0; i < 4; i++)
 			tura[i].gameObject.SetActive(false);
@@ -132,13 +132,14 @@ public class GameRules : MonoBehaviour
 
     }
 
-    public static void TurnCounter()
+    public void TurnCounter()
     {
         milk.GetComponent<Milk>().setMilkButton();
         catnip.GetComponent<Catnip>().setCatnipButton();
         turnCounter++;
 		if (turnCounter % 4 == 0)
 		{
+			EndGame();
             for (int i = 0; i < fluff.Count(); i++)
                 fluff[i].GetComponent<Fluff>().FadeAway();
             cat.GetComponent<Cat>().catTurn();
@@ -151,7 +152,7 @@ public class GameRules : MonoBehaviour
     }
 
 
-    public static GameObject GetTura()
+    public GameObject GetTura()
 	{
 		return pawn[whoseTurn-1];
 	}
@@ -160,7 +161,7 @@ public class GameRules : MonoBehaviour
 	
 
 	//metoda odpowiedzialana za przypisaywanie pozycji w rankigu
-	public static void PlayerFinishedGamed(GameObject gracz)
+	public void PlayerFinishedGamed(GameObject gracz)
 	{
 		ranking[miejsce] = gracz;
 		miejsce++;
@@ -168,7 +169,7 @@ public class GameRules : MonoBehaviour
 			EndGame();
 	}
 
-	public static void EndGame()
+	public void EndGame()
 	{
 		koniec.gameObject.SetActive(true);
 		for (int i = 0; i < 4; i++)
@@ -187,7 +188,7 @@ public class GameRules : MonoBehaviour
 	
 	//funkcje zwi¹zane z mechanik¹ gry
 
-	public static void Chceck(Transform waitPoints, string nazwa, GameObject pionek)
+	public void Chceck(Transform waitPoints, string nazwa, GameObject pionek)
 	{
 		
 		for (int i = 0; i < 2; i++)
@@ -268,7 +269,7 @@ public class GameRules : MonoBehaviour
 		}
     }
 
-	public static void losoweCofanie()
+	public void losoweCofanie()
 	{
 		int los = Random.Range(0, onBoard.Count);
 		GameObject pionek = onBoard.ElementAt(los);
@@ -281,7 +282,7 @@ public class GameRules : MonoBehaviour
 		pionek.GetComponent<Move>().ruch = true;
 	}
 
-	public static void RandomFluff()
+	public void RandomFluff()
 	{
         int los = Random.Range(1, 4);
 		if (los == 3)
@@ -327,7 +328,7 @@ public class GameRules : MonoBehaviour
 
 	
 
-	public static void OnSafePlace(GameObject pionek, Transform waitPoint)
+	public void OnSafePlace(GameObject pionek, Transform waitPoint)
 	{
 		pionek.GetComponent<Move>().defence = true;
         Transform newWaitPoint = GetRandomPosition();
@@ -342,19 +343,19 @@ public class GameRules : MonoBehaviour
 		safePlace[safePlace.Count-1].GetComponent<SafePlace>().setPlace(newWaitPoint);
     }
 
-    public static void AddSafePlace()
+    public void AddSafePlace()
     {
 		Transform newWaitPoint = GetRandomPosition();
         List<Transform> safePlacePosition = new List<Transform>();
         for (int i = 0; i < safePlace.Count; i++)
             safePlacePosition.Add(safePlace[i].GetComponent<SafePlace>().waitPoint);
-       while (safePlacePosition.Contains(newWaitPoint))
+		while (safePlacePosition.Contains(newWaitPoint))
             newWaitPoint = GetRandomPosition();
         safePlace.Add(Instantiate(safePlacePrefabe) as GameObject);
         safePlace[safePlace.Count - 1].GetComponent<SafePlace>().setPlace(newWaitPoint);
     }
 
-    public static void AddCoin(int NumberofCoins)
+    public void AddCoin(int NumberofCoins)
     {
 		for (int j = 0; j < NumberofCoins; j++)
 		{
@@ -374,18 +375,18 @@ public class GameRules : MonoBehaviour
 		}
     }
 
-    public static Transform GetRandomPosition()
+    public Transform GetRandomPosition()
 	{
 		return boardWaitPoints[Random.Range(0, 44)];
 	}
 
-    public static List<GameObject> GetOnBoard()
+    public List<GameObject> GetOnBoard()
 	{
 		int k = onBoard.Count;
 		return onBoard;
 	}
 
-	public static void SetCatnipMik()
+	public void SetCatnipMik()
 	{
 		milk.GetComponent<Milk>().setMilkButton();
 		catnip.GetComponent<Catnip>().setCatnipButton();
