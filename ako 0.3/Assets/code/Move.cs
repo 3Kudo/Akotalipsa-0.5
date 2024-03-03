@@ -25,8 +25,12 @@ public abstract class Move : MonoBehaviour
     [HideInInspector] public int pozycja;
     [HideInInspector] public bool finished;
 
-    [HideInInspector] public float changeValue = (float)0.1;
+    public float changeValue = 0.1f;
     public float moveSpeed = 2f;
+    public float maxBlinkValue = 0.5f;
+    public float minBlinkValue = 0.0f;
+    [HideInInspector]
+    public bool isMouseOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +59,7 @@ public abstract class Move : MonoBehaviour
 
     public void onUpdate()
     {
-        if (getFlashAmount() > (float)1.0 || getFlashAmount() < (float)0.0)
+        if (getFlashAmount() > maxBlinkValue || getFlashAmount() < minBlinkValue)
             changeValue = -changeValue;
         setFlashAmount(getFlashAmount() + changeValue);
     }
@@ -101,12 +105,14 @@ public abstract class Move : MonoBehaviour
     {
         if(GameRules.GetTura() == GetComponentInParent<Player>().gracz)
             MouseControle.instance.Clickable();
+        isMouseOver = true;
     }
 
     private void OnMouseExit()
     {
         if (GameRules.GetTura() == GetComponentInParent<Player>().gracz)
             MouseControle.instance.Default();
+        isMouseOver = false;
     }
 
     public int ShadowPawnPosition(bool activPowerup)

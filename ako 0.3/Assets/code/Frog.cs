@@ -56,8 +56,10 @@ public class Frog : Move
                 }
             }
         }
-        if(MoveEnabled() && GetComponentInParent<Player>().active)
+        if(GetComponentInParent<Player>().active && !isMouseOver && MoveEnabled())
             base.onUpdate();
+        else
+            base.setFlashAmount(0.0f);
     }
     
 

@@ -1145,6 +1145,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
 --- !u!1 &145207963
 GameObject:
   m_ObjectHideFlags: 0
@@ -2524,6 +2527,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
 --- !u!1 &211584193
 GameObject:
   m_ObjectHideFlags: 0
@@ -3484,6 +3490,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   powerupActive: 0
   onBoard: []
 --- !u!1 &386882483
@@ -5151,6 +5160,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   powerupActive: 0
 --- !u!1 &566059255
 GameObject:
@@ -6630,6 +6642,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   powerupActive: 0
   onBoard: []
 --- !u!1 &609282487
@@ -6940,6 +6955,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   powerupActive: 0
 --- !u!1 &610892559
 GameObject:
@@ -7249,6 +7267,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   powerupActive: 0
 --- !u!1 &623516399
 GameObject:
@@ -8047,6 +8068,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   poweruopActive: 0
   molehill:
   - {fileID: 0}
@@ -9291,6 +9315,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   poweruopActive: 0
   molehill:
   - {fileID: 0}
@@ -10770,6 +10797,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   poweruopActive: 0
   molehill:
   - {fileID: 0}
@@ -11685,7 +11715,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c81f7bba98cd82e43ba973ad63276b2f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11758,6 +11788,10 @@ MonoBehaviour:
   soundTracks:
   - {fileID: 8300000, guid: 2da37231c2006294583834cbcd11b671, type: 3}
   - {fileID: 8300000, guid: 6075906c219337f43abcdbe1cda0e132, type: 3}
+  changeValue: 0.005
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
 --- !u!114 &1207189490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12887,6 +12921,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   poweruopActive: 0
   molehill:
   - {fileID: 0}
@@ -14867,6 +14904,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   powerupActive: 0
 --- !u!1 &1759401554
 GameObject:
@@ -15509,6 +15549,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   powerupActive: 0
   onBoard: []
 --- !u!1 &1818684312
@@ -16089,6 +16132,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
 --- !u!1 &1869554854
 GameObject:
   m_ObjectHideFlags: 0
@@ -16398,6 +16444,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
   powerupActive: 0
   onBoard: []
 --- !u!1 &1881778226
@@ -18883,6 +18932,9 @@ MonoBehaviour:
   finished: 0
   changeValue: 0.005
   moveSpeed: 2
+  maxBlinkValue: 0.5
+  minBlinkValue: 0
+  isMouseOver: 0
 --- !u!1 &2128273755
 GameObject:
   m_ObjectHideFlags: 0
