@@ -16,20 +16,31 @@ public class Shark : Move
 
             if (transform.position == waitPoints[pozycja].transform.position && transform.position != waitPoints[waitPointIndex].transform.position)
             {
-                foreach (GameObject pawn in onBoard)
+                if (powerupActive)
                 {
-                    if (pawn.GetComponent<Move>().waitPoints[pawn.GetComponent<Move>().waitPointIndex] == waitPoints[pozycja] && 
-                        pawn.GetComponentInParent<Player>().gracz != GetComponentInParent<Player>().gracz &&
-                        !pawn.GetComponent<Move>().defence)
+                    foreach (GameObject pawn in onBoard)
                     {
-                        pawn.GetComponent<Move>().waitPointIndex = 0;
-                        pawn.GetComponent<Move>().ruch = true;
-                        onBoard.Remove(pawn);
+                        if (pawn.GetComponent<Move>().waitPoints[pawn.GetComponent<Move>().waitPointIndex] == waitPoints[pozycja] &&
+                            pawn.GetComponentInParent<Player>().gracz != GetComponentInParent<Player>().gracz &&
+                            !pawn.GetComponent<Move>().defence)
+                        {
+                            pawn.GetComponent<Move>().waitPointIndex = 0;
+                            pawn.GetComponent<Move>().ruch = true;
+                            onBoard.Remove(pawn);
+                        }
+                    }
+                    foreach(GameObject fluff in GetComponentInParent<GameRules>().fluff)
+                    {
+                        if (waitPoints[pozycja]==fluff.GetComponent<Fluff>().waitPoint)
+                        {
+                            GetComponentInParent<GameRules>().fluff.Remove(fluff);
+                            Destroy(fluff);
+                        }
                     }
                 }
                 if (waitPointIndex > pozycja)
                 {
-                    moveSpeed = 20f;
+                    moveSpeed = 8f;
                     pozycja++;
                 }
                 else
@@ -50,25 +61,25 @@ public class Shark : Move
                 AS.Stop();
                 if (waitPointIndex != 0)
                 {
+                    if (powerupActive)
+                        GetComponentInParent<GameRules>().onBoard = onBoard;
+                    powerupActive = false;
                     GetComponentInParent<Player>().MoveTheSame(pionek,
                         waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y, waitPointIndex);
-                    GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
+                    GetComponentInParent<GameRules>().Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
 
-                    if (GameRules.diceNumber < 6)
+                    if (GetComponentInParent<GameRules>().diceNumber < 6)
                     {
-                        GameRules.TurnCounter();
-                        GameRules.whoseTurn++;
-                        if (GameRules.whoseTurn == 5)
+                        GetComponentInParent<GameRules>().whoseTurn++;
+                        if (GetComponentInParent<GameRules>().whoseTurn == 5)
                         {
-                            GameRules.whoseTurn = 1;
+                            GetComponentInParent<GameRules>().whoseTurn = 1;
                         }
+                        GetComponentInParent<GameRules>().TurnCounter();
                     }
-                    if (powerupActive)
-                        GameRules.onBoard = onBoard;
-                    powerupActive = false;
                     GetComponentInParent<PlayerShark>().ResetPowerupActive(pionek);
-                    GameRules.Turn();
-                    GameRules.diceNumber = 0;
+                    GetComponentInParent<GameRules>().Turn();
+                    GetComponentInParent<GameRules>().diceNumber = 0;
                 }
             }
         }
@@ -85,7 +96,7 @@ public class Shark : Move
 
         if (finished)
             return false;
-        if (waitPointIndex == 0 && (GameRules.diceNumber == 6))
+        if (waitPointIndex == 0 && (GetComponentInParent<GameRules>().diceNumber == 6))
             return true;
         if (waitPointIndex > 0)
             return true;

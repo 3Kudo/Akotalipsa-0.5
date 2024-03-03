@@ -13,8 +13,7 @@ public abstract class Move : MonoBehaviour
 
     public Transform[] waitPoints;
 
-    [HideInInspector]
-    public int waitPointIndex = 0;
+    public int waitPointIndex;
       
     public AudioClip[] soundTracks;
     [HideInInspector] public AudioSource AS;
@@ -23,7 +22,7 @@ public abstract class Move : MonoBehaviour
 
     //ruch pionka
     [HideInInspector] public bool ruch = false, chosen = false;
-    [HideInInspector] public int pozycja = 0;
+    [HideInInspector] public int pozycja;
     [HideInInspector] public bool finished;
     public float moveSpeed = 2f;
 
@@ -38,6 +37,7 @@ public abstract class Move : MonoBehaviour
         AS = GetComponent<AudioSource>();
         finished = false;
         defence = false;
+        pozycja = waitPointIndex;
         
     }
 
@@ -45,13 +45,13 @@ public abstract class Move : MonoBehaviour
     {
         int position = 0;
         GetComponentInParent<Player>().SetPawnToNormal(pionek);
-        if (GameRules.GetTura() == GetComponentInParent<Player>().gracz)
+        if (GetComponentInParent<GameRules>().GetTura() == GetComponentInParent<Player>().gracz)
         {
             Sprite tymSrpite = this.GetComponent<SpriteRenderer>().sprite;
             this.GetComponent<SpriteRenderer>().sprite = PawnSprite;
             PawnSprite = tymSrpite;
             chosen = !chosen;
-            position = ShadowPawnPosition();
+            position = ShadowPawnPosition(false);
             if (!GetComponentInParent<Player>().PowerupWindowInteraction(pionek))
                 yield return new WaitForSeconds(0.45f);
             GetComponentInParent<Player>().SetPowerups(parent);
@@ -73,51 +73,92 @@ public abstract class Move : MonoBehaviour
             shadowPawn.transform.position = waitPoints[position].transform.position;
             shadowPawn.GetComponent<SpriteRenderer>().sprite = PawnSprite;
             shadowPawn.GetComponent<PolygonCollider2D>().points = this.GetComponent<PolygonCollider2D>().points;
+            shadowPawn.GetComponent<ShadowPawn>().waitPointIndex = position;
             GetComponentInParent<Player>().MoveTheSame(shadowPawn, waitPoints[position].transform.position.x, waitPoints[position].transform.position.y, position);
         }
-
-        
-
     }
 
-    public int ShadowPawnPosition()
+    private void OnMouseEnter()
     {
-        if (waitPointIndex == 0 && GameRules.diceNumber >= 6)
+        if(GetComponentInParent<GameRules>().GetTura() == GetComponentInParent<Player>().gracz)
+            MouseControle.instance.Clickable();
+    }
+
+    private void OnMouseExit()
+    {
+        if (GetComponentInParent<GameRules>().GetTura() == GetComponentInParent<Player>().gracz)
+            MouseControle.instance.Default();
+    }
+
+    public int ShadowPawnPosition(bool activPowerup)
+    {
+        if (waitPointIndex == 0 && GetComponentInParent<GameRules>().diceNumber >= 6)
             return waitPointIndex + 1;
-        else if ((waitPointIndex + GameRules.diceNumber) <= waitPoints.Length - 1)
-            return waitPointIndex + GameRules.diceNumber;
+        if (activPowerup || GetComponentInParent<GameRules>().fluff.Count == 0)
+        {
+            if ((waitPointIndex + GetComponentInParent<GameRules>().diceNumber) <= waitPoints.Length - 1)
+            {
+                for (int j = 0; j < GetComponentInParent<GameRules>().fluff.Count; j++)
+                    if (waitPoints[waitPointIndex + GetComponentInParent<GameRules>().diceNumber] == GetComponentInParent<GameRules>().fluff[j].GetComponent<Fluff>().waitPoint)
+                        return waitPointIndex + GetComponentInParent<GameRules>().diceNumber - 1;
+                return waitPointIndex + GetComponentInParent<GameRules>().diceNumber;
+            }
+        }
         else
         {
-            int countPosition = waitPointIndex;
-            countPosition = countPosition + GameRules.diceNumber;
-            countPosition = countPosition - (waitPoints.Length - 1);
-            countPosition = (waitPoints.Length - 1) - countPosition;
-            return countPosition;
+            if ((waitPointIndex + GetComponentInParent<GameRules>().diceNumber) <= waitPoints.Length - 1)
+            {
+                for (int j = 1; j <= GetComponentInParent<GameRules>().diceNumber; j++)
+                    for (int i = 0; i < GetComponentInParent<GameRules>().fluff.Count; i++)
+                        if (waitPoints[waitPointIndex + j] == GetComponentInParent<GameRules>().fluff[i].GetComponent<Fluff>().waitPoint)
+                            return waitPointIndex + j - 1;
+                return waitPointIndex + GetComponentInParent<GameRules>().diceNumber;
+            }
         }
+        int countPosition = waitPointIndex;
+        countPosition = countPosition + GetComponentInParent<GameRules>().diceNumber;
+        countPosition = countPosition - (waitPoints.Length - 1);
+        countPosition = (waitPoints.Length - 1) - countPosition;
+        for (int j = 0; j < GetComponentInParent<GameRules>().fluff.Count; j++)
+            if (waitPoints[countPosition] == GetComponentInParent<GameRules>().fluff[j].GetComponent<Fluff>().waitPoint)
+                countPosition++;
+        return countPosition;
     }
 
-    public void MoveOn()
+    public void MoveOn(int moveTo)
     {
-        moveSpeed = 20f;
+        moveSpeed = 8f;
         GetComponentInParent<Player>().active = false;
-        if (waitPointIndex == 0 && GameRules.diceNumber >= 6)
+        if(moveTo != 0)
+        {
+            Transform waitPoint = waitPoints[waitPointIndex];
+            if (moveTo < waitPointIndex)
+                pozycja--;
+            else if (moveTo > waitPointIndex)
+                pozycja++;
+            if (waitPointIndex == 0)
+                GetComponentInParent<GameRules>().onBoard.Add(pionek);
+            waitPointIndex = moveTo;
+            GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
+        }
+        else if (waitPointIndex == 0 && GetComponentInParent<GameRules>().diceNumber >= 6)
         {
             pozycja++;
             waitPointIndex++;
-            GameRules.onBoard.Add(pionek);
+            GetComponentInParent<GameRules>().onBoard.Add(pionek);
         }
-        else if ((waitPointIndex + GameRules.diceNumber) <= waitPoints.Length - 1)
+        else if ((waitPointIndex + GetComponentInParent<GameRules>().diceNumber) <= waitPoints.Length - 1)
         {
             pozycja++;
             Transform waitPoint = waitPoints[waitPointIndex];
-            waitPointIndex = waitPointIndex + GameRules.diceNumber;
+            waitPointIndex = waitPointIndex + GetComponentInParent<GameRules>().diceNumber;
             GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
         }
         else
         {
             Transform waitPoint = waitPoints[waitPointIndex];
             int countPosition = waitPointIndex;
-            countPosition = countPosition + GameRules.diceNumber;
+            countPosition = countPosition + GetComponentInParent<GameRules>().diceNumber;
             countPosition = countPosition - (waitPoints.Length - 1);
             countPosition = (waitPoints.Length - 1) - countPosition;
             if (countPosition < waitPointIndex)
@@ -127,13 +168,13 @@ public abstract class Move : MonoBehaviour
             waitPointIndex = countPosition;
             GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
         }
-        int dice = GameRules.diceNumber;
         ruch = true;
         if (waitPointIndex == waitPoints.Length - 1)
         {
             finished = true;
-            GameRules.onBoard.Remove(pionek);
-            GetComponentInParent<Player>().ChceckPlayerFinished(dice);
+            GetComponentInParent<GameRules>().onBoard.Remove(pionek);
+            GetComponent<PolygonCollider2D>().enabled = false;
+            GetComponentInParent<Player>().ChceckPlayerFinished();
         }
         ToNormalState();
     }
@@ -141,6 +182,9 @@ public abstract class Move : MonoBehaviour
 
     public void ToNormalState()
     {
+        int index = 0;
+        if (shadowPawn!=null)
+             index = shadowPawn.GetComponent<ShadowPawn>().waitPointIndex;
         Destroy(shadowPawn);
         shadowPawn = null;
         if (chosen)
@@ -152,16 +196,19 @@ public abstract class Move : MonoBehaviour
             chosen = !chosen;
             GetComponentInParent<Player>().PowerupWindowInteraction(pionek);
         }
+        if (index != 0)
+            GetComponentInParent<Player>().MoveOut(waitPoints[index], pionek);
     }
 
-    public bool IsChosen()
+    public bool IsChosen(bool isPowerup)
     {
         if(!MoveEnabled())
             return chosen;
         if (chosen)
         {
             shadowPawn = Instantiate(shadowPawnPattern, parent) as GameObject;
-            int position = ShadowPawnPosition();
+            int position = ShadowPawnPosition(isPowerup);
+            shadowPawn.GetComponent<ShadowPawn>().waitPointIndex = position;
             shadowPawn.transform.position = waitPoints[position].transform.position;
             shadowPawn.GetComponent<SpriteRenderer>().sprite = PawnSprite;
             shadowPawn.GetComponent<PolygonCollider2D>().points = this.GetComponent<PolygonCollider2D>().points;

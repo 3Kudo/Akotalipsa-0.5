@@ -14,6 +14,8 @@ public class Coin : MonoBehaviour
     public bool spin=false;
     int klatki = 0;
 
+    public AudioClip soundTracks;
+
     private void Update()
     {
         klatki++;

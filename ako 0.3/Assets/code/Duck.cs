@@ -17,7 +17,7 @@ public class Duck : Move
             {
                 if (waitPointIndex > pozycja)
                 {
-                    moveSpeed = 20f;
+                    moveSpeed = 8f;
                     pozycja++;
                 }
                 else
@@ -40,25 +40,25 @@ public class Duck : Move
                 {
                     GetComponentInParent<Player>().MoveTheSame(pionek,
                         waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y, waitPointIndex);
-                    GameRules.Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
+                    GetComponentInParent<GameRules>().Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
 
                     if (powerupActive)
                     {
                         powerupActive = false;
                         return;
                     }
-                    if (GameRules.diceNumber < 6)
+                    if (GetComponentInParent<GameRules>().diceNumber < 6)
                     {
-                        GameRules.TurnCounter();
-                        GameRules.whoseTurn++;
-                        if (GameRules.whoseTurn == 5)
+                        GetComponentInParent<GameRules>().whoseTurn++;
+                        if (GetComponentInParent<GameRules>().whoseTurn == 5)
                         {
-                            GameRules.whoseTurn = 1;
+                            GetComponentInParent<GameRules>().whoseTurn = 1;
                         }
+                        GetComponentInParent<GameRules>().TurnCounter();
                     }
-                    
-                    GameRules.Turn();
-                    GameRules.diceNumber = 0;
+
+                    GetComponentInParent<GameRules>().Turn();
+                    GetComponentInParent<GameRules>().diceNumber = 0;
                 }
             }
         }
@@ -75,7 +75,7 @@ public class Duck : Move
 
         if (finished)
             return false;
-        if (waitPointIndex == 0 && (GameRules.diceNumber == 6))
+        if (waitPointIndex == 0 && (GetComponentInParent<GameRules>().diceNumber == 6))
             return true;
         if (waitPointIndex > 0)
             return true;

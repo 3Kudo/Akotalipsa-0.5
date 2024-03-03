@@ -5,26 +5,32 @@ using UnityEngine;
 public class PlayerMole : Player
 {
     public GameObject molehillPattern;
-    public GameObject[] molehill = new GameObject[2];
-    public int[] molehillWaitPointsIndex = new int[2];
+    public List<int> molehillEntrancce = new List<int>();
+    public List<int> molehillExit = new List<int>();
+    
     public override void EnambleMovement()
     {
         for(int i = 0; i < 4; i++)
         {
             if (pionek[i].GetComponent<Mole>().poweruopActive)
             {
-                Destroy(molehill[0]);
-                molehill[0] = null;
-                Destroy(molehill[1]);
-                molehill[1] = null;
-                molehillWaitPointsIndex[0] = -1;
-                molehillWaitPointsIndex[1] = -1;
+                pionek[i].GetComponent<SpriteRenderer>().enabled = false;
+                Destroy(pionek[i].GetComponent<Mole>().molehill[0]);
+                pionek[i].GetComponent<Mole>().molehill[0] = null;
+                Destroy(pionek[i].GetComponent<Mole>().molehill[1]);
+                pionek[i].GetComponent<Mole>().molehill[1] = null;
+
+                molehillEntrancce.Remove(pionek[i].GetComponent<Mole>().molehillWaitPointsIndex[0]);
+                pionek[i].GetComponent<Mole>().molehillWaitPointsIndex[0] = -1;
+                molehillExit.Remove(pionek[i].GetComponent<Mole>().molehillWaitPointsIndex[1]);
+                pionek[i].GetComponent<Mole>().molehillWaitPointsIndex[1] = -1;
 
 
-                molehill[0] = Instantiate(molehillPattern) as GameObject;
-                molehillWaitPointsIndex[0] = pionek[i].GetComponent<Mole>().waitPointIndex;
-                molehill[0].transform.position = pionek[i].GetComponent<Mole>().waitPoints[molehillWaitPointsIndex[0]].transform.position;
-                pionek[i].GetComponent<Mole>().MoveOn();
+                pionek[i].GetComponent<Mole>().molehill[0] = Instantiate(molehillPattern) as GameObject;
+                pionek[i].GetComponent<Mole>().molehillWaitPointsIndex[0] = pionek[i].GetComponent<Mole>().waitPointIndex;
+                molehillEntrancce.Add(pionek[i].GetComponent<Mole>().molehillWaitPointsIndex[0]);
+                pionek[i].GetComponent<Mole>().molehill[0].transform.position = pionek[i].GetComponent<Mole>().waitPoints[pionek[i].GetComponent<Mole>().molehillWaitPointsIndex[0]].transform.position;
+                pionek[i].GetComponent<Mole>().MoveOn(0);
                 active = false;
                 return;
             }
@@ -34,13 +40,13 @@ public class PlayerMole : Player
         {
             coin++;
             coinText.text = coin.ToString();
-            GameRules.whoseTurn++;
-            if (GameRules.whoseTurn == 5)
-                GameRules.whoseTurn = 1;
+            GetComponentInParent<GameRules>().whoseTurn++;
+            if (GetComponentInParent<GameRules>().whoseTurn == 5)
+                GetComponentInParent<GameRules>().whoseTurn = 1;
 
-            GameRules.TurnCounter();
-            GameRules.Turn();
-            GameRules.diceNumber = 0;
+            GetComponentInParent<GameRules>().TurnCounter();
+            GetComponentInParent<GameRules>().Turn();
+            GetComponentInParent<GameRules>().diceNumber = 0;
             SetPawnToNormal(null);
             PowerupWindowInteraction(pionek[0]);
             active = false;
@@ -48,8 +54,11 @@ public class PlayerMole : Player
         }
         active = true;
         for (int i = 0; i < 4; i++)
-            if (pionek[i].GetComponent<Move>().IsChosen())
+            if (pionek[i].GetComponent<Move>().IsChosen(false))
+            {
+                powerupWindow.GetComponent<PowerupWindow>().powerups[1].GetComponent<MolePowerup>().SetUp();
                 break;
+            }
     }
 
 

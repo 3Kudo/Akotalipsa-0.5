@@ -32,20 +32,31 @@ public class DuckPowerup : MonoBehaviour
         int ammount = GetComponentInParent<PlayerDuck>().WaitPointIndex(GetComponentInParent<Move>().pionek);
         if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex!=0 && GetComponentInParent<Player>().coin >= 3)
         {
+            MouseControle.instance.Default();
             GetComponentInParent<Move>().ToNormalState();
             GetComponentInParent<Player>().DecraseCoins(3);
+            GetComponentInParent<GameRules>().SetCatnipMik();
             Destroy(GetComponentInParent<Move>().shadowPawn);
             GetComponentInParent<Duck>().powerupActive = true;
+            foreach(GameObject wall in GetComponentInParent<GameRules>().fluff)
+            {
+                if (wall.GetComponent<Fluff>().waitPoint == GetComponentInParent<Move>().waitPoints[GetComponentInParent<Move>().waitPointIndex + ammount])
+                {
+                    ammount++;
+                    break;
+                }
+            }
             GetComponentInParent<Move>().waitPointIndex += ammount;
             GetComponentInParent<Move>().ruch = true;
         }
     }
 
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
         int ammount = GetComponentInParent<PlayerDuck>().WaitPointIndex(GetComponentInParent<Move>().pionek);
         if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex != 0 && GetComponentInParent<Player>().coin >= 3)
         {
+            MouseControle.instance.Clickable();
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)1;
             color.g = (float)1;
@@ -59,6 +70,7 @@ public class DuckPowerup : MonoBehaviour
         int ammount = GetComponentInParent<PlayerDuck>().WaitPointIndex(GetComponentInParent<Move>().pionek);
         if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex != 0 && GetComponentInParent<Player>().coin >= 3)
         {
+            MouseControle.instance.Default();
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.80;
             color.g = (float)0.80;

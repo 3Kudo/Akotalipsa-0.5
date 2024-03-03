@@ -6,7 +6,7 @@ public class BaseExitClass : MonoBehaviour
 {
     private void Start()
     {
-        if (GetComponentInParent<Move>().waitPointIndex > 0 || GetComponentInParent<Player>().coin<3)
+        if (GetComponentInParent<Move>().waitPointIndex > 0 || GetComponentInParent<Player>().coin<5)
         {
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.40;
@@ -25,20 +25,23 @@ public class BaseExitClass : MonoBehaviour
     }
     private void OnMouseUpAsButton()
     {
-        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin>=3)
+        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin>=5)
         {
-            GameRules.diceNumber = 6;
-            GetComponentInParent<Player>().DecraseCoins(3);
+            MouseControle.instance.Default();
+            GetComponentInParent<GameRules>().diceNumber = 6;
+            GetComponentInParent<Player>().DecraseCoins(5);
+            GetComponentInParent<GameRules>().SetCatnipMik();
             GetComponentInParent<Player>().PowerupWindowInteraction(null);
             GetComponentInParent<Move>().ToNormalState();
-            GetComponentInParent<Move>().MoveOn();
+            GetComponentInParent<Move>().MoveOn(0);
         }
     }
 
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
-        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin >= 3)
+        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin >= 5)
         {
+            MouseControle.instance.Clickable();
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)1;
             color.g = (float)1;
@@ -49,8 +52,9 @@ public class BaseExitClass : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin >= 3)
+        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin >= 5)
         {
+            MouseControle.instance.Default();
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.80;
             color.g = (float)0.80;
@@ -61,7 +65,7 @@ public class BaseExitClass : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin >= 3)
+        if (GetComponentInParent<Move>().waitPointIndex == 0 && GetComponentInParent<Player>().coin >= 5)
         {
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.80;

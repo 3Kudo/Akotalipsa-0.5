@@ -34,6 +34,8 @@ public abstract class Player : MonoBehaviour
 
     public void MoveTheSame(GameObject pio, float x, float y, int waitPoint)
     {
+        if (waitPoint == 0)
+            return;
         List<GameObject> toMove = new List<GameObject>();
         toMove.Add(pio);
         for (int i = 0; i < 4; i++)
@@ -74,20 +76,20 @@ public abstract class Player : MonoBehaviour
             if(waitPoint == pionek[i].GetComponent<Move>().GetWaitpoint() && pio != pionek[i])
             {
                 MoveTheSame(pionek[i], waitPoint.transform.position.x,waitPoint.transform.position.y, pionek[i].GetComponent<Move>().waitPointIndex);
+                break;
             }
         }
     }
 
-    public void ChceckPlayerFinished(int dice)
+    public void ChceckPlayerFinished()
     {
         if (pionek[0].GetComponent<Move>().GetFinish() && pionek[1].GetComponent<Move>().GetFinish()
                 && pionek[2].GetComponent<Move>().GetFinish() && pionek[3].GetComponent<Move>().GetFinish())
         {
             finished = true;
-            GameRules.PlayerFinishedGamed(gracz);
+            GetComponentInParent<GameRules>().PlayerFinishedGamed(gracz);
         }
     }
-
 
     public void SetPawnToNormal(GameObject pawn)
     {
@@ -110,8 +112,6 @@ public abstract class Player : MonoBehaviour
         powerupWindow.GetComponent<PowerupWindow>().SetPowerupsButtons(parent);
         
     }
-
-
 
     public void IncreaseCoins(int add)
     {

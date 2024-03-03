@@ -12,7 +12,7 @@ public class CoinSpin : MonoBehaviour
 
     void Update()
     {
-        if (gracz == GameRules.GetTura())
+        if (gracz == GetComponentInParent<GameRules>().GetTura())
         {
             klatki++;
             if (klatki == 10)
