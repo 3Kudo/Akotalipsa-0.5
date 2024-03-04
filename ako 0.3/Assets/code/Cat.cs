@@ -15,7 +15,7 @@ public class Cat : MonoBehaviour
     public Sprite[] akotametrSprites;
     public GameObject akotametr;
     public GameObject[] pawns;
-    public AudioClip[] soundTracks;
+    public AudioClip[] SFX;
     int clip=0;
     AudioSource AS;
 
@@ -93,13 +93,18 @@ public class Cat : MonoBehaviour
             pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
             int move = Random.Range(minMove, maxMove);
             Debug.Log(move);
+            if(pionek.GetComponent<Move>().defence)
+            {
+                GetComponentInParent<GameRules>().AS.clip = GetComponentInParent<GameRules>().sfx[2];
+                GetComponentInParent<GameRules>().AS.Play();
+            }
             if (pionek.GetComponent<Move>().waitPointIndex < 1 || move == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
                 return;
             Transform position = pionek.GetComponent<Move>().GetWaitpoint();
 
             if (move < 0)
             {
-                for(int i = -1; i > move; i--)
+                for(int i = -1; i >= move; i--)
                 {
                     for(int j = 0; j < GetComponentInParent<GameRules>().fluff.Count; j++)
                     {
@@ -116,10 +121,12 @@ public class Cat : MonoBehaviour
                 if (move < 1)
                     move = 1;
                 pionek.GetComponent<Move>().waitPointIndex = move;
+                AS.clip = SFX[0];
+                AS.Play();
             }
             else
             {
-                for (int i = 1; i > move; i++)
+                for (int i = 1; i <= move; i++)
                 {
                     for (int j = 0; j < GetComponentInParent<GameRules>().fluff.Count; j++)
                     {
@@ -136,6 +143,8 @@ public class Cat : MonoBehaviour
                 if (move > 53)
                     move = 53;
                 pionek.GetComponent<Move>().waitPointIndex = move;
+                AS.clip = SFX[1];
+                AS.Play();
             }
 
             pionek.GetComponent<Move>().ruch = true;
@@ -168,6 +177,8 @@ public class Cat : MonoBehaviour
             pionek.GetComponent<Move>().waitPointIndex = 0;
             pionek.GetComponent<Move>().ruch = true;
             pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
+            AS.clip = SFX[0];
+            AS.Play();
         }
     }
 

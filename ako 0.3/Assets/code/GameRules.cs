@@ -15,7 +15,8 @@ public class GameRules : MonoBehaviour
 	public Image[] images= new Image[4];
 	public int miejsce;
 	public GameObject safePlacePrefabe, CoinPrefabe, fluffPrefab;
-    [HideInInspector] public AudioSource AS;
+    public AudioSource AS;
+    public AudioClip[] sfx;
 
 
     public GameObject cat, milk, catnip;
@@ -215,7 +216,9 @@ public class GameRules : MonoBehaviour
 						if (pawn[j].GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex == 1 || 
 							pawn[j].GetComponent<Player>().pionek[i].GetComponent<Move>().defence)
 						{
-							pionek.GetComponent<Move>().waitPointIndex = 0;
+                            GetComponentInParent<GameRules>().AS.clip = GetComponentInParent<GameRules>().sfx[2];
+                            GetComponentInParent<GameRules>().AS.Play();
+                            pionek.GetComponent<Move>().waitPointIndex = 0;
 							pionek.GetComponent<Move>().ruch = true;
 							leave = true;
 							break;
@@ -273,20 +276,26 @@ public class GameRules : MonoBehaviour
 		int los = Random.Range(0, onBoard.Count);
 		GameObject pionek = onBoard.ElementAt(los);
 		if (pionek.GetComponent<Move>().defence)
-			return;
+		{
+            AS.clip = sfx[2];
+            AS.Play();
+            return;
+        }
 		onBoard.Remove(pionek);
 		Transform position = pionek.GetComponent<Move>().GetWaitpoint();
 		pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
         pionek.GetComponent<Move>().waitPointIndex = 0;
 		pionek.GetComponent<Move>().ruch = true;
-	}
+		AS.clip = sfx[0];
+        AS.Play();
+    }
 
 	public void RandomFluff()
 	{
         int los = Random.Range(1, 4);
 		if (los == 3)
 		{
-			Transform newWaitPoint;
+            Transform newWaitPoint;
             List<Transform> fluffPosition = new List<Transform>();
             foreach (GameObject wall in fluff)
 				fluffPosition.Add(wall.GetComponent<Fluff>().waitPoint);
@@ -322,7 +331,9 @@ public class GameRules : MonoBehaviour
 			}
 			fluff.Add(Instantiate(fluffPrefab) as GameObject);
 			fluff[fluff.Count - 1].GetComponent<Fluff>().setPlace(newWaitPoint);
-		}
+            AS.clip = fluff[0].GetComponent<Fluff>().soundTracks;
+            AS.Play();
+        }
 	}
 
 	
@@ -340,6 +351,8 @@ public class GameRules : MonoBehaviour
             newWaitPoint = GetRandomPosition();
         safePlace.Add(Instantiate(safePlacePrefabe) as GameObject);
 		safePlace[safePlace.Count-1].GetComponent<SafePlace>().setPlace(newWaitPoint);
+        AS.clip = sfx[1];
+        AS.Play();
     }
 
     public void AddSafePlace()

@@ -7,6 +7,8 @@ public class Fluff : MonoBehaviour
     public Transform waitPoint;
     int exist = 2;
 
+    public AudioClip soundTracks;
+
     public void setPlace(Transform newWaitPoint)
     {
         waitPoint = newWaitPoint;
