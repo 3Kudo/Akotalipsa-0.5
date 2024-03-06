@@ -54,17 +54,17 @@ public class Cat : MonoBehaviour
     {
         if (Phase == 1)
         {
-            losowePrzesuwanie(-2, 2);
+            losowePrzesuwanie(-1, 2);
         }
         else if (Phase == 2)
         {
-            losowePrzesuwanie(-4, 3);
+            losowePrzesuwanie(-3, 4);
             GetComponentInParent<GameRules>().RandomFluff();
         }
         else if (Phase == 3)
         {
             RandomBack();
-            losowePrzesuwanie(-6, 4);
+            losowePrzesuwanie(-4, 5);
             GetComponentInParent<GameRules>().RandomFluff();
         }
         //zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
@@ -89,16 +89,19 @@ public class Cat : MonoBehaviour
                     money--;
                 }
             }
+            back:
             GameObject pionek = players[Random.Range(0, players.Length)];
             pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
             int move = Random.Range(minMove, maxMove);
+            if (pionek.GetComponent<Move>().waitPointIndex < 1)
+                goto back;
             Debug.Log(move);
             if(pionek.GetComponent<Move>().defence)
             {
                 GetComponentInParent<GameRules>().AS.clip = GetComponentInParent<GameRules>().sfx[2];
                 GetComponentInParent<GameRules>().AS.Play();
             }
-            if (pionek.GetComponent<Move>().waitPointIndex < 1 || move == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
+            if (move == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
                 return;
             Transform position = pionek.GetComponent<Move>().GetWaitpoint();
 
@@ -153,7 +156,7 @@ public class Cat : MonoBehaviour
     }
     public void RandomBack()
     {
-        int los = Random.Range(1, 4);
+        int los = Random.Range(1, 5);
         if (los == 3)
         {
             int money = 4;
