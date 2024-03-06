@@ -24,7 +24,13 @@ public abstract class Move : MonoBehaviour
     [HideInInspector] public bool ruch = false, chosen = false;
     [HideInInspector] public int pozycja;
     [HideInInspector] public bool finished;
+
+    public float changeValue = 0.1f;
     public float moveSpeed = 2f;
+    public float maxBlinkValue = 0.5f;
+    public float minBlinkValue = 0.0f;
+    [HideInInspector]
+    public bool isMouseOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +45,23 @@ public abstract class Move : MonoBehaviour
         defence = false;
         pozycja = waitPointIndex;
         
+    }
+
+    public void setFlashAmount(float amount)
+    {
+        this.GetComponent<SpriteRenderer>().material.SetFloat("_FlashAmount", amount);
+    }
+
+    public float getFlashAmount()
+    {
+        return this.GetComponent<SpriteRenderer>().material.GetFloat("_FlashAmount");
+    }
+
+    public void onUpdate()
+    {
+        if (getFlashAmount() > maxBlinkValue || getFlashAmount() < minBlinkValue)
+            changeValue = -changeValue;
+        setFlashAmount(getFlashAmount() + changeValue);
     }
 
     private IEnumerator OnMouseDown()
@@ -82,12 +105,14 @@ public abstract class Move : MonoBehaviour
     {
         if(GetComponentInParent<GameRules>().GetTura() == GetComponentInParent<Player>().gracz)
             MouseControle.instance.Clickable();
+        isMouseOver = true;
     }
 
     private void OnMouseExit()
     {
         if (GetComponentInParent<GameRules>().GetTura() == GetComponentInParent<Player>().gracz)
             MouseControle.instance.Default();
+        isMouseOver = false;
     }
 
     public int ShadowPawnPosition(bool activPowerup)

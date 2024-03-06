@@ -6,13 +6,28 @@ using UnityEngine.XR.WSA;
 
 public class RollDice : MonoBehaviour
 {
-    // ogólnie to nie wiem czy wgl musicie ruszaæ t¹ klasê
+    // ogï¿½lnie to nie wiem czy wgl musicie ruszaï¿½ tï¿½ klasï¿½
 
     private Sprite[] dicesSides;
     private SpriteRenderer rend;
     private static bool diceThrowAllowed = true;
     private AudioSource AS;
     public AudioClip[] soundTracks;
+    public float changeValue = 0.01f;
+    public float maxBlinkValue = 0.4f;
+    public float minBlinkValue = 0.0f;
+    [HideInInspector]
+    public bool isMouseOver = false;
+
+    public void setFlashAmount(float amount)
+    {
+        this.GetComponent<SpriteRenderer>().material.SetFloat("_FlashAmount", amount);
+    }
+
+    public float getFlashAmount()
+    {
+        return this.GetComponent<SpriteRenderer>().material.GetFloat("_FlashAmount");
+    }
     
 
     // Start is called before the first frame update
@@ -42,6 +57,16 @@ public class RollDice : MonoBehaviour
             rend.color = color;
             GetComponentInParent<GameRules>().diceNumber =7;
         }
+        if (diceThrowAllowed && !isMouseOver)
+        {
+            if (getFlashAmount() > maxBlinkValue|| getFlashAmount() < minBlinkValue)
+                changeValue = -changeValue;
+            setFlashAmount(getFlashAmount() + changeValue);
+        }
+        else
+        {
+            setFlashAmount(0.0f);
+        }
     }
 
     private void OnMouseEnter()
@@ -55,6 +80,7 @@ public class RollDice : MonoBehaviour
             color.b = 1;
             rend.color = color;
         }
+        isMouseOver = true;
     }
 
     private void OnMouseExit()
@@ -68,6 +94,7 @@ public class RollDice : MonoBehaviour
             color.b = (float)0.80;
             rend.color = color;
         }
+        isMouseOver = false;
     }
 
     private void OnMouseUpAsButton()
