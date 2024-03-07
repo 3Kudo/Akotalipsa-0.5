@@ -292,8 +292,8 @@ public class GameRules : MonoBehaviour
 
 	public void RandomFluff()
 	{
-        int los = Random.Range(1, 4);
-		if (los == 3)
+        int los = Random.Range(0, 100);
+		if (los <= 45)
 		{
             Transform newWaitPoint;
             List<Transform> fluffPosition = new List<Transform>();
