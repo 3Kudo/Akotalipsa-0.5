@@ -7,8 +7,8 @@ using UnityEngine.UIElements;
 public class Cat : MonoBehaviour
 {
 
-    private int wakeCounter;
-    private int phase;
+    public int wakeCounter;
+    public int phase;
     private static int[] phaseThreshold = { 0, 3, 10, 20, 35};
     public bool isLocked;
     public Sprite[] catSprites;
@@ -16,7 +16,6 @@ public class Cat : MonoBehaviour
     public GameObject akotametr;
     public GameObject[] pawns;
     public AudioClip[] SFX;
-    int clip=0;
     AudioSource AS;
 
 
@@ -26,48 +25,32 @@ public class Cat : MonoBehaviour
 
 
 
-    // Start is called before the first frame update
     void Start()
     {
         AS = GetComponent<AudioSource>();
-        WakeCounter = 0;
         Phase = 0;
         IsLocked = false;
         this.GetComponent<SpriteRenderer>().sprite = catSprites[0];
         akotametr.GetComponent<SpriteRenderer>().sprite = akotametrSprites[0];
     }
-    /*private void Update()
-    {
-        if (AS.isPlaying == false)
-        {
-            int clipOn = 4 * phase + clip;
-            AS.clip = soundTracks[clipOn];
-
-            AS.Play();
-            clip++;
-            if (clip == 4)
-                clip = 0;
-        }
-    }*/
 
     public void catTurn()
     {
         if (Phase == 1)
         {
-            losowePrzesuwanie(-1, 2);
+            losowePrzesuwanie(-2, 1);
         }
         else if (Phase == 2)
         {
-            losowePrzesuwanie(-3, 4);
+            losowePrzesuwanie(-3, 2);
             GetComponentInParent<GameRules>().RandomFluff();
         }
         else if (Phase == 3)
         {
             RandomBack();
-            losowePrzesuwanie(-4, 5);
+            losowePrzesuwanie(-5, 3);
             GetComponentInParent<GameRules>().RandomFluff();
         }
-        //zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
         incrementWakeCounter(1);
         phaseCheck();
     }
@@ -95,7 +78,6 @@ public class Cat : MonoBehaviour
             int move = Random.Range(minMove, maxMove);
             if (pionek.GetComponent<Move>().waitPointIndex < 1)
                 goto back;
-            Debug.Log(move);
             if(pionek.GetComponent<Move>().defence)
             {
                 GetComponentInParent<GameRules>().AS.clip = GetComponentInParent<GameRules>().sfx[2];
@@ -224,6 +206,5 @@ public class Cat : MonoBehaviour
         }
         this.GetComponent<SpriteRenderer>().sprite = catSprites[phase];
         akotametr.GetComponent<SpriteRenderer>().sprite = akotametrSprites[phase];
-        Debug.Log("Cat phase: " + phase);
     }
 }

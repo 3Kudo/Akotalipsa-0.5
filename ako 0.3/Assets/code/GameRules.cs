@@ -140,8 +140,16 @@ public class GameRules : MonoBehaviour
         turnCounter++;
 		if (turnCounter % 4 == 0)
 		{
-            for (int i = 0; i < fluff.Count(); i++)
-                fluff[i].GetComponent<Fluff>().FadeAway();
+            for(int i = 0; i < fluff.Count(); i++)
+			{
+                GameObject toDestroy = fluff[i].GetComponent<Fluff>().FadeAway();
+                if (toDestroy != null)
+                {
+                    fluff.Remove(toDestroy);
+                    Destroy(toDestroy);
+                    i--;
+                }
+            }
             cat.GetComponent<Cat>().catTurn();
 		}
 		if(turnCounter % 7 == 0)
