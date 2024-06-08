@@ -12,17 +12,27 @@ public class PowerupWindow : MonoBehaviour
     public Sprite baseExit;
     private AudioSource AS;
     public AudioClip AC;
+    public Transform parent;
 
     private void Start()
     {
         AS = GetComponent<AudioSource>();
     }
 
-    public bool ChangeState(GameObject pawn)
+    public void ChangeState(GameObject pawn, Transform changeParent)
     {
-        bool state = anim.GetBool("IsActive");
+        parent = changeParent;
+        if(anim.GetBool("IsActive") == pawn.GetComponent<Move>().chosen)
+        {
+            SetPowerupsButtons();
+            SetPowerupsButtons();
+            return;
+        }
+
         if (pawn != null)
         {
+            if (!pawn.GetComponent<Move>().chosen)
+                SetPowerupsButtons();
             if (anim.GetBool("IsActive") != pawn.GetComponent<Move>().chosen)
             {
                 AS.clip = AC;
@@ -32,14 +42,14 @@ public class PowerupWindow : MonoBehaviour
         }
         else
         {
+            SetPowerupsButtons();
             anim.SetBool("IsActive", false);
             AS.clip = AC;
             AS.Play();
         }
-        return state;
     }
     
-    public void SetPowerupsButtons(Transform parent)
+    public void SetPowerupsButtons()
     {
         if (powerups[0] == null)
         {

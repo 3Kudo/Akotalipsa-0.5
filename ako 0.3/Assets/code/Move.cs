@@ -32,7 +32,6 @@ public abstract class Move : MonoBehaviour
     [HideInInspector]
     public bool isMouseOver = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         //ustawienie pionków na miejscu startowym
@@ -64,7 +63,7 @@ public abstract class Move : MonoBehaviour
         setFlashAmount(getFlashAmount() + changeValue);
     }
 
-    private IEnumerator OnMouseDown()
+    private void OnMouseDown()
     {
         int position = 0;
         GetComponentInParent<Player>().SetPawnToNormal(pionek);
@@ -75,9 +74,7 @@ public abstract class Move : MonoBehaviour
             PawnSprite = tymSrpite;
             chosen = !chosen;
             position = ShadowPawnPosition(false);
-            if (!GetComponentInParent<Player>().PowerupWindowInteraction(pionek))
-                yield return new WaitForSeconds(0.45f);
-            GetComponentInParent<Player>().SetPowerups(parent);
+            GetComponentInParent<Player>().PowerupWindowInteraction(pionek, parent);
         }
 
 
@@ -152,6 +149,7 @@ public abstract class Move : MonoBehaviour
 
     public void MoveOn(int moveTo)
     {
+        ToNormalState(true);
         moveSpeed = 8f;
         GetComponentInParent<Player>().active = false;
         if(moveTo != 0)
@@ -201,11 +199,10 @@ public abstract class Move : MonoBehaviour
             GetComponent<PolygonCollider2D>().enabled = false;
             GetComponentInParent<Player>().ChceckPlayerFinished();
         }
-        ToNormalState();
     }
 
 
-    public void ToNormalState()
+    public void ToNormalState(bool anim)
     {
         int index = 0;
         if (shadowPawn!=null)
@@ -214,12 +211,13 @@ public abstract class Move : MonoBehaviour
         shadowPawn = null;
         if (chosen)
         {
-            GetComponentInParent<Player>().SetPowerups(parent);
+            chosen = !chosen;
+            if (anim)
+                GetComponentInParent<Player>().PowerupWindowInteraction(pionek, null);
+            //GetComponentInParent<Player>().SetPowerups(parent);
             Sprite tymSrpite = this.GetComponent<SpriteRenderer>().sprite;
             this.GetComponent<SpriteRenderer>().sprite = PawnSprite;
             PawnSprite = tymSrpite;
-            chosen = !chosen;
-            GetComponentInParent<Player>().PowerupWindowInteraction(pionek);
         }
         if (index != 0)
             GetComponentInParent<Player>().MoveOut(waitPoints[index], pionek);

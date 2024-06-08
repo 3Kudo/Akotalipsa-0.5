@@ -14,7 +14,7 @@ public class GameRules : MonoBehaviour
 	public Sprite[] sprites = new Sprite[4];
 	public Image[] images= new Image[4];
 	public int miejsce;
-	public GameObject safePlacePrefabe, CoinPrefabe, fluffPrefab;
+	public GameObject safePlacePrefab, CoinPrefab, fluffPrefab, shieldPrefab, toothsPrefab;
     public AudioSource AS;
     public AudioClip[] sfx;
 
@@ -224,6 +224,11 @@ public class GameRules : MonoBehaviour
 						if (pawn[j].GetComponent<Player>().pionek[i].GetComponent<Move>().waitPointIndex == 1 || 
 							pawn[j].GetComponent<Player>().pionek[i].GetComponent<Move>().defence)
 						{
+							if (pawn[j].GetComponent<Player>().pionek[i].GetComponent<Move>().defence)
+							{
+                                GameObject shield = Instantiate(shieldPrefab as GameObject);
+                                shield.gameObject.transform.position = pionek.transform.position;
+                            }
                             GetComponentInParent<GameRules>().AS.clip = GetComponentInParent<GameRules>().sfx[2];
                             GetComponentInParent<GameRules>().AS.Play();
                             pionek.GetComponent<Move>().waitPointIndex = 0;
@@ -260,9 +265,11 @@ public class GameRules : MonoBehaviour
 			if (safePlace[i].GetComponent<SafePlace>().waitPoint == waitPoints)
 			{
 				GameObject toDestroy = safePlace[i];
-				safePlace.RemoveAt(i);
+                GameObject shield = Instantiate(shieldPrefab as GameObject);
+                shield.gameObject.transform.position = pionek.transform.position;
+                safePlace.RemoveAt(i);
 				Destroy(toDestroy);
-				OnSafePlace(pionek, waitPoints);
+				OnSafePlace(pionek);
 			}
 		}
 		for(int i = 0; i <Coin.Count; i++)
@@ -283,8 +290,12 @@ public class GameRules : MonoBehaviour
 	{
 		int los = Random.Range(0, onBoard.Count);
 		GameObject pionek = onBoard.ElementAt(los);
+		GameObject tooths = Instantiate (toothsPrefab as GameObject);
+		tooths.transform.position = pionek.transform.position;
 		if (pionek.GetComponent<Move>().defence)
 		{
+			GameObject shield = Instantiate(shieldPrefab as GameObject);
+			shield.gameObject.transform.position = pionek.transform.position;
             AS.clip = sfx[2];
             AS.Play();
             return;
@@ -346,7 +357,7 @@ public class GameRules : MonoBehaviour
 
 	
 
-	public void OnSafePlace(GameObject pionek, Transform waitPoint)
+	public void OnSafePlace(GameObject pionek)
 	{
 		pionek.GetComponent<Move>().defence = true;
         Transform newWaitPoint = GetRandomPosition();
@@ -357,7 +368,7 @@ public class GameRules : MonoBehaviour
 			safePlacePosition.Add(randomBack[i]);
         while(safePlacePosition.Contains(newWaitPoint))
             newWaitPoint = GetRandomPosition();
-        safePlace.Add(Instantiate(safePlacePrefabe) as GameObject);
+        safePlace.Add(Instantiate(safePlacePrefab) as GameObject);
 		safePlace[safePlace.Count-1].GetComponent<SafePlace>().setPlace(newWaitPoint);
         AS.clip = sfx[1];
         AS.Play();
@@ -371,7 +382,7 @@ public class GameRules : MonoBehaviour
             safePlacePosition.Add(safePlace[i].GetComponent<SafePlace>().waitPoint);
 		while (safePlacePosition.Contains(newWaitPoint))
             newWaitPoint = GetRandomPosition();
-        safePlace.Add(Instantiate(safePlacePrefabe) as GameObject);
+        safePlace.Add(Instantiate(safePlacePrefab) as GameObject);
         safePlace[safePlace.Count - 1].GetComponent<SafePlace>().setPlace(newWaitPoint);
     }
 
@@ -387,7 +398,7 @@ public class GameRules : MonoBehaviour
 					CoinPosition.Add(Coin[i].GetComponent<Coin>().waitPoint);
 				while (CoinPosition.Contains(newWaitPoint))
 					newWaitPoint = GetRandomPosition();
-				Coin.Add(Instantiate(CoinPrefabe) as GameObject);
+				Coin.Add(Instantiate(CoinPrefab) as GameObject);
 				Coin[Coin.Count - 1].GetComponent<Coin>().setPlace(newWaitPoint);
 			}
 			else

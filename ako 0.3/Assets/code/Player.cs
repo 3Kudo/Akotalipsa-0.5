@@ -98,18 +98,18 @@ public abstract class Player : MonoBehaviour
             if (pionek[i] == pawn)
                 continue;
             else
-                pionek[i].GetComponent<Move>().ToNormalState();
+                pionek[i].GetComponent<Move>().ToNormalState(false);
         }
     }
 
-    public bool PowerupWindowInteraction(GameObject pawn)
+    public void PowerupWindowInteraction(GameObject pawn, Transform parent)
     {
-        return powerupWindow.GetComponent<PowerupWindow>().ChangeState(pawn);
+        powerupWindow.GetComponent<PowerupWindow>().ChangeState(pawn, parent);
     }
 
-    public void SetPowerups(Transform parent)
+    public void SetPowerups()
     {
-        powerupWindow.GetComponent<PowerupWindow>().SetPowerupsButtons(parent);
+        powerupWindow.GetComponent<PowerupWindow>().SetPowerupsButtons();
         
     }
 

@@ -7,6 +7,7 @@ public class ShadowPawn : MonoBehaviour
     public int waitPointIndex = 0;
     private void OnMouseDown()
     {
+        GetComponentInParent<Move>().ToNormalState(true);
         MouseControle.instance.Default();
         GetComponentInParent<Move>().MoveOn(waitPointIndex);
     }

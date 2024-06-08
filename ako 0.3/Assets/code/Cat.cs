@@ -58,7 +58,7 @@ public class Cat : MonoBehaviour
     public void losowePrzesuwanie(int maxMove, int minMove)
     {
         int los = Random.Range(1, 4);
-        if (los == 3)
+        if (los == 3 && GetComponentInParent<GameRules>().onBoard.Count > 0)
         {
             int money = 4;
             for (int i = 0; i < 4; i++)
