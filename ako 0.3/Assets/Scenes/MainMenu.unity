@@ -3497,10 +3497,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 637002640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38982301616cbc5439facebaa6b488a8, type: 3}
+  m_Script: {fileID: 11500000, guid: e2c1c48be13fd3347b2659ec8296caa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundTracks: {fileID: 8300000, guid: 962c79f8f21f7d34282deeb70a13a3e9, type: 3}
+  soundTracks: {fileID: 8300000, guid: d3db307c2b3d5fc41894f685853c25b1, type: 3}
 --- !u!1 &691687748
 GameObject:
   m_ObjectHideFlags: 0

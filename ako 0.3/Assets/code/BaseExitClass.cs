@@ -31,8 +31,8 @@ public class BaseExitClass : MonoBehaviour
             GetComponentInParent<GameRules>().diceNumber = 6;
             GetComponentInParent<Player>().DecraseCoins(5);
             GetComponentInParent<GameRules>().SetCatnipMik();
-            GetComponentInParent<Player>().PowerupWindowInteraction(null);
-            GetComponentInParent<Move>().ToNormalState();
+            //GetComponentInParent<Player>().PowerupWindowInteraction(null, null);
+            GetComponentInParent<Move>().ToNormalState(true);
             GetComponentInParent<Move>().MoveOn(0);
         }
     }

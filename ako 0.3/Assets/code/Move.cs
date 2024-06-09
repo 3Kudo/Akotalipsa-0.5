@@ -24,9 +24,14 @@ public abstract class Move : MonoBehaviour
     [HideInInspector] public bool ruch = false, chosen = false;
     [HideInInspector] public int pozycja;
     [HideInInspector] public bool finished;
-    public float moveSpeed = 2f;
 
-    // Start is called before the first frame update
+    public float changeValue = 0.1f;
+    public float moveSpeed = 2f;
+    public float maxBlinkValue = 0.5f;
+    public float minBlinkValue = 0.0f;
+    [HideInInspector]
+    public bool isMouseOver = false;
+
     void Start()
     {
         //ustawienie pionków na miejscu startowym
@@ -41,7 +46,24 @@ public abstract class Move : MonoBehaviour
         
     }
 
-    private IEnumerator OnMouseDown()
+    public void setFlashAmount(float amount)
+    {
+        this.GetComponent<SpriteRenderer>().material.SetFloat("_FlashAmount", amount);
+    }
+
+    public float getFlashAmount()
+    {
+        return this.GetComponent<SpriteRenderer>().material.GetFloat("_FlashAmount");
+    }
+
+    public void onUpdate()
+    {
+        if (getFlashAmount() > maxBlinkValue || getFlashAmount() < minBlinkValue)
+            changeValue = -changeValue;
+        setFlashAmount(getFlashAmount() + changeValue);
+    }
+
+    private void OnMouseDown()
     {
         int position = 0;
         GetComponentInParent<Player>().SetPawnToNormal(pionek);
@@ -52,9 +74,7 @@ public abstract class Move : MonoBehaviour
             PawnSprite = tymSrpite;
             chosen = !chosen;
             position = ShadowPawnPosition(false);
-            if (!GetComponentInParent<Player>().PowerupWindowInteraction(pionek))
-                yield return new WaitForSeconds(0.45f);
-            GetComponentInParent<Player>().SetPowerups(parent);
+            GetComponentInParent<Player>().PowerupWindowInteraction(pionek, parent);
         }
 
 
@@ -82,12 +102,14 @@ public abstract class Move : MonoBehaviour
     {
         if(GetComponentInParent<GameRules>().GetTura() == GetComponentInParent<Player>().gracz)
             MouseControle.instance.Clickable();
+        isMouseOver = true;
     }
 
     private void OnMouseExit()
     {
         if (GetComponentInParent<GameRules>().GetTura() == GetComponentInParent<Player>().gracz)
             MouseControle.instance.Default();
+        isMouseOver = false;
     }
 
     public int ShadowPawnPosition(bool activPowerup)
@@ -127,6 +149,7 @@ public abstract class Move : MonoBehaviour
 
     public void MoveOn(int moveTo)
     {
+        ToNormalState(true);
         moveSpeed = 8f;
         GetComponentInParent<Player>().active = false;
         if(moveTo != 0)
@@ -176,11 +199,10 @@ public abstract class Move : MonoBehaviour
             GetComponent<PolygonCollider2D>().enabled = false;
             GetComponentInParent<Player>().ChceckPlayerFinished();
         }
-        ToNormalState();
     }
 
 
-    public void ToNormalState()
+    public void ToNormalState(bool anim)
     {
         int index = 0;
         if (shadowPawn!=null)
@@ -189,12 +211,13 @@ public abstract class Move : MonoBehaviour
         shadowPawn = null;
         if (chosen)
         {
-            GetComponentInParent<Player>().SetPowerups(parent);
+            chosen = !chosen;
+            if (anim)
+                GetComponentInParent<Player>().PowerupWindowInteraction(pionek, null);
+            //GetComponentInParent<Player>().SetPowerups(parent);
             Sprite tymSrpite = this.GetComponent<SpriteRenderer>().sprite;
             this.GetComponent<SpriteRenderer>().sprite = PawnSprite;
             PawnSprite = tymSrpite;
-            chosen = !chosen;
-            GetComponentInParent<Player>().PowerupWindowInteraction(pionek);
         }
         if (index != 0)
             GetComponentInParent<Player>().MoveOut(waitPoints[index], pionek);

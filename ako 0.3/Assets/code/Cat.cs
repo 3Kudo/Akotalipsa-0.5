@@ -7,16 +7,15 @@ using UnityEngine.UIElements;
 public class Cat : MonoBehaviour
 {
 
-    private int wakeCounter;
-    private int phase;
+    public int wakeCounter;
+    public int phase;
     private static int[] phaseThreshold = { 0, 3, 10, 20, 35};
     public bool isLocked;
     public Sprite[] catSprites;
     public Sprite[] akotametrSprites;
     public GameObject akotametr;
     public GameObject[] pawns;
-    public AudioClip[] soundTracks;
-    int clip=0;
+    public AudioClip[] SFX;
     AudioSource AS;
 
 
@@ -26,48 +25,32 @@ public class Cat : MonoBehaviour
 
 
 
-    // Start is called before the first frame update
     void Start()
     {
         AS = GetComponent<AudioSource>();
-        WakeCounter = 0;
         Phase = 0;
         IsLocked = false;
         this.GetComponent<SpriteRenderer>().sprite = catSprites[0];
         akotametr.GetComponent<SpriteRenderer>().sprite = akotametrSprites[0];
     }
-    /*private void Update()
-    {
-        if (AS.isPlaying == false)
-        {
-            int clipOn = 4 * phase + clip;
-            AS.clip = soundTracks[clipOn];
-
-            AS.Play();
-            clip++;
-            if (clip == 4)
-                clip = 0;
-        }
-    }*/
 
     public void catTurn()
     {
         if (Phase == 1)
         {
-            losowePrzesuwanie(-2, 2);
+            losowePrzesuwanie(-2, 1);
         }
         else if (Phase == 2)
         {
-            losowePrzesuwanie(-4, 3);
+            losowePrzesuwanie(-3, 2);
             GetComponentInParent<GameRules>().RandomFluff();
         }
         else if (Phase == 3)
         {
             RandomBack();
-            losowePrzesuwanie(-6, 4);
+            losowePrzesuwanie(-5, 3);
             GetComponentInParent<GameRules>().RandomFluff();
         }
-        //zwieksza sie tez przy wyjsciu z bazy po wyrzuceniu 6 - poprawic, czy git?
         incrementWakeCounter(1);
         phaseCheck();
     }
@@ -75,7 +58,7 @@ public class Cat : MonoBehaviour
     public void losowePrzesuwanie(int maxMove, int minMove)
     {
         int los = Random.Range(1, 4);
-        if (los == 3)
+        if (los == 3 && GetComponentInParent<GameRules>().onBoard.Count > 0)
         {
             int money = 4;
             for (int i = 0; i < 4; i++)
@@ -89,17 +72,24 @@ public class Cat : MonoBehaviour
                     money--;
                 }
             }
+            back:
             GameObject pionek = players[Random.Range(0, players.Length)];
             pionek = pionek.GetComponent<Player>().pionek[Random.Range(0, 4)];
             int move = Random.Range(minMove, maxMove);
-            Debug.Log(move);
-            if (pionek.GetComponent<Move>().waitPointIndex < 1 || move == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
+            if (pionek.GetComponent<Move>().waitPointIndex < 1)
+                goto back;
+            if(pionek.GetComponent<Move>().defence)
+            {
+                GetComponentInParent<GameRules>().AS.clip = GetComponentInParent<GameRules>().sfx[2];
+                GetComponentInParent<GameRules>().AS.Play();
+            }
+            if (move == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
                 return;
             Transform position = pionek.GetComponent<Move>().GetWaitpoint();
 
             if (move < 0)
             {
-                for(int i = -1; i > move; i--)
+                for(int i = -1; i >= move; i--)
                 {
                     for(int j = 0; j < GetComponentInParent<GameRules>().fluff.Count; j++)
                     {
@@ -116,10 +106,12 @@ public class Cat : MonoBehaviour
                 if (move < 1)
                     move = 1;
                 pionek.GetComponent<Move>().waitPointIndex = move;
+                AS.clip = SFX[0];
+                AS.Play();
             }
             else
             {
-                for (int i = 1; i > move; i++)
+                for (int i = 1; i <= move; i++)
                 {
                     for (int j = 0; j < GetComponentInParent<GameRules>().fluff.Count; j++)
                     {
@@ -136,6 +128,8 @@ public class Cat : MonoBehaviour
                 if (move > 53)
                     move = 53;
                 pionek.GetComponent<Move>().waitPointIndex = move;
+                AS.clip = SFX[1];
+                AS.Play();
             }
 
             pionek.GetComponent<Move>().ruch = true;
@@ -144,7 +138,7 @@ public class Cat : MonoBehaviour
     }
     public void RandomBack()
     {
-        int los = Random.Range(1, 4);
+        int los = Random.Range(1, 5);
         if (los == 3)
         {
             int money = 4;
@@ -168,6 +162,8 @@ public class Cat : MonoBehaviour
             pionek.GetComponent<Move>().waitPointIndex = 0;
             pionek.GetComponent<Move>().ruch = true;
             pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
+            AS.clip = SFX[0];
+            AS.Play();
         }
     }
 
@@ -210,6 +206,5 @@ public class Cat : MonoBehaviour
         }
         this.GetComponent<SpriteRenderer>().sprite = catSprites[phase];
         akotametr.GetComponent<SpriteRenderer>().sprite = akotametrSprites[phase];
-        Debug.Log("Cat phase: " + phase);
     }
 }

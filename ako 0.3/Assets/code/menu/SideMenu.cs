@@ -9,8 +9,14 @@ public class SideMenu : MonoBehaviour
     public GameObject curtain;
     public GameObject[] buttons;
     public bool mouseExit=true;
+    public AudioSource AS;
+    public AudioClip soundTracks;
 
-    public void OnMouseEnter()
+    void Start()
+    {
+        AS = GetComponent<AudioSource>();
+    }
+        public void OnMouseEnter()
     {
         MouseControle.instance.Clickable();
         Sprite tym = this.GetComponent<SpriteRenderer>().sprite;
@@ -34,6 +40,8 @@ public class SideMenu : MonoBehaviour
         mouseExit = false;
         MouseControle.instance.Clickable();
         this.GetComponent<PolygonCollider2D>().enabled = false;
+        AS.clip = soundTracks;
+        AS.Play();
         anim.SetBool("Rozwiniete", true);
         yield return new WaitForSeconds(0.65f);
         MouseControle.instance.Default();

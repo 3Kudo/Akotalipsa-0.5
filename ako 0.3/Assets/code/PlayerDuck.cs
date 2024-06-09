@@ -20,7 +20,7 @@ public class PlayerDuck : Player
             GetComponentInParent<GameRules>().Turn();
             GetComponentInParent<GameRules>().diceNumber = 0;
             SetPawnToNormal(null);
-            PowerupWindowInteraction(pionek[0]);
+            PowerupWindowInteraction(pionek[0], pionek[0].GetComponent<Move>().parent);
             active = false;
             return;
         }

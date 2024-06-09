@@ -19,7 +19,7 @@ public class MolePowerup : MonoBehaviour
             color.b = (float)0.80;
             GetComponent<SpriteRenderer>().color = color;
         }
-        else if(GetComponentInParent<Move>().waitPointIndex == 0 || GetComponentInParent<Player>().coin < 2 || GetComponentInParent<PlayerMole>().active)
+        else if(GetComponentInParent<Move>().waitPointIndex == 0 || GetComponentInParent<Player>().coin < 3 || GetComponentInParent<PlayerMole>().active)
         {
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.50;
@@ -44,7 +44,7 @@ public class MolePowerup : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        if ( (GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 2) ||
+        if ( (GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 3) ||
             GetComponentInParent<Mole>().poweruopActive)
         {
             MouseControle.instance.Default();
@@ -54,13 +54,13 @@ public class MolePowerup : MonoBehaviour
             GetComponentInParent<Mole>().poweruopActive = !GetComponentInParent<Mole>().poweruopActive;
             if (GetComponentInParent<Mole>().poweruopActive)
             {
-                GetComponentInParent<Player>().DecraseCoins(2);
+                GetComponentInParent<Player>().DecraseCoins(3);
                 GetComponentInParent<GameRules>().SetCatnipMik();
                 GetComponentInParent<PlayerMole>().ResetPowerupActive(GetComponentInParent<Mole>().pionek);
             }
             else
             {
-                GetComponentInParent<Player>().IncreaseCoins(2);
+                GetComponentInParent<Player>().IncreaseCoins(3);
                 GetComponentInParent<GameRules>().SetCatnipMik();
             }
             
@@ -69,7 +69,7 @@ public class MolePowerup : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 2) ||
+        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 3) ||
             GetComponentInParent<Mole>().poweruopActive)
         {
             MouseControle.instance.Clickable();
@@ -83,7 +83,7 @@ public class MolePowerup : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 2) ||
+        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 3) ||
             GetComponentInParent<Mole>().poweruopActive)
         {
             MouseControle.instance.Default();
@@ -97,7 +97,7 @@ public class MolePowerup : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 2) ||
+        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 3) ||
             GetComponentInParent<Mole>().poweruopActive)
         {
             Color color = GetComponent<SpriteRenderer>().color;

@@ -6,6 +6,13 @@ public class Catnip : MonoBehaviour
 {
     public GameObject cat;
 
+    private AudioSource AS;
+    public AudioClip soundTracks;
+
+    public void Start()
+    {
+        AS = GetComponent<AudioSource>();
+    }
 
     public void setCatnipButton()
     {
@@ -36,6 +43,8 @@ public class Catnip : MonoBehaviour
             cat.GetComponent<Cat>().incrementWakeCounter(4);
             cat.GetComponent<Cat>().phaseCheck();
             GetComponentInParent<GameRules>().SetCatnipMik();
+            AS.clip = soundTracks;
+            AS.Play();
         }
     }
 

@@ -33,7 +33,7 @@ public class DuckPowerup : MonoBehaviour
         if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex!=0 && GetComponentInParent<Player>().coin >= 3)
         {
             MouseControle.instance.Default();
-            GetComponentInParent<Move>().ToNormalState();
+            GetComponentInParent<Move>().ToNormalState(true);
             GetComponentInParent<Player>().DecraseCoins(3);
             GetComponentInParent<GameRules>().SetCatnipMik();
             Destroy(GetComponentInParent<Move>().shadowPawn);

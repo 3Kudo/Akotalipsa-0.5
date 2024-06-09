@@ -5,7 +5,15 @@ using UnityEngine;
 public class Milk : MonoBehaviour
 {
     public GameObject cat;
-    
+
+    private AudioSource AS;
+    public AudioClip[] soundTracks;
+
+
+    public void Start()
+    {
+        AS = GetComponent<AudioSource>();
+    }
 
     public void setMilkButton()
     {
@@ -36,6 +44,16 @@ public class Milk : MonoBehaviour
             cat.GetComponent<Cat>().decrementWakeCounter(4);
             cat.GetComponent<Cat>().phaseCheck();
             GetComponentInParent<GameRules>().SetCatnipMik();
+            if (cat.GetComponent<Cat>().Phase == 0)
+            {
+                AS.clip = soundTracks[1];
+                AS.Play();
+            }
+            else
+            {
+                AS.clip = soundTracks[0];
+                AS.Play();
+            }
         }
     }
 
