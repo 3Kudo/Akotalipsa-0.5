@@ -40,6 +40,7 @@ public class GameRules : MonoBehaviour
 	// Start is called before the first frame update
 	public void Start()
 	{
+		diceNumber = 0;
         AS = GetComponent<AudioSource>();
         //przypisanie odpowiednich obiektów
         pawn = new GameObject[4];
