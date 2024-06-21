@@ -192,13 +192,6 @@ public abstract class Move : MonoBehaviour
             GetComponentInParent<Player>().MoveOut(waitPoint, pionek);
         }
         ruch = true;
-        if (waitPointIndex == waitPoints.Length - 1)
-        {
-            finished = true;
-            GetComponentInParent<GameRules>().onBoard.Remove(pionek);
-            GetComponent<PolygonCollider2D>().enabled = false;
-            GetComponentInParent<Player>().ChceckPlayerFinished();
-        }
     }
 
 

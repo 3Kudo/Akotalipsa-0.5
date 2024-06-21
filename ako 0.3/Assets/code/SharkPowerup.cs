@@ -9,7 +9,15 @@ public class SharkPowerup : MonoBehaviour
 
     private void Start()
     {
-        if (GetComponentInParent<Shark>().powerupActive)
+        if ((GetComponentInParent<Player>().coin < 5 || !GetComponentInParent<Player>().active) && !GetComponentInParent<PlayerShark>().powerupActive)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.40;
+            color.g = (float)0.40;
+            color.b = (float)0.40;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+        else if (GetComponentInParent<PlayerShark>().powerupActive)
         {
             Sprite sprite = GetComponentInParent<SpriteRenderer>().sprite;
             GetComponentInParent<SpriteRenderer>().sprite = powerup;
@@ -18,14 +26,6 @@ public class SharkPowerup : MonoBehaviour
             color.r = (float)0.80;
             color.g = (float)0.80;
             color.b = (float)0.80;
-            GetComponent<SpriteRenderer>().color = color;
-        }
-        else if (GetComponentInParent<Move>().waitPointIndex == 0 || GetComponentInParent<PlayerShark>().active || GetComponentInParent<Player>().coin < 5)
-        {
-            Color color = GetComponent<SpriteRenderer>().color;
-            color.r = (float)0.50;
-            color.g = (float)0.50;
-            color.b = (float)0.50;
             GetComponent<SpriteRenderer>().color = color;
         }
         else
@@ -40,7 +40,15 @@ public class SharkPowerup : MonoBehaviour
 
     public void SetUp()
     {
-        if (GetComponentInParent<Shark>().powerupActive)
+        if ((GetComponentInParent<Player>().coin < 5 || !GetComponentInParent<Player>().active) && !GetComponentInParent<PlayerShark>().powerupActive)
+        {
+            Color color = GetComponent<SpriteRenderer>().color;
+            color.r = (float)0.40;
+            color.g = (float)0.40;
+            color.b = (float)0.40;
+            GetComponent<SpriteRenderer>().color = color;
+        }
+        else if (GetComponentInParent<PlayerFrog>().powerupActive)
         {
             Sprite sprite = GetComponentInParent<SpriteRenderer>().sprite;
             GetComponentInParent<SpriteRenderer>().sprite = powerup;
@@ -49,14 +57,6 @@ public class SharkPowerup : MonoBehaviour
             color.r = (float)0.80;
             color.g = (float)0.80;
             color.b = (float)0.80;
-            GetComponent<SpriteRenderer>().color = color;
-        }
-        else if (GetComponentInParent<Move>().waitPointIndex == 0 || GetComponentInParent<PlayerShark>().active || GetComponentInParent<Player>().coin < 5)
-        {
-            Color color = GetComponent<SpriteRenderer>().color;
-            color.r = (float)0.50;
-            color.g = (float)0.50;
-            color.b = (float)0.50;
             GetComponent<SpriteRenderer>().color = color;
         }
         else
@@ -71,32 +71,30 @@ public class SharkPowerup : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
-        if ( (GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerShark>().active && GetComponentInParent<Player>().coin >= 5) ||
-            GetComponentInParent<Shark>().powerupActive)
+        if ((GetComponentInParent<Player>().coin >= 5 || GetComponentInParent<PlayerShark>().powerupActive) && GetComponentInParent<Player>().active)
         {
             MouseControle.instance.Default();
             Sprite sprite = GetComponentInParent<SpriteRenderer>().sprite;
             GetComponentInParent<SpriteRenderer>().sprite = powerup;
             powerup = sprite;
-            GetComponentInParent<Shark>().powerupActive = !GetComponentInParent<Shark>().powerupActive;
-            if (GetComponentInParent<Shark>().powerupActive)
+            GetComponentInParent<PlayerShark>().powerupActive = !GetComponentInParent<PlayerShark>().powerupActive;
+            if (GetComponentInParent<PlayerShark>().active && GetComponentInParent<PlayerShark>().powerupActive)
             {
-                GetComponentInParent<Player>().DecraseCoins(5);
-                GetComponentInParent<GameRules>().SetCatnipMik();
-                GetComponentInParent<PlayerShark>().ResetPowerupActive(GetComponentInParent<Shark>().pionek);
-            }
-            else
-            {
-                GetComponentInParent<Player>().IncreaseCoins(5);
+                GetComponentInParent<Player>().DecraseCoins(4);
                 GetComponentInParent<GameRules>().SetCatnipMik();
             }
+            else if (GetComponentInParent<PlayerShark>().active && !GetComponentInParent<PlayerShark>().powerupActive)
+            {
+                GetComponentInParent<Player>().IncreaseCoins(4);
+                GetComponentInParent<GameRules>().SetCatnipMik();
+            }
+
         }
     }
 
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
-        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 5) ||
-            GetComponentInParent<Mole>().poweruopActive)
+        if ((GetComponentInParent<Player>().coin >= 5 || GetComponentInParent<PlayerShark>().powerupActive) && GetComponentInParent<Player>().active)
         {
             MouseControle.instance.Clickable();
             Color color = GetComponent<SpriteRenderer>().color;
@@ -109,8 +107,7 @@ public class SharkPowerup : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 5) ||
-            GetComponentInParent<Mole>().poweruopActive)
+        if ((GetComponentInParent<Player>().coin >= 5 || GetComponentInParent<PlayerShark>().powerupActive) && GetComponentInParent<Player>().active)
         {
             MouseControle.instance.Default();
             Color color = GetComponent<SpriteRenderer>().color;
@@ -123,13 +120,13 @@ public class SharkPowerup : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if ((GetComponentInParent<Move>().waitPointIndex > 0 && !GetComponentInParent<PlayerMole>().active && GetComponentInParent<Player>().coin >= 5) ||
-            GetComponentInParent<Mole>().poweruopActive)
+        if ((GetComponentInParent<Player>().coin >= 5 || GetComponentInParent<PlayerShark>().powerupActive) && GetComponentInParent<Player>().active)
         {
+            MouseControle.instance.Half();
             Color color = GetComponent<SpriteRenderer>().color;
-            color.r = (float)0.80;
-            color.g = (float)0.80;
-            color.b = (float)0.80;
+            color.r = (float)0.70;
+            color.g = (float)0.70;
+            color.b = (float)0.70;
             GetComponent<SpriteRenderer>().color = color;
         }
     }

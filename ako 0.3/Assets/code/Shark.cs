@@ -5,8 +5,6 @@ using UnityEngine.Assertions.Must;
 
 public class Shark : Move
 {
-    [HideInInspector] public bool powerupActive;
-    [HideInInspector] public List<GameObject> onBoard = new List<GameObject>();
     private void Update()
     {
         //wykonanie ruchu, nie wiem czy to jest dobry pomys� �e to tutaj wstawi�em po porstu lepiej tutaj wygl�da ruch
@@ -16,9 +14,9 @@ public class Shark : Move
 
             if (transform.position == waitPoints[pozycja].transform.position && transform.position != waitPoints[waitPointIndex].transform.position)
             {
-                if (powerupActive)
+                if (GetComponentInParent<PlayerShark>().powerupActive)
                 {
-                    foreach (GameObject pawn in onBoard)
+                    foreach (GameObject pawn in GetComponentInParent<GameRules>().onBoard)
                     {
                         if (pawn.GetComponent<Move>().waitPoints[pawn.GetComponent<Move>().waitPointIndex] == waitPoints[pozycja] &&
                             pawn.GetComponentInParent<Player>().gracz != GetComponentInParent<Player>().gracz &&
@@ -26,7 +24,7 @@ public class Shark : Move
                         {
                             pawn.GetComponent<Move>().waitPointIndex = 0;
                             pawn.GetComponent<Move>().ruch = true;
-                            onBoard.Remove(pawn);
+                            GetComponentInParent<GameRules>().onBoard.Remove(pawn);
                         }
                     }
                     foreach(GameObject fluff in GetComponentInParent<GameRules>().fluff)
@@ -61,9 +59,7 @@ public class Shark : Move
                 AS.Stop();
                 if (waitPointIndex != 0)
                 {
-                    if (powerupActive)
-                        GetComponentInParent<GameRules>().onBoard = onBoard;
-                    powerupActive = false;
+                    GetComponentInParent<PlayerShark>().powerupActive = false;
                     GetComponentInParent<Player>().MoveTheSame(pionek,
                         waitPoints[waitPointIndex].transform.position.x, waitPoints[waitPointIndex].transform.position.y, waitPointIndex);
                     GetComponentInParent<GameRules>().Chceck(waitPoints[waitPointIndex], GetComponentInParent<Player>().nazwa, pionek);
@@ -77,7 +73,13 @@ public class Shark : Move
                         }
                         GetComponentInParent<GameRules>().TurnCounter();
                     }
-                    GetComponentInParent<PlayerShark>().ResetPowerupActive(pionek);
+                    if (waitPointIndex == waitPoints.Length - 1)
+                    {
+                        finished = true;
+                        GetComponentInParent<GameRules>().onBoard.Remove(pionek);
+                        GetComponent<PolygonCollider2D>().enabled = false;
+                        GetComponentInParent<Player>().ChceckPlayerFinished();
+                    }
                     GetComponentInParent<GameRules>().Turn();
                     GetComponentInParent<GameRules>().diceNumber = 0;
                 }

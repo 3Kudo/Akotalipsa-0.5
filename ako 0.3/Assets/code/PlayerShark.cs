@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class PlayerShark : Player
 {
+    [HideInInspector] public bool powerupActive = false;
     public override void EnambleMovement()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            if (pionek[i].GetComponent<Shark>().powerupActive)
-            {
-                pionek[i].GetComponent<Shark>().onBoard = GetComponentInParent<GameRules>().GetOnBoard();
-                pionek[i].GetComponent<Shark>().MoveOn(0);
-                active = false;
-                return;
-            }
-        }
         if (!pionek[0].GetComponent<Move>().MoveEnabled() && !pionek[1].GetComponent<Move>().MoveEnabled()
                 && !pionek[2].GetComponent<Move>().MoveEnabled() && !pionek[3].GetComponent<Move>().MoveEnabled())
         {
@@ -40,18 +31,5 @@ public class PlayerShark : Player
                 powerupWindow.GetComponent<PowerupWindow>().powerups[1].GetComponent<SharkPowerup>().SetUp();
                 break;
             }
-    }
-
-    public void ResetPowerupActive(GameObject pawn)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            if (pionek[i] != pawn && pionek[i].GetComponent<Shark>().powerupActive)
-            {
-                pionek[i].GetComponent<Shark>().powerupActive = false;
-
-                break;
-            }
-        }
     }
 }
