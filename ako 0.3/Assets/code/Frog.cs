@@ -9,6 +9,7 @@ public class Frog : Move
         //wykonanie ruchu, nie wiem czy to jest dobry pomys� �e to tutaj wstawi�em po porstu lepiej tutaj wygl�da ruch
         if (ruch)
         {
+
             transform.position = Vector3.MoveTowards(transform.position, waitPoints[pozycja].transform.position, moveSpeed * Time.deltaTime);
 
 
@@ -50,6 +51,13 @@ public class Frog : Move
                             GetComponentInParent<GameRules>().whoseTurn = 1;
                         }
                         GetComponentInParent<GameRules>().TurnCounter();
+                    }
+                    if (waitPointIndex == waitPoints.Length - 1)
+                    {
+                        finished = true;
+                        GetComponentInParent<GameRules>().onBoard.Remove(pionek);
+                        GetComponent<PolygonCollider2D>().enabled = false;
+                        GetComponentInParent<Player>().ChceckPlayerFinished();
                     }
                     GetComponentInParent<GameRules>().Turn();
                     GetComponentInParent<GameRules>().diceNumber = 0;
