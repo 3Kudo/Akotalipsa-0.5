@@ -38,7 +38,7 @@ public class PlayerDuck : Player
             if (pionek[i] == pawn)
                 continue;
             int count = pionek[i].GetComponent<Move>().waitPointIndex - pawn.GetComponent<Move>().waitPointIndex -1;
-            if(count <=4 && count>=1 && moveAmmount<count)
+            if(count <=5 && count>=1 && moveAmmount<count)
                 moveAmmount = count;
         }
         return moveAmmount;

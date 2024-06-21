@@ -37,8 +37,9 @@ public class GameRules : MonoBehaviour
     public int whoseTurn = 0;
 	public int diceNumber = 6;
 	public int turnCounter = 0;
-	// Start is called before the first frame update
-	public void Start()
+	public int ActivePlayerCount = 4;
+    // Start is called before the first frame update
+    public void Start()
 	{
 		diceNumber = 0;
         AS = GetComponent<AudioSource>();
@@ -143,7 +144,7 @@ public class GameRules : MonoBehaviour
         milk.GetComponent<Milk>().setMilkButton();
         catnip.GetComponent<Catnip>().setCatnipButton();
         turnCounter++;
-		if (turnCounter % 4 == 0)
+		if (turnCounter % ActivePlayerCount == 0)
 		{
             for(int i = 0; i < fluff.Count(); i++)
 			{
@@ -178,6 +179,7 @@ public class GameRules : MonoBehaviour
 	{
 		ranking[miejsce] = gracz;
 		miejsce++;
+		ActivePlayerCount--;
 		if (miejsce == 3)
 			EndGame();
 	}

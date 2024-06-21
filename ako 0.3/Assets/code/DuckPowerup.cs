@@ -47,6 +47,7 @@ public class DuckPowerup : MonoBehaviour
                 }
             }
             GetComponentInParent<Move>().waitPointIndex += ammount;
+            GetComponentInParent<Player>().MoveOut(GetComponentInParent<Move>().waitPoints[GetComponentInParent<Move>().waitPointIndex - ammount], GetComponentInParent<Move>().pionek);
             GetComponentInParent<Move>().ruch = true;
         }
     }
