@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 3f6bfc44f2b8fc049921080faf87b5ee
+  - enabled: 1
+    path: Assets/Scenes/Wybor Postaci.unity
+    guid: 03d125677e1451146a91432a6ff996da
   m_configObjects: {}
