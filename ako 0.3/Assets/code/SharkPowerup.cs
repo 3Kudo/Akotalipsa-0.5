@@ -48,7 +48,7 @@ public class SharkPowerup : MonoBehaviour
             color.b = (float)0.40;
             GetComponent<SpriteRenderer>().color = color;
         }
-        else if (GetComponentInParent<PlayerFrog>().powerupActive)
+        else if (GetComponentInParent<PlayerShark>().powerupActive)
         {
             Sprite sprite = GetComponentInParent<SpriteRenderer>().sprite;
             GetComponentInParent<SpriteRenderer>().sprite = powerup;
@@ -81,11 +81,13 @@ public class SharkPowerup : MonoBehaviour
             if (GetComponentInParent<PlayerShark>().active && GetComponentInParent<PlayerShark>().powerupActive)
             {
                 GetComponentInParent<Player>().DecraseCoins(4);
+                GetComponentInParent<Shark>().PowerSound = true;
                 GetComponentInParent<GameRules>().SetCatnipMik();
             }
             else if (GetComponentInParent<PlayerShark>().active && !GetComponentInParent<PlayerShark>().powerupActive)
             {
                 GetComponentInParent<Player>().IncreaseCoins(4);
+                GetComponentInParent<Shark>().PowerSound = false;
                 GetComponentInParent<GameRules>().SetCatnipMik();
             }
 

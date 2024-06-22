@@ -44,16 +44,8 @@ public class Milk : MonoBehaviour
             cat.GetComponent<Cat>().decrementWakeCounter(4);
             cat.GetComponent<Cat>().phaseCheck();
             GetComponentInParent<GameRules>().SetCatnipMik();
-            if (cat.GetComponent<Cat>().Phase == 0)
-            {
-                AS.clip = soundTracks[1];
-                AS.Play();
-            }
-            else
-            {
                 AS.clip = soundTracks[0];
                 AS.Play();
-            }
         }
     }
 

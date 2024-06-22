@@ -76,6 +76,7 @@ public class FrogPowerup : MonoBehaviour
             Sprite sprite = GetComponentInParent<SpriteRenderer>().sprite;
             GetComponentInParent<SpriteRenderer>().sprite = powerup;
             powerup = sprite;
+            GetComponentInParent<Frog>().PowerSound = true;
             GetComponentInParent<PlayerFrog>().powerupActive = !GetComponentInParent<PlayerFrog>().powerupActive;
             if (GetComponentInParent<PlayerFrog>().active && GetComponentInParent<PlayerFrog>().powerupActive)
             {

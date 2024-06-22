@@ -1083,7 +1083,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1241,7 +1241,9 @@ MonoBehaviour:
   - {fileID: 1091194499}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
+  - {fileID: 8300000, guid: 091e882c90bce144f9cb4a5f694cf61d, type: 3}
+  - {fileID: 8300000, guid: dfe28249ae1284b448adc8f9f2bada92, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -1253,6 +1255,7 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
+  PowerSound: 0
 --- !u!1 &145207963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,7 +1707,7 @@ MonoBehaviour:
   powerupWindow: {fileID: 1459844017}
   coinText: {fileID: 17265446}
   active: 0
-  coin: 0
+  coin: 100
   nazwa: 
   finished: 0
 --- !u!1 &182138097
@@ -2197,8 +2200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cat: {fileID: 1194998735}
   soundTracks:
-  - {fileID: 8300000, guid: caf3e8a2d7eb77045b7c436a9a0bdfc9, type: 3}
-  - {fileID: 8300000, guid: 124183a805950db4aa96d0de14f07f8e, type: 3}
+  - {fileID: 8300000, guid: 69d3bf07432df474ab31bfb6d71b932d, type: 3}
 --- !u!82 &194103816
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2478,8 +2480,8 @@ GameObject:
   - component: {fileID: 209223029}
   - component: {fileID: 209223032}
   - component: {fileID: 209223031}
-  - component: {fileID: 209223033}
   - component: {fileID: 211292473}
+  - component: {fileID: 209223033}
   m_Layer: 8
   m_Name: Frog
   m_TagString: Untagged
@@ -2616,7 +2618,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2774,7 +2776,9 @@ MonoBehaviour:
   - {fileID: 1091194499}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
+  - {fileID: 8300000, guid: 091e882c90bce144f9cb4a5f694cf61d, type: 3}
+  - {fileID: 8300000, guid: dfe28249ae1284b448adc8f9f2bada92, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -2786,6 +2790,7 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
+  PowerSound: 0
 --- !u!1 &211584193
 GameObject:
   m_ObjectHideFlags: 0
@@ -3738,7 +3743,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3896,7 +3901,9 @@ MonoBehaviour:
   - {fileID: 1692644719}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
+  - {fileID: 8300000, guid: 6642e71686f78dd4995ee413f7a22bad, type: 3}
+  - {fileID: 8300000, guid: 1078e68f66b1ebe4199d3ea592a46377, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -3908,8 +3915,7 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
-  powerupActive: 0
-  onBoard: []
+  PowerSound: 0
 --- !u!1 &386882483
 GameObject:
   m_ObjectHideFlags: 0
@@ -4337,7 +4343,7 @@ MonoBehaviour:
   - {fileID: 1837765624}
   anim: {fileID: 444166207}
   baseExit: {fileID: 21300000, guid: 229c2be2e4369014bade8df6bed0f529, type: 3}
-  AC: {fileID: 8300000, guid: 8a9b534196d979544adf87fe23d97c37, type: 3}
+  AC: {fileID: 8300000, guid: 3984aaec9f43aa341a9af3b051b87890, type: 3}
   parent: {fileID: 0}
 --- !u!212 &444166209
 SpriteRenderer:
@@ -4420,7 +4426,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5595,12 +5601,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 279eae9a542c3ee4595e335a7955804c, type: 3}
   - {fileID: 8300000, guid: d7235e1737b6bbb48b9e25715b8194cd, type: 3}
   - {fileID: 8300000, guid: 1ad56ee9d28cbb0498f4a045c17d692f, type: 3}
-  - {fileID: 8300000, guid: 64caadd5145e8e54e8a2678dd67ab1e5, type: 3}
-  - {fileID: 8300000, guid: 52c4fd8ef16d876489dc787201b59ec6, type: 3}
-  - {fileID: 8300000, guid: 64caadd5145e8e54e8a2678dd67ab1e5, type: 3}
-  - {fileID: 8300000, guid: 5ae46782a3d060a429df68a682b1e3b9, type: 3}
-  - {fileID: 8300000, guid: 64caadd5145e8e54e8a2678dd67ab1e5, type: 3}
-  - {fileID: 8300000, guid: 1c73eab720dc02a488012182d09f9da0, type: 3}
+  - {fileID: 8300000, guid: 8df5ab6ee037d3b46820ffc4bc3dc06e, type: 3}
+  - {fileID: 8300000, guid: 2f4dcc1c32f46424eadeee494a1908b0, type: 3}
+  - {fileID: 8300000, guid: 8df5ab6ee037d3b46820ffc4bc3dc06e, type: 3}
+  - {fileID: 8300000, guid: c637443ae4236f3498f2b5dcb3ba1e78, type: 3}
+  - {fileID: 8300000, guid: 8df5ab6ee037d3b46820ffc4bc3dc06e, type: 3}
+  - {fileID: 8300000, guid: 98f9ab2a3bcfd99439126ce7193e9751, type: 3}
   - {fileID: 8300000, guid: b308bf311a793194eb45d2c5e371e424, type: 3}
   - {fileID: 8300000, guid: 827a8892a555fc34d93557b0b9092209, type: 3}
   - {fileID: 8300000, guid: b308bf311a793194eb45d2c5e371e424, type: 3}
@@ -5825,7 +5831,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5983,7 +5989,9 @@ MonoBehaviour:
   - {fileID: 2037938501}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
+  - {fileID: 8300000, guid: 8d13cf8d229411b4583da0f87a71db7c, type: 3}
+  - {fileID: 8300000, guid: 7ea1839c99c2be149be689bd93628097, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -5996,6 +6004,7 @@ MonoBehaviour:
   minBlinkValue: 0
   isMouseOver: 0
   powerupActive: 0
+  PowerSound: 0
 --- !u!1 &566059255
 GameObject:
   m_ObjectHideFlags: 0
@@ -6309,7 +6318,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cat: {fileID: 1194998735}
-  soundTracks: {fileID: 8300000, guid: 599d8f1b76c97774d88b03f2b898c7e8, type: 3}
+  sfx:
+  - {fileID: 8300000, guid: d9096c9861d7d5f46abf9905f45bd930, type: 3}
+  - {fileID: 8300000, guid: 81a39009d10e1504eb6548b2fc0ca81d, type: 3}
 --- !u!82 &578743738
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6587,7 +6598,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6745,7 +6756,9 @@ MonoBehaviour:
   - {fileID: 1692644719}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
+  - {fileID: 8300000, guid: 6642e71686f78dd4995ee413f7a22bad, type: 3}
+  - {fileID: 8300000, guid: 1078e68f66b1ebe4199d3ea592a46377, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -6757,8 +6770,7 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
-  powerupActive: 0
-  onBoard: []
+  PowerSound: 0
 --- !u!1 &609282487
 GameObject:
   m_ObjectHideFlags: 0
@@ -6908,7 +6920,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -7066,7 +7078,9 @@ MonoBehaviour:
   - {fileID: 2037938501}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
+  - {fileID: 8300000, guid: 8d13cf8d229411b4583da0f87a71db7c, type: 3}
+  - {fileID: 8300000, guid: 7ea1839c99c2be149be689bd93628097, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -7079,6 +7093,7 @@ MonoBehaviour:
   minBlinkValue: 0
   isMouseOver: 0
   powerupActive: 0
+  PowerSound: 0
 --- !u!1 &610892559
 GameObject:
   m_ObjectHideFlags: 0
@@ -7228,7 +7243,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -7386,7 +7401,9 @@ MonoBehaviour:
   - {fileID: 2037938501}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
+  - {fileID: 8300000, guid: 8d13cf8d229411b4583da0f87a71db7c, type: 3}
+  - {fileID: 8300000, guid: 7ea1839c99c2be149be689bd93628097, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -7399,6 +7416,7 @@ MonoBehaviour:
   minBlinkValue: 0
   isMouseOver: 0
   powerupActive: 0
+  PowerSound: 0
 --- !u!1 &623516399
 GameObject:
   m_ObjectHideFlags: 0
@@ -8046,7 +8064,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8204,7 +8222,9 @@ MonoBehaviour:
   - {fileID: 1321306624}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
+  - {fileID: 8300000, guid: 0419077e5a3dc424f8ac664513527689, type: 3}
+  - {fileID: 8300000, guid: c4e4168dd744b5848b467d558092b3af, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -8387,7 +8407,7 @@ MonoBehaviour:
   powerupWindow: {fileID: 2069679630}
   coinText: {fileID: 197007702}
   active: 0
-  coin: 0
+  coin: 100
   nazwa: 
   finished: 0
   molehillPattern: {fileID: 4648657561776326780, guid: 384aefd88289b394798a1d268a299cb4, type: 3}
@@ -9583,7 +9603,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -9741,7 +9761,9 @@ MonoBehaviour:
   - {fileID: 1321306624}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
+  - {fileID: 8300000, guid: 0419077e5a3dc424f8ac664513527689, type: 3}
+  - {fileID: 8300000, guid: c4e4168dd744b5848b467d558092b3af, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -10513,7 +10535,7 @@ MonoBehaviour:
   - {fileID: 387267640}
   anim: {fileID: 953401984}
   baseExit: {fileID: 21300000, guid: 74b9bef6afd19b94cbc4907a7b336011, type: 3}
-  AC: {fileID: 8300000, guid: 8a9b534196d979544adf87fe23d97c37, type: 3}
+  AC: {fileID: 8300000, guid: 3984aaec9f43aa341a9af3b051b87890, type: 3}
   parent: {fileID: 0}
 --- !u!82 &953401987
 AudioSource:
@@ -10527,7 +10549,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -11169,7 +11191,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -11327,7 +11349,9 @@ MonoBehaviour:
   - {fileID: 1321306624}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
+  - {fileID: 8300000, guid: 0419077e5a3dc424f8ac664513527689, type: 3}
+  - {fileID: 8300000, guid: c4e4168dd744b5848b467d558092b3af, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -12329,7 +12353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundTracks:
-  - {fileID: 8300000, guid: 2da37231c2006294583834cbcd11b671, type: 3}
+  - {fileID: 8300000, guid: 8ee2eab9dee747145a946ec4419266ab, type: 3}
   - {fileID: 8300000, guid: 6075906c219337f43abcdbe1cda0e132, type: 3}
   changeValue: 0.005
   maxBlinkValue: 0.4
@@ -13302,7 +13326,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -13460,7 +13484,9 @@ MonoBehaviour:
   - {fileID: 1321306624}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: ab3b691c5765b3f47a842f35a26dac14, type: 3}
+  - {fileID: 8300000, guid: 0419077e5a3dc424f8ac664513527689, type: 3}
+  - {fileID: 8300000, guid: c4e4168dd744b5848b467d558092b3af, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -14031,7 +14057,7 @@ MonoBehaviour:
   - {fileID: 889221949}
   anim: {fileID: 1459844018}
   baseExit: {fileID: 21300000, guid: 5e65f9c6913edd248b207fbfde576f09, type: 3}
-  AC: {fileID: 8300000, guid: 8a9b534196d979544adf87fe23d97c37, type: 3}
+  AC: {fileID: 8300000, guid: 3984aaec9f43aa341a9af3b051b87890, type: 3}
   parent: {fileID: 0}
 --- !u!212 &1459844020
 SpriteRenderer:
@@ -14114,7 +14140,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -14456,6 +14482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1598017227}
   - component: {fileID: 1598017228}
+  - component: {fileID: 1598017229}
   m_Layer: 0
   m_Name: Sharks
   m_TagString: Untagged
@@ -14505,9 +14532,106 @@ MonoBehaviour:
   powerupWindow: {fileID: 953401982}
   coinText: {fileID: 791477771}
   active: 0
-  coin: 0
+  coin: 100
   nazwa: 
   finished: 0
+  powerupActive: 0
+--- !u!82 &1598017229
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598017226}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1598846302
 GameObject:
   m_ObjectHideFlags: 0
@@ -14815,7 +14939,7 @@ MonoBehaviour:
   powerupWindow: {fileID: 444166206}
   coinText: {fileID: 919727038}
   active: 0
-  coin: 0
+  coin: 100
   nazwa: 
   finished: 0
   powerupActive: 0
@@ -15752,7 +15876,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -15910,7 +16034,9 @@ MonoBehaviour:
   - {fileID: 2037938501}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: f03cd4b3f5f4fba4b83796bba06cfe65, type: 3}
+  - {fileID: 8300000, guid: 8d13cf8d229411b4583da0f87a71db7c, type: 3}
+  - {fileID: 8300000, guid: 7ea1839c99c2be149be689bd93628097, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -15923,6 +16049,7 @@ MonoBehaviour:
   minBlinkValue: 0
   isMouseOver: 0
   powerupActive: 0
+  PowerSound: 0
 --- !u!1 &1759401554
 GameObject:
   m_ObjectHideFlags: 0
@@ -16405,7 +16532,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -16563,7 +16690,9 @@ MonoBehaviour:
   - {fileID: 1692644719}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
+  - {fileID: 8300000, guid: 6642e71686f78dd4995ee413f7a22bad, type: 3}
+  - {fileID: 8300000, guid: 1078e68f66b1ebe4199d3ea592a46377, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -16575,8 +16704,7 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
-  powerupActive: 0
-  onBoard: []
+  PowerSound: 0
 --- !u!1 &1818684312
 GameObject:
   m_ObjectHideFlags: 0
@@ -17002,7 +17130,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -17160,7 +17288,9 @@ MonoBehaviour:
   - {fileID: 1091194499}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
+  - {fileID: 8300000, guid: 091e882c90bce144f9cb4a5f694cf61d, type: 3}
+  - {fileID: 8300000, guid: dfe28249ae1284b448adc8f9f2bada92, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -17172,6 +17302,7 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
+  PowerSound: 0
 --- !u!1 &1869554854
 GameObject:
   m_ObjectHideFlags: 0
@@ -17322,7 +17453,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -17480,7 +17611,9 @@ MonoBehaviour:
   - {fileID: 1692644719}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 8be0d8a7114116b4e94948b63ccaeab8, type: 3}
+  - {fileID: 8300000, guid: 6642e71686f78dd4995ee413f7a22bad, type: 3}
+  - {fileID: 8300000, guid: 1078e68f66b1ebe4199d3ea592a46377, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -17492,8 +17625,7 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
-  powerupActive: 0
-  onBoard: []
+  PowerSound: 0
 --- !u!1 &1881778226
 GameObject:
   m_ObjectHideFlags: 0
@@ -19391,7 +19523,7 @@ MonoBehaviour:
   - {fileID: 2110773107}
   mouseExit: 1
   AS: {fileID: 0}
-  soundTracks: {fileID: 8300000, guid: 8a9b534196d979544adf87fe23d97c37, type: 3}
+  soundTracks: {fileID: 8300000, guid: 3984aaec9f43aa341a9af3b051b87890, type: 3}
 --- !u!212 &2068923612
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19623,7 +19755,7 @@ MonoBehaviour:
   - {fileID: 878002696}
   anim: {fileID: 2069679631}
   baseExit: {fileID: 21300000, guid: 51879dca07316c644b995d7dbbb35461, type: 3}
-  AC: {fileID: 8300000, guid: 8a9b534196d979544adf87fe23d97c37, type: 3}
+  AC: {fileID: 8300000, guid: 3984aaec9f43aa341a9af3b051b87890, type: 3}
   parent: {fileID: 0}
 --- !u!212 &2069679633
 SpriteRenderer:
@@ -19706,7 +19838,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -19877,6 +20009,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e48203bfed7015a4bba6e4923ccddf2d, type: 3}
   - {fileID: 8300000, guid: 26bd9fc2bf68bfa4d940fce23c0d3fe5, type: 3}
   - {fileID: 8300000, guid: c6567758fe56d804ab4b72dd61a61b0d, type: 3}
+  - {fileID: 8300000, guid: f1553d19d1d6c924cbadeebbd4867616, type: 3}
+  - {fileID: 8300000, guid: 09c3c3c7a905a2b448c8f82aeea1ee51, type: 3}
   cat: {fileID: 1194998735}
   milk: {fileID: 194103811}
   catnip: {fileID: 578743733}
@@ -19936,6 +20070,7 @@ MonoBehaviour:
   whoseTurn: 0
   diceNumber: 6
   turnCounter: 0
+  ActivePlayerCount: 4
 --- !u!82 &2082301970
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20521,7 +20656,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.26
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -20679,7 +20814,9 @@ MonoBehaviour:
   - {fileID: 1091194499}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 588f8a42b76cd0d4096981fa353747a9, type: 3}
+  - {fileID: 8300000, guid: 091e882c90bce144f9cb4a5f694cf61d, type: 3}
+  - {fileID: 8300000, guid: dfe28249ae1284b448adc8f9f2bada92, type: 3}
+  - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
   defence: 0
   ruch: 0
@@ -20691,6 +20828,7 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
+  PowerSound: 0
 --- !u!1 &2128273755
 GameObject:
   m_ObjectHideFlags: 0

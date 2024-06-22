@@ -35,10 +35,11 @@ public class DuckPowerup : MonoBehaviour
             MouseControle.instance.Default();
             GetComponentInParent<Move>().ToNormalState(true);
             GetComponentInParent<Player>().DecraseCoins(3);
+            GetComponentInParent<Duck>().PowerSound = true;
             GetComponentInParent<GameRules>().SetCatnipMik();
             Destroy(GetComponentInParent<Move>().shadowPawn);
             GetComponentInParent<Duck>().powerupActive = true;
-            foreach(GameObject wall in GetComponentInParent<GameRules>().fluff)
+            foreach (GameObject wall in GetComponentInParent<GameRules>().fluff)
             {
                 if (wall.GetComponent<Fluff>().waitPoint == GetComponentInParent<Move>().waitPoints[GetComponentInParent<Move>().waitPointIndex + ammount])
                 {

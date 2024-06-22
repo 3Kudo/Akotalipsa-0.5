@@ -7,7 +7,7 @@ public class Catnip : MonoBehaviour
     public GameObject cat;
 
     private AudioSource AS;
-    public AudioClip soundTracks;
+    public AudioClip[] sfx;
 
     public void Start()
     {
@@ -43,8 +43,16 @@ public class Catnip : MonoBehaviour
             cat.GetComponent<Cat>().incrementWakeCounter(4);
             cat.GetComponent<Cat>().phaseCheck();
             GetComponentInParent<GameRules>().SetCatnipMik();
-            AS.clip = soundTracks;
-            AS.Play();
+            if (cat.GetComponent<Cat>().Phase == 0 || cat.GetComponent<Cat>().Phase == 1)
+            {
+                AS.clip = sfx[0];
+                AS.Play();
+            }
+            else
+            {
+                AS.clip = sfx[1];
+                AS.Play();
+            }
         }
     }
 
