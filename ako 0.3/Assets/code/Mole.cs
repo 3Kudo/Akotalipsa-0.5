@@ -19,7 +19,7 @@ public class Mole : Move
             {
                 if (waitPointIndex > pozycja)
                 {
-                    moveSpeed = 8f;
+                    moveSpeed = 5f;
                     pozycja++;
                     if (AS.isPlaying == false)
                     {
@@ -30,13 +30,21 @@ public class Mole : Move
                 }
                 else
                 {
-                    moveSpeed = 12f;
+                    moveSpeed = 9f;
                     pozycja--;
                 }
             }
             if (transform.position == waitPoints[waitPointIndex].transform.position)
             {
                // AS.Stop();
+
+                if (paw != null)
+                {
+                    Destroy(paw);
+                    paw = null;
+                }
+                AS.Stop();
+
                 if (waitPointIndex != 0)
                 {
                     if (poweruopActive)
@@ -118,5 +126,53 @@ public class Mole : Move
         if (waitPointIndex > 0)
             return true;
         return false;
+    }
+
+    public override void SetPawFront()
+    {
+        if ((waitPointIndex >= 1 && waitPointIndex < 11) || (waitPointIndex >= 47 && waitPointIndex < 53))
+        {
+            paw.transform.rotation.Set(0, 0, 180, 0);
+            paw.transform.position.Set(-0.23f, 0, 0);
+        }
+        else if (waitPointIndex >= 11 && waitPointIndex < 23)
+        {
+            paw.transform.rotation.Set(0, 0, 90, 0);
+            paw.transform.position.Set(0, 0.26f, 0);
+        }
+        else if (waitPointIndex >= 23 && waitPointIndex < 35)
+        {
+            paw.transform.rotation.Set(0, 0, 0, 0);
+            paw.transform.position.Set(0.23f, 0, 0);
+        }
+        else if (waitPointIndex >= 35 && waitPointIndex <= 47)
+        {
+            paw.transform.rotation.Set(0, 0, 270, 0);
+            paw.transform.position.Set(0, -0.26f, 0);
+        }
+    }
+
+    public override void SetPawBack()
+    {
+        if ((waitPointIndex >= 1 && waitPointIndex <= 13) || (waitPointIndex > 48 && waitPointIndex <= 53))
+        {
+            paw.transform.rotation.Set(0, 0, 0, 0);
+            paw.transform.position.Set(0.23f, 0, 0);
+        }
+        else if (waitPointIndex > 11 && waitPointIndex <= 25)
+        {
+            paw.transform.rotation.Set(0, 0, 270, 0);
+            paw.transform.position.Set(0, -0.26f, 0);
+        }
+        else if (waitPointIndex > 23 && waitPointIndex <= 37)
+        {
+            paw.transform.rotation.Set(0, 0, 180, 0);
+            paw.transform.position.Set(-0.23f, 0, 0);
+        }
+        else if (waitPointIndex > 35 && waitPointIndex <= 48)
+        {
+            paw.transform.rotation.Set(0, 0, 90, 0);
+            paw.transform.position.Set(0, 0.26f, 0);
+        }
     }
 }
