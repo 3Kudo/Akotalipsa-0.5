@@ -1707,7 +1707,7 @@ MonoBehaviour:
   powerupWindow: {fileID: 1459844017}
   coinText: {fileID: 17265446}
   active: 0
-  coin: 100
+  coin: 0
   nazwa: 
   finished: 0
 --- !u!1 &182138097
@@ -3901,7 +3901,7 @@ MonoBehaviour:
   - {fileID: 1692644719}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 6642e71686f78dd4995ee413f7a22bad, type: 3}
+  - {fileID: 8300000, guid: 912308bfea4679e469748fdc75fe615e, type: 3}
   - {fileID: 8300000, guid: 1078e68f66b1ebe4199d3ea592a46377, type: 3}
   - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
@@ -4426,7 +4426,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5613,12 +5613,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b3d5a8967c6492c49b5f45f4d5fa1182, type: 3}
   - {fileID: 8300000, guid: b308bf311a793194eb45d2c5e371e424, type: 3}
   - {fileID: 8300000, guid: e5446fe72ecd837478783def6cb0beda, type: 3}
-  - {fileID: 8300000, guid: 1e389fdcf5e33e6429df160f76c59860, type: 3}
-  - {fileID: 8300000, guid: aa5ad55fe35041342ad2c9b26e5bc01c, type: 3}
-  - {fileID: 8300000, guid: 1e389fdcf5e33e6429df160f76c59860, type: 3}
-  - {fileID: 8300000, guid: e904b451adb43954b9bf2b59ec878a09, type: 3}
-  - {fileID: 8300000, guid: 1e389fdcf5e33e6429df160f76c59860, type: 3}
-  - {fileID: 8300000, guid: dac8af061c986434db695412d0d93a37, type: 3}
+  - {fileID: 8300000, guid: 3e553e9ced4df5c41ae682371d060804, type: 3}
+  - {fileID: 8300000, guid: 357d0cff70151604ab5e9f802d71580b, type: 3}
+  - {fileID: 8300000, guid: 3e553e9ced4df5c41ae682371d060804, type: 3}
+  - {fileID: 8300000, guid: 4e35836243350244c87e213c9b7348dd, type: 3}
+  - {fileID: 8300000, guid: 3e553e9ced4df5c41ae682371d060804, type: 3}
+  - {fileID: 8300000, guid: 0a314e601b79ceb47928834e558f2a03, type: 3}
   cat: {fileID: 1194998735}
 --- !u!1 &544553959
 GameObject:
@@ -6756,7 +6756,7 @@ MonoBehaviour:
   - {fileID: 1692644719}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 6642e71686f78dd4995ee413f7a22bad, type: 3}
+  - {fileID: 8300000, guid: 912308bfea4679e469748fdc75fe615e, type: 3}
   - {fileID: 8300000, guid: 1078e68f66b1ebe4199d3ea592a46377, type: 3}
   - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
@@ -8407,7 +8407,7 @@ MonoBehaviour:
   powerupWindow: {fileID: 2069679630}
   coinText: {fileID: 197007702}
   active: 0
-  coin: 100
+  coin: 0
   nazwa: 
   finished: 0
   molehillPattern: {fileID: 4648657561776326780, guid: 384aefd88289b394798a1d268a299cb4, type: 3}
@@ -10549,7 +10549,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -11910,8 +11910,8 @@ MonoBehaviour:
   - {fileID: 729415138}
   - {fileID: 1610930975}
   SFX:
-  - {fileID: 8300000, guid: c71e42676fb1eb7459e7cdabd3f7d096, type: 3}
-  - {fileID: 8300000, guid: bb1a754f58fcf424b9c02d4709693fea, type: 3}
+  - {fileID: 8300000, guid: c35977a7c91f4154e92f5434d67a9d3d, type: 3}
+  - {fileID: 8300000, guid: 11cd97aecceb36e4e8efe2013c426269, type: 3}
 --- !u!212 &1194998737
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14140,7 +14140,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -14532,7 +14532,7 @@ MonoBehaviour:
   powerupWindow: {fileID: 953401982}
   coinText: {fileID: 791477771}
   active: 0
-  coin: 100
+  coin: 0
   nazwa: 
   finished: 0
   powerupActive: 0
@@ -14939,7 +14939,7 @@ MonoBehaviour:
   powerupWindow: {fileID: 444166206}
   coinText: {fileID: 919727038}
   active: 0
-  coin: 100
+  coin: 0
   nazwa: 
   finished: 0
   powerupActive: 0
@@ -16690,7 +16690,7 @@ MonoBehaviour:
   - {fileID: 1692644719}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 6642e71686f78dd4995ee413f7a22bad, type: 3}
+  - {fileID: 8300000, guid: 912308bfea4679e469748fdc75fe615e, type: 3}
   - {fileID: 8300000, guid: 1078e68f66b1ebe4199d3ea592a46377, type: 3}
   - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
@@ -17611,7 +17611,7 @@ MonoBehaviour:
   - {fileID: 1692644719}
   waitPointIndex: 0
   soundTracks:
-  - {fileID: 8300000, guid: 6642e71686f78dd4995ee413f7a22bad, type: 3}
+  - {fileID: 8300000, guid: 912308bfea4679e469748fdc75fe615e, type: 3}
   - {fileID: 8300000, guid: 1078e68f66b1ebe4199d3ea592a46377, type: 3}
   - {fileID: 8300000, guid: e268a10d376007046827ebbb15bf4d82, type: 3}
   AS: {fileID: 0}
@@ -19838,7 +19838,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -1943542622408441518, guid: e7058c46a4fe89f42841ed52d586dac5, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -20011,6 +20011,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c6567758fe56d804ab4b72dd61a61b0d, type: 3}
   - {fileID: 8300000, guid: f1553d19d1d6c924cbadeebbd4867616, type: 3}
   - {fileID: 8300000, guid: 09c3c3c7a905a2b448c8f82aeea1ee51, type: 3}
+  - {fileID: 8300000, guid: 05d6d12063da2d243823f42ccb440eff, type: 3}
   cat: {fileID: 1194998735}
   milk: {fileID: 194103811}
   catnip: {fileID: 578743733}
