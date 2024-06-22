@@ -21,6 +21,12 @@ public class Mole : Move
                 {
                     moveSpeed = 5f;
                     pozycja++;
+                    if (AS.isPlaying == false)
+                    {
+                        AS.clip = soundTracks[0];
+
+                        AS.Play();
+                    }
                 }
                 else
                 {
@@ -28,25 +34,24 @@ public class Mole : Move
                     pozycja--;
                 }
             }
-            if (AS.isPlaying == false)
-            {
-                AS.clip = soundTracks[0];
-
-                AS.Play();
-            }
             if (transform.position == waitPoints[waitPointIndex].transform.position)
             {
+               // AS.Stop();
+
                 if (paw != null)
                 {
                     Destroy(paw);
                     paw = null;
                 }
                 AS.Stop();
+
                 if (waitPointIndex != 0)
                 {
                     if (poweruopActive)
                     {
-                        foreach(GameObject wall in GetComponentInParent<GameRules>().fluff)
+                        AS.clip = soundTracks[1];
+                        AS.Play();
+                        foreach (GameObject wall in GetComponentInParent<GameRules>().fluff)
                         {
                             if(wall.GetComponent<Fluff>().waitPoint == waitPoints[waitPointIndex])
                             {

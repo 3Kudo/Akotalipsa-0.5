@@ -1717,7 +1717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c1c48be13fd3347b2659ec8296caa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundTracks: {fileID: 8300000, guid: d3db307c2b3d5fc41894f685853c25b1, type: 3}
+  soundTracks: {fileID: 8300000, guid: 7516975127c9d534ba9bce70b3727b38, type: 3}
 --- !u!20 &2146587959
 Camera:
   m_ObjectHideFlags: 0

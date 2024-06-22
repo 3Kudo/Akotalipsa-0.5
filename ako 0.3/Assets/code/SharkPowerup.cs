@@ -81,11 +81,13 @@ public class SharkPowerup : MonoBehaviour
             if (GetComponentInParent<PlayerShark>().active && GetComponentInParent<PlayerShark>().powerupActive)
             {
                 GetComponentInParent<Player>().DecraseCoins(4);
+                GetComponentInParent<Shark>().PowerSound = true;
                 GetComponentInParent<GameRules>().SetCatnipMik();
             }
             else if (GetComponentInParent<PlayerShark>().active && !GetComponentInParent<PlayerShark>().powerupActive)
             {
                 GetComponentInParent<Player>().IncreaseCoins(4);
+                GetComponentInParent<Shark>().PowerSound = false;
                 GetComponentInParent<GameRules>().SetCatnipMik();
             }
 

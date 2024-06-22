@@ -179,14 +179,18 @@ public class GameRules : MonoBehaviour
 	{
 		ranking[miejsce] = gracz;
 		miejsce++;
-		ActivePlayerCount--;
+        AS.clip = sfx[3];
+        AS.Play();
+        ActivePlayerCount--;
 		if (miejsce == 3)
 			EndGame();
 	}
 
 	public void EndGame()
 	{
-		koniec.gameObject.SetActive(true);
+        AS.clip = sfx[5];
+        AS.Play();
+        koniec.gameObject.SetActive(true);
 		for (int i = 0; i < 4; i++)
 		{
 			if (ranking[0] == pawn[i])
@@ -357,7 +361,7 @@ public class GameRules : MonoBehaviour
 			}
 			fluff.Add(Instantiate(fluffPrefab) as GameObject);
 			fluff[fluff.Count - 1].GetComponent<Fluff>().setPlace(newWaitPoint);
-            AS.clip = fluff[0].GetComponent<Fluff>().soundTracks;
+            AS.clip = sfx[4];
             AS.Play();
         }
 	}

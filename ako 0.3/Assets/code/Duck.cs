@@ -5,6 +5,8 @@ using UnityEngine;
 public class Duck : Move
 {
     [HideInInspector] public bool powerupActive = false;
+    public bool PowerSound = false;
+
     private void Update()
     {
         //wykonanie ruchu, nie wiem czy to jest dobry pomys� �e to tutaj wstawi�em po porstu lepiej tutaj wygl�da ruch
@@ -19,6 +21,24 @@ public class Duck : Move
                 {
                     moveSpeed = 5f;
                     pozycja++;
+
+                    if (AS.isPlaying == false)
+                    {
+                        if (PowerSound == true)
+                        {
+                            AS.clip = soundTracks[1];
+
+                            AS.Play();
+                            PowerSound = false;
+                        }
+                        else
+                        {
+                            AS.clip = soundTracks[0];
+
+                            AS.Play();
+                        }
+                    }
+
                 }
                 else
                 {
@@ -26,12 +46,7 @@ public class Duck : Move
                     pozycja--;
                 }
             }
-            if (AS.isPlaying == false)
-            {
-                AS.clip = soundTracks[0];
 
-                AS.Play();
-            }
             if (transform.position == waitPoints[waitPointIndex].transform.position)
             {
                 if (paw != null)
@@ -40,7 +55,7 @@ public class Duck : Move
                     paw = null;
                 }
                 ruch = false;
-                AS.Stop();
+               // AS.Stop();
                 if (waitPointIndex != 0)
                 {
                     GetComponentInParent<Player>().MoveTheSame(pionek,
