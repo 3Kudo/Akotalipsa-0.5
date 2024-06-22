@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerup: {fileID: 21300000, guid: b195982ceac0b784c9122a60bd880adf, type: 3}
+  price: 6
 --- !u!61 &9102247509208313970
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -311,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 6
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ea703189b3423bb46ab00a6e978a6605, type: 2}
   m_sharedMaterial: {fileID: 6702790385685223542, guid: ea703189b3423bb46ab00a6e978a6605, type: 2}

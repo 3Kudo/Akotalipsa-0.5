@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerShark : Player
 {
+
     [HideInInspector] public bool powerupActive = false;
     public override void EnambleMovement()
-    {
+    { 
         if (!pionek[0].GetComponent<Move>().MoveEnabled() && !pionek[1].GetComponent<Move>().MoveEnabled()
                 && !pionek[2].GetComponent<Move>().MoveEnabled() && !pionek[3].GetComponent<Move>().MoveEnabled())
         {

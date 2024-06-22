@@ -14,7 +14,7 @@ public class GameRules : MonoBehaviour
 	public Sprite[] sprites = new Sprite[4];
 	public Image[] images= new Image[4];
 	public int miejsce;
-	public GameObject safePlacePrefab, CoinPrefab, fluffPrefab, shieldPrefab, toothsPrefab;
+	public GameObject safePlacePrefab, CoinPrefab, fluffPrefab, shieldPrefab, toothsPrefab, clawPrefab;
     public AudioSource AS;
     public AudioClip[] sfx;
 
@@ -179,14 +179,18 @@ public class GameRules : MonoBehaviour
 	{
 		ranking[miejsce] = gracz;
 		miejsce++;
-		ActivePlayerCount--;
+        AS.clip = sfx[3];
+        AS.Play();
+        ActivePlayerCount--;
 		if (miejsce == 3)
 			EndGame();
 	}
 
 	public void EndGame()
 	{
-		koniec.gameObject.SetActive(true);
+        AS.clip = sfx[5];
+        AS.Play();
+        koniec.gameObject.SetActive(true);
 		for (int i = 0; i < 4; i++)
 		{
 			if (ranking[0] == pawn[i])
@@ -297,8 +301,8 @@ public class GameRules : MonoBehaviour
 	{
 		int los = Random.Range(0, onBoard.Count);
 		GameObject pionek = onBoard.ElementAt(los);
-		GameObject tooths = Instantiate (toothsPrefab as GameObject);
-		tooths.transform.position = pionek.transform.position;
+		GameObject claws = Instantiate (clawPrefab as GameObject);
+		claws.transform.position = pionek.transform.position;
 		if (pionek.GetComponent<Move>().defence)
 		{
 			GameObject shield = Instantiate(shieldPrefab as GameObject);
@@ -357,7 +361,7 @@ public class GameRules : MonoBehaviour
 			}
 			fluff.Add(Instantiate(fluffPrefab) as GameObject);
 			fluff[fluff.Count - 1].GetComponent<Fluff>().setPlace(newWaitPoint);
-            AS.clip = fluff[0].GetComponent<Fluff>().soundTracks;
+            AS.clip = sfx[4];
             AS.Play();
         }
 	}
