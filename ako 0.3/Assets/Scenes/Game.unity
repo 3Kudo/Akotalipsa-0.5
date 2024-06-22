@@ -1182,6 +1182,7 @@ MonoBehaviour:
   pionek: {fileID: 145181907}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 145181908}
   PawnSprite: {fileID: 21300000, guid: 16e5c17913a388f4fa4fb603ad6ad89c, type: 3}
   waitPoints:
@@ -2715,6 +2716,7 @@ MonoBehaviour:
   pionek: {fileID: 209223028}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 209223029}
   PawnSprite: {fileID: 21300000, guid: 16e5c17913a388f4fa4fb603ad6ad89c, type: 3}
   waitPoints:
@@ -3837,6 +3839,7 @@ MonoBehaviour:
   pionek: {fileID: 384831387}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 384831388}
   PawnSprite: {fileID: 21300000, guid: 3be6ce2fc52d9764faa7f12ec2e49c1c, type: 3}
   waitPoints:
@@ -3908,8 +3911,6 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
-  powerupActive: 0
-  onBoard: []
 --- !u!1 &386882483
 GameObject:
   m_ObjectHideFlags: 0
@@ -5924,6 +5925,7 @@ MonoBehaviour:
   pionek: {fileID: 565801311}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 565801312}
   PawnSprite: {fileID: 21300000, guid: ef1e1b584041d0641b121ad6dd515e14, type: 3}
   waitPoints:
@@ -6686,6 +6688,7 @@ MonoBehaviour:
   pionek: {fileID: 604178498}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 604178499}
   PawnSprite: {fileID: 21300000, guid: 3be6ce2fc52d9764faa7f12ec2e49c1c, type: 3}
   waitPoints:
@@ -6757,8 +6760,6 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
-  powerupActive: 0
-  onBoard: []
 --- !u!1 &609282487
 GameObject:
   m_ObjectHideFlags: 0
@@ -7007,6 +7008,7 @@ MonoBehaviour:
   pionek: {fileID: 609282487}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 609282488}
   PawnSprite: {fileID: 21300000, guid: ef1e1b584041d0641b121ad6dd515e14, type: 3}
   waitPoints:
@@ -7327,6 +7329,7 @@ MonoBehaviour:
   pionek: {fileID: 610892559}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 610892560}
   PawnSprite: {fileID: 21300000, guid: ef1e1b584041d0641b121ad6dd515e14, type: 3}
   waitPoints:
@@ -8145,6 +8148,7 @@ MonoBehaviour:
   pionek: {fileID: 688237528}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 688237529}
   PawnSprite: {fileID: 21300000, guid: 634b9bde49c687848bd3f99354284017, type: 3}
   waitPoints:
@@ -9682,6 +9686,7 @@ MonoBehaviour:
   pionek: {fileID: 901403420}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 901403421}
   PawnSprite: {fileID: 21300000, guid: 634b9bde49c687848bd3f99354284017, type: 3}
   waitPoints:
@@ -11268,6 +11273,7 @@ MonoBehaviour:
   pionek: {fileID: 1063066514}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 1063066515}
   PawnSprite: {fileID: 21300000, guid: 634b9bde49c687848bd3f99354284017, type: 3}
   waitPoints:
@@ -11880,6 +11886,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 80d6410baf8604e4490463153c368c5a, type: 3}
   - {fileID: 21300000, guid: b05168697c05ab64aa525ff8cb62f682, type: 3}
   akotametr: {fileID: 1114353143}
+  pawPrefab: {fileID: 5486855111203769684, guid: bfcfac4ce8c06d3448f4995c28182c35, type: 3}
   pawns:
   - {fileID: 1598017226}
   - {fileID: 181445512}
@@ -13401,6 +13408,7 @@ MonoBehaviour:
   pionek: {fileID: 1333517152}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 1333517153}
   PawnSprite: {fileID: 21300000, guid: 634b9bde49c687848bd3f99354284017, type: 3}
   waitPoints:
@@ -14508,6 +14516,7 @@ MonoBehaviour:
   coin: 0
   nazwa: 
   finished: 0
+  powerupActive: 0
 --- !u!1 &1598846302
 GameObject:
   m_ObjectHideFlags: 0
@@ -15851,6 +15860,7 @@ MonoBehaviour:
   pionek: {fileID: 1751368370}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 1751368371}
   PawnSprite: {fileID: 21300000, guid: ef1e1b584041d0641b121ad6dd515e14, type: 3}
   waitPoints:
@@ -16381,7 +16391,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: aaf15b1be7fbf834cb5e6f4f9381a59b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -16504,6 +16514,7 @@ MonoBehaviour:
   pionek: {fileID: 1809797739}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 1809797740}
   PawnSprite: {fileID: 21300000, guid: 3be6ce2fc52d9764faa7f12ec2e49c1c, type: 3}
   waitPoints:
@@ -16575,8 +16586,6 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
-  powerupActive: 0
-  onBoard: []
 --- !u!1 &1818684312
 GameObject:
   m_ObjectHideFlags: 0
@@ -17101,6 +17110,7 @@ MonoBehaviour:
   pionek: {fileID: 1868742800}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 1868742801}
   PawnSprite: {fileID: 21300000, guid: 16e5c17913a388f4fa4fb603ad6ad89c, type: 3}
   waitPoints:
@@ -17421,6 +17431,7 @@ MonoBehaviour:
   pionek: {fileID: 1869554854}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 1869554855}
   PawnSprite: {fileID: 21300000, guid: 3be6ce2fc52d9764faa7f12ec2e49c1c, type: 3}
   waitPoints:
@@ -17492,8 +17503,6 @@ MonoBehaviour:
   maxBlinkValue: 0.5
   minBlinkValue: 0
   isMouseOver: 0
-  powerupActive: 0
-  onBoard: []
 --- !u!1 &1881778226
 GameObject:
   m_ObjectHideFlags: 0
@@ -19871,7 +19880,8 @@ MonoBehaviour:
   CoinPrefab: {fileID: 8953187167900519848, guid: ff2b38fc0becdc845b8a33d5f08ee266, type: 3}
   fluffPrefab: {fileID: 7302053712523213347, guid: 1dbb4d223529d1f4ea5fade76d6c8a76, type: 3}
   shieldPrefab: {fileID: 5388337910621034145, guid: 85c0baed4c6b8844ea1fb891e0d84b26, type: 3}
-  toothsPrefab: {fileID: 4015627604489470171, guid: 5855604227d70dc41a0cbd1be6e3145c, type: 3}
+  toothsPrefab: {fileID: 4015627604489470171, guid: a050437cabb99fd429660b21959d41ed, type: 3}
+  clawPrefab: {fileID: 2330445201237323718, guid: 67e25140412a7534cb985f4db2363512, type: 3}
   AS: {fileID: 0}
   sfx:
   - {fileID: 8300000, guid: e48203bfed7015a4bba6e4923ccddf2d, type: 3}
@@ -19936,6 +19946,7 @@ MonoBehaviour:
   whoseTurn: 0
   diceNumber: 6
   turnCounter: 0
+  ActivePlayerCount: 4
 --- !u!82 &2082301970
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20620,6 +20631,7 @@ MonoBehaviour:
   pionek: {fileID: 2119415009}
   shadowPawnPattern: {fileID: 5337930361331412338, guid: 273b71b11f26bec489ed9422b4f97867, type: 3}
   shadowPawn: {fileID: 0}
+  paw: {fileID: 0}
   parent: {fileID: 2119415010}
   PawnSprite: {fileID: 21300000, guid: 16e5c17913a388f4fa4fb603ad6ad89c, type: 3}
   waitPoints:
@@ -20805,8 +20817,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 867381533}
   m_HandleRect: {fileID: 867381532}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.17469588
+  m_Value: 1.0000001
+  m_Size: 0.17469592
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
