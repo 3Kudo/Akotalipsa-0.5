@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerup: {fileID: 21300000, guid: 578cc4f4dd22e034ea0c188067b34b97, type: 3}
+  price: 3
 --- !u!61 &4140990540879922368
 BoxCollider2D:
   m_ObjectHideFlags: 0

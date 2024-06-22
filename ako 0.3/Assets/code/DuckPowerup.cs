@@ -5,11 +5,11 @@ using UnityEngine;
 public class DuckPowerup : MonoBehaviour
 {
     public Sprite powerup;
-
+    [SerializeField] private int price;
     private void Start()
     {
         int ammount = GetComponentInParent<PlayerDuck>().WaitPointIndex(GetComponentInParent<Move>().pionek);
-        if (ammount == 0 || GetComponentInParent<Move>().waitPointIndex == 0 || GetComponentInParent<Player>().coin < 3)
+        if (ammount == 0 || GetComponentInParent<Move>().waitPointIndex == 0 || GetComponentInParent<Player>().coin < price)
         {
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.40;
@@ -30,7 +30,7 @@ public class DuckPowerup : MonoBehaviour
     private void OnMouseUpAsButton()
     {
         int ammount = GetComponentInParent<PlayerDuck>().WaitPointIndex(GetComponentInParent<Move>().pionek);
-        if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex!=0 && GetComponentInParent<Player>().coin >= 3)
+        if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex!=0 && GetComponentInParent<Player>().coin >= price)
         {
             MouseControle.instance.Default();
             GetComponentInParent<Move>().ToNormalState(true);
@@ -56,7 +56,7 @@ public class DuckPowerup : MonoBehaviour
     private void OnMouseOver()
     {
         int ammount = GetComponentInParent<PlayerDuck>().WaitPointIndex(GetComponentInParent<Move>().pionek);
-        if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex != 0 && GetComponentInParent<Player>().coin >= 3)
+        if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex != 0 && GetComponentInParent<Player>().coin >= price)
         {
             MouseControle.instance.Clickable();
             Color color = GetComponent<SpriteRenderer>().color;
@@ -70,7 +70,7 @@ public class DuckPowerup : MonoBehaviour
     private void OnMouseExit()
     {
         int ammount = GetComponentInParent<PlayerDuck>().WaitPointIndex(GetComponentInParent<Move>().pionek);
-        if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex != 0 && GetComponentInParent<Player>().coin >= 3)
+        if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex != 0 && GetComponentInParent<Player>().coin >= price)
         {
             MouseControle.instance.Default();
             Color color = GetComponent<SpriteRenderer>().color;
@@ -84,7 +84,7 @@ public class DuckPowerup : MonoBehaviour
     private void OnMouseDrag()
     {
         int ammount = GetComponentInParent<PlayerDuck>().WaitPointIndex(GetComponentInParent<Move>().pionek);
-        if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex != 0 && GetComponentInParent<Player>().coin >= 3)
+        if (ammount > 0 && GetComponentInParent<Move>().waitPointIndex != 0 && GetComponentInParent<Player>().coin >= price)
         {
             Color color = GetComponent<SpriteRenderer>().color;
             color.r = (float)0.80;
