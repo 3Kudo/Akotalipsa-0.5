@@ -48,7 +48,7 @@ public class SharkPowerup : MonoBehaviour
             color.b = (float)0.40;
             GetComponent<SpriteRenderer>().color = color;
         }
-        else if (GetComponentInParent<PlayerFrog>().powerupActive)
+        else if (GetComponentInParent<PlayerShark>().powerupActive)
         {
             Sprite sprite = GetComponentInParent<SpriteRenderer>().sprite;
             GetComponentInParent<SpriteRenderer>().sprite = powerup;

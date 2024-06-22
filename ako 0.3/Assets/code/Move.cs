@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class Move : MonoBehaviour
 {
 
-    public GameObject pionek, shadowPawnPattern, shadowPawn;
+    public GameObject pionek, shadowPawnPattern, shadowPawn, paw;
     public Transform parent;
     public Sprite PawnSprite;
 
@@ -252,4 +252,8 @@ public abstract class Move : MonoBehaviour
     {
         return finished;
     }
+
+    public abstract void SetPawFront();
+
+    public abstract void SetPawBack();
 }

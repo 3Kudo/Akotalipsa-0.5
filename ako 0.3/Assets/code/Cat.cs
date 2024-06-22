@@ -13,7 +13,7 @@ public class Cat : MonoBehaviour
     public bool isLocked;
     public Sprite[] catSprites;
     public Sprite[] akotametrSprites;
-    public GameObject akotametr;
+    public GameObject akotametr, pawPrefab;
     public GameObject[] pawns;
     public AudioClip[] SFX;
     AudioSource AS;
@@ -60,6 +60,7 @@ public class Cat : MonoBehaviour
         int los = Random.Range(1, 4);
         if (los == 3 && GetComponentInParent<GameRules>().onBoard.Count > 0)
         {
+            bool front = false;
             int money = 4;
             for (int i = 0; i < 4; i++)
                 money += pawns[i].GetComponent<Player>().coin;
@@ -89,6 +90,7 @@ public class Cat : MonoBehaviour
 
             if (move < 0)
             {
+                front = false;
                 for(int i = -1; i >= move; i--)
                 {
                     for(int j = 0; j < GetComponentInParent<GameRules>().fluff.Count; j++)
@@ -111,6 +113,7 @@ public class Cat : MonoBehaviour
             }
             else
             {
+                front = true;
                 for (int i = 1; i <= move; i++)
                 {
                     for (int j = 0; j < GetComponentInParent<GameRules>().fluff.Count; j++)
@@ -131,7 +134,11 @@ public class Cat : MonoBehaviour
                 AS.clip = SFX[1];
                 AS.Play();
             }
-
+            pionek.GetComponent<Move>().paw = Instantiate(pawPrefab as GameObject, pionek.GetComponent<Move>().parent);
+            if (front)
+                pionek.GetComponent<Move>().SetPawFront();
+            else
+                pionek.GetComponent<Move>().SetPawBack();
             pionek.GetComponent<Move>().ruch = true;
             pionek.GetComponentInParent<Player>().MoveOut(position, pionek);
         }
@@ -158,6 +165,8 @@ public class Cat : MonoBehaviour
             if (pionek.GetComponent<Move>().waitPointIndex == 0 || pionek.GetComponent<Move>().defence || pionek.GetComponent<Move>().GetFinish())
                 return;
             Transform position = pionek.GetComponent<Move>().GetWaitpoint();
+            GameObject tooths = Instantiate(GetComponentInParent<GameRules>().toothsPrefab as GameObject);
+            tooths.transform.position = pionek.transform.position;
             pionek.GetComponent<Move>().pozycja = 0;
             pionek.GetComponent<Move>().waitPointIndex = 0;
             pionek.GetComponent<Move>().ruch = true;
